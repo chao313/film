@@ -23,6 +23,9 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -78,6 +81,17 @@ public class cinemasTest {
 
 
     }
+
+    /**
+     * cinemas的细节
+     */
+    public void cinemas_detail() throws FileNotFoundException {
+        File file = new File("cinemas_detail.json");
+        FileInputStream inputStream = new FileInputStream(file);
+        inputStream.
+
+    }
+
 
     @Test
     public void jpaTest() {
