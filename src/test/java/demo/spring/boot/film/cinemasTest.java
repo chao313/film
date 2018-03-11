@@ -16,24 +16,19 @@ import org.springframework.web.client.RestTemplate;
 
 import demo.spring.boot.demospringboot.DemoSpringBootApplication;
 import demo.spring.boot.demospringboot.jpa.service.CinemasJpa;
+import demo.spring.boot.demospringboot.jpa.service.CommentJpa;
 import demo.spring.boot.demospringboot.jpa.service.HotMoviesJpa;
 
 import demo.spring.boot.demospringboot.jpa.service.MovieDetailJpa;
 import demo.spring.boot.demospringboot.jpa.vo.CinemasJsonVo;
+import demo.spring.boot.demospringboot.jpa.vo.CommentJsonVo;
 import demo.spring.boot.demospringboot.jpa.vo.HotMovieJsonVo;
-import demo.spring.boot.demospringboot.jpa.vo.MovieDetail;
+import demo.spring.boot.demospringboot.jpa.vo.MovieDetailJsonVo;
 import demo.spring.boot.demospringboot.thrid.party.api.maoyan.CinemasFactory;
+import io.swagger.models.auth.In;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONObject;
-
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -324,16 +319,50 @@ public class cinemasTest {
         String ip = "43.241.51.255";
         try {
             for (HotMovieJsonVo hotMovieJsonVo : hotMoviesJpa.findAll()) {
-                MovieDetail movieDetail = cinemasFactory.loadInMoviesDetail(ip,
+                MovieDetailJsonVo movieDetailJsonVo = cinemasFactory.loadInMoviesDetail(ip,
                         String.valueOf(hotMovieJsonVo.getId()));
-                LOGGER.info("保存{}", movieDetail);
-                movieDetailJpa.save(movieDetail);
+                LOGGER.info("保存{}", movieDetailJsonVo);
+                movieDetailJpa.save(movieDetailJsonVo);
             }
 
 
         } catch (Exception e) {
             LOGGER.info("error ip:{}", ip, e);
         }
+    }
+
+    @Autowired
+    CommentJpa commentJpa;
+
+    @Test
+    public void loadInComments() throws InterruptedException {
+        String ip = "43.241.51.255";
+
+        for (HotMovieJsonVo hotMovieJsonVo : hotMoviesJpa.findAll()) {
+            Integer movieId = hotMovieJsonVo.getId();
+            Integer limit = 14;
+            Integer offset = 0;
+            for (int i = 0; i < 20; i++) {
+                offset = i * limit;
+                Thread.sleep(1000 * 2);
+                List<CommentJsonVo> commentJsonVos
+                        = cinemasFactory.loadInComments(ip, movieId, limit, offset);
+                for (CommentJsonVo vo : commentJsonVos) {
+                    try {
+                        commentJpa.save(vo);
+                    } catch (Exception e) {
+                        LOGGER.error("数据插入异常：{}", vo, e);
+                    }
+
+                }
+                if (commentJsonVos.size() == 0) {
+                    break;
+                }
+
+            }
+        }
+
+
     }
 
 }

@@ -17,8 +17,9 @@ import java.util.List;
 import java.util.Map;
 
 import demo.spring.boot.demospringboot.jpa.vo.CinemasJsonVo;
+import demo.spring.boot.demospringboot.jpa.vo.CommentJsonVo;
 import demo.spring.boot.demospringboot.jpa.vo.HotMovieJsonVo;
-import demo.spring.boot.demospringboot.jpa.vo.MovieDetail;
+import demo.spring.boot.demospringboot.jpa.vo.MovieDetailJsonVo;
 import demo.spring.boot.demospringboot.thrid.party.util.Http;
 
 @Component
@@ -80,9 +81,9 @@ public class CinemasFactory {
     }
 
     /**
-     * 获取movie
+     * 获取movieDeatil
      */
-    public MovieDetail loadInMoviesDetail(String ip, String movieId) {
+    public MovieDetailJsonVo loadInMoviesDetail(String ip, String movieId) {
         HttpHeaders requestHeaders = new HttpHeaders();
         requestHeaders.add("user-agent",
                 "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) " +
@@ -98,6 +99,37 @@ public class CinemasFactory {
 
         JSONObject jsonObject1 = map.get("MovieDetailModel");
 
-        return jsonObject1.toJavaObject(MovieDetail.class);
+        return jsonObject1.toJavaObject(MovieDetailJsonVo.class);
     }
+
+    /**
+     * 获取movieDeatil
+     */
+    public List<CommentJsonVo> loadInComments(String ip, Integer movieId,
+                                              Integer limit, Integer offset) {
+        HttpHeaders requestHeaders = new HttpHeaders();
+        requestHeaders.add("user-agent",
+                "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) " +
+                        "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.3");
+        requestHeaders.add("x-forwarded-for", ip);
+        ResponseEntity<String> result =
+                this.http.http(Config.COMMENT_URL + "?limit="
+                                + limit + "&offset="
+                                + offset + "&movieid="
+                                + movieId,
+                        requestHeaders, HttpMethod.GET);
+        JSONObject jsonObject = JSON.parseObject(result.getBody());
+        Map<String, Object> innerMap =
+                jsonObject.getInnerMap();
+        List<CommentJsonVo> commentJsonVos = new ArrayList<>();
+        Map<String, JSONObject> map = (Map<String, JSONObject>) innerMap.get("data");
+        JSONObject jsonObject1 = map.get("CommentResponseModel");
+        for (CommentJsonVo vo : ((JSONArray) jsonObject1.get("cmts")).toJavaList(CommentJsonVo.class)) {
+            vo.setMovieId(movieId);
+            commentJsonVos.add(vo);
+        }
+        return commentJsonVos;
+    }
+
+
 }
