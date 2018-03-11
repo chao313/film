@@ -16,7 +16,10 @@ import org.springframework.web.client.RestTemplate;
 
 import demo.spring.boot.demospringboot.DemoSpringBootApplication;
 import demo.spring.boot.demospringboot.jpa.service.CinemasJpa;
+import demo.spring.boot.demospringboot.jpa.service.HotMoviesJpa;
+
 import demo.spring.boot.demospringboot.jpa.vo.CinemasJsonVo;
+import demo.spring.boot.demospringboot.jpa.vo.HotMovieJsonVo;
 import demo.spring.boot.demospringboot.thrid.party.api.maoyan.CinemasFactory;
 
 import com.alibaba.fastjson.JSON;
@@ -82,15 +85,15 @@ public class cinemasTest {
 
     }
 
-    /**
-     * cinemas的细节
-     */
-    public void cinemas_detail() throws FileNotFoundException {
-        File file = new File("cinemas_detail.json");
-        FileInputStream inputStream = new FileInputStream(file);
-        inputStream.
-
-    }
+//    /**
+//     * cinemas的细节
+//     */
+//    public void cinemas_detail() throws FileNotFoundException {
+//        File file = new File("cinemas_detail.json");
+//        FileInputStream inputStream = new FileInputStream(file);
+//        inputStream.
+//
+//    }
 
 
     @Test
@@ -293,6 +296,21 @@ public class cinemasTest {
             } catch (Exception e) {
                 LOGGER.info("error ip:{}", ip, e);
             }
+        }
+    }
+    @Autowired
+    private HotMoviesJpa hotMoviesJpa;
+
+    @Test
+    public void moviesLoadinTest(){
+        String ip = "43.241.51.255";
+        try {
+            for (HotMovieJsonVo vo : cinemasFactory.loadInMovies(ip)) {
+                LOGGER.info("保存{}", vo);
+                hotMoviesJpa.save(vo);
+            }
+        } catch (Exception e) {
+            LOGGER.info("error ip:{}", ip, e);
         }
     }
 

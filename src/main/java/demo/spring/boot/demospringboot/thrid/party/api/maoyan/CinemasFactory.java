@@ -17,6 +17,7 @@ import java.util.List;
 import java.util.Map;
 
 import demo.spring.boot.demospringboot.jpa.vo.CinemasJsonVo;
+import demo.spring.boot.demospringboot.jpa.vo.HotMovieJsonVo;
 import demo.spring.boot.demospringboot.thrid.party.util.Http;
 
 @Component
@@ -50,5 +51,30 @@ public class CinemasFactory {
             }
         }
         return cinemasJsonVos;
+    }
+
+    /**
+     * 获取movie
+     */
+    public List<HotMovieJsonVo> loadInMovies(String ip) {
+        HttpHeaders requestHeaders = new HttpHeaders();
+        requestHeaders.add("user-agent",
+                "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) " +
+                        "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.3");
+     //   requestHeaders.add("x-forwarded-for", ip);
+        ResponseEntity<String> result =
+                this.http.http(Config.HOT_MOVIE_URL, requestHeaders, HttpMethod.GET);
+        JSONObject jsonObject = JSON.parseObject(result.getBody());
+        Map<String, Object> innerMap =
+                jsonObject.getInnerMap();
+        Map<String, JSONArray> map = (Map<String, JSONArray>) innerMap.get("data");
+        List<HotMovieJsonVo> hotMovieJsonVos = new ArrayList<>();
+
+        JSONArray jsonArray = map.get("movies");
+        for (HotMovieJsonVo vo : jsonArray.toJavaList(HotMovieJsonVo.class)) {
+            hotMovieJsonVos.add(vo);
+
+        }
+        return hotMovieJsonVos;
     }
 }
