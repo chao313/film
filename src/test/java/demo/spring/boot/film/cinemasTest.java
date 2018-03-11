@@ -18,8 +18,10 @@ import demo.spring.boot.demospringboot.DemoSpringBootApplication;
 import demo.spring.boot.demospringboot.jpa.service.CinemasJpa;
 import demo.spring.boot.demospringboot.jpa.service.HotMoviesJpa;
 
+import demo.spring.boot.demospringboot.jpa.service.MovieDetailJpa;
 import demo.spring.boot.demospringboot.jpa.vo.CinemasJsonVo;
 import demo.spring.boot.demospringboot.jpa.vo.HotMovieJsonVo;
+import demo.spring.boot.demospringboot.jpa.vo.MovieDetail;
 import demo.spring.boot.demospringboot.thrid.party.api.maoyan.CinemasFactory;
 
 import com.alibaba.fastjson.JSON;
@@ -255,7 +257,7 @@ public class cinemasTest {
 //        list.add("219.150.32.132.");
 //        list.add("202.96.69.38");
 // //     list.add("219.150.32.132");
- //       list.add("222.88.88.88");
+        //       list.add("222.88.88.88");
 //        list.add("210.76.0.2");
 //        list.add("219.150.150.150");
 //        list.add("202.102.224.68");
@@ -283,8 +285,7 @@ public class cinemasTest {
 //        list.add("202.100.64.68");
 
 
-
-       list.add("43.241.51.255");//宿迁
+        list.add("43.241.51.255");//宿迁
 
 
         for (String ip : list) {
@@ -298,17 +299,38 @@ public class cinemasTest {
             }
         }
     }
+
     @Autowired
     private HotMoviesJpa hotMoviesJpa;
 
     @Test
-    public void moviesLoadinTest(){
+    public void moviesLoadinTest() {
         String ip = "43.241.51.255";
         try {
             for (HotMovieJsonVo vo : cinemasFactory.loadInMovies(ip)) {
                 LOGGER.info("保存{}", vo);
                 hotMoviesJpa.save(vo);
             }
+        } catch (Exception e) {
+            LOGGER.info("error ip:{}", ip, e);
+        }
+    }
+
+    @Autowired
+    private MovieDetailJpa movieDetailJpa;
+
+    @Test
+    public void movieDetailLoadinTest() {
+        String ip = "43.241.51.255";
+        try {
+            for (HotMovieJsonVo hotMovieJsonVo : hotMoviesJpa.findAll()) {
+                MovieDetail movieDetail = cinemasFactory.loadInMoviesDetail(ip,
+                        String.valueOf(hotMovieJsonVo.getId()));
+                LOGGER.info("保存{}", movieDetail);
+                movieDetailJpa.save(movieDetail);
+            }
+
+
         } catch (Exception e) {
             LOGGER.info("error ip:{}", ip, e);
         }
