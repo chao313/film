@@ -15,6 +15,7 @@ import java.util.List;
 
 import demo.spring.boot.demospringboot.framework.Code;
 import demo.spring.boot.demospringboot.framework.Response;
+import demo.spring.boot.demospringboot.jpa.service.CinemasJpa;
 import demo.spring.boot.demospringboot.jpa.service.CommentJpa;
 import demo.spring.boot.demospringboot.jpa.service.HotMoviesJpa;
 import demo.spring.boot.demospringboot.jpa.service.MovieDetailJpa;
@@ -36,6 +37,9 @@ public class FilmController {
     @Autowired
     private CommentJpa commentJpa;
 
+
+    @Autowired
+    private CinemasJpa cinemasJpa;
 
     @GetMapping(value = "/getCinems/{page}/{limit}")
     public List<CinemasJsonVo> getCinems(
@@ -109,6 +113,31 @@ public class FilmController {
             //分页查询
             Pageable pageable = new PageRequest(page, size);
             Page<CommentJsonVo> result = commentJpa.findAll(example, pageable);
+            response.setCode(Code.System.OK);
+            response.setMsg(Code.System.SERVER_SUCCESS_MSG);
+            response.setContent(result.getContent());
+        } catch (Exception e) {
+            response.setCode(Code.System.FAIL);
+            response.setMsg(Code.SystemError.SERVER_INTERNAL_ERROR_MSG);
+            response.addException(e);
+        }
+        return response;
+    }
+
+    /**
+     * 获取 电影院
+     */
+    @GetMapping(value = "/getCinemas/{lat}/{lng}/{page}/{size}")
+    public Response<List<CinemasJsonVo>> getComments(
+            @PathVariable(value = "lat") Integer lat,
+            @PathVariable(value = "lng") Integer lng,
+            @PathVariable(value = "page") Integer page,
+            @PathVariable(value = "size") Integer size) {
+        Response<List<CinemasJsonVo>> response
+                = new Response<>();
+        try {
+            Pageable pageable = new PageRequest(page, size);
+            Page<CinemasJsonVo> result = cinemasJpa.findAll(pageable);
             response.setCode(Code.System.OK);
             response.setMsg(Code.System.SERVER_SUCCESS_MSG);
             response.setContent(result.getContent());
