@@ -70,8 +70,13 @@ public class DataFactoryController {
         try {
             final String ip = "202.96.128.166";
             hotMoviesJpa.findAll().stream().forEach(hotMovie -> {
-                List<String> movieIds = maoyanCinemasFactory
-                        .geCinemasMovieIds(ip, hotMovie.getId());
+                List<String> movieIds = null;
+                try {
+                    movieIds = maoyanCinemasFactory
+                            .geCinemasMovieIds(ip, hotMovie.getId());
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
                 try {
                     maoyanCinemasFactory.
                             loadInCinemasDetail(ip, movieIds, hotMovie.getId()).stream()

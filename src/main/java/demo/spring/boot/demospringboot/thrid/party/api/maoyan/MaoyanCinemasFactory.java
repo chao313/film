@@ -149,7 +149,7 @@ public class MaoyanCinemasFactory {
             String url = Config.CINEMAS_DETAILS
                     + "?cinemaid=" + cinemasId
                     + "&movieid=" + movieId;
-            Thread.sleep(2000);
+            Thread.sleep(4000);
             ResponseEntity<String> result =
                     this.http.http(url,
                             requestHeaders, HttpMethod.GET);
@@ -177,7 +177,7 @@ public class MaoyanCinemasFactory {
      * 根据电影院的id获取电影院的播放的电影id
      */
     public List<String> geCinemasMovieIds(String ip,
-                                          Integer cinemasId) {
+                                          Integer cinemasId) throws InterruptedException {
         HttpHeaders requestHeaders = new HttpHeaders();
         requestHeaders.add("user-agent",
                 "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) " +
@@ -186,6 +186,7 @@ public class MaoyanCinemasFactory {
         String url = Config.CINEMAS_DETAILS
                 + "?cinemaid=" + cinemasId
                 + "&movieid=";
+        Thread.sleep(4000);
         ResponseEntity<String> result =
                 this.http.http(url,
                         requestHeaders, HttpMethod.GET);
