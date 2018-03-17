@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import demo.spring.boot.demospringboot.jpa.vo.CinemasDetailVo;
 import demo.spring.boot.demospringboot.jpa.vo.CinemasJsonVo;
 import demo.spring.boot.demospringboot.jpa.vo.CommentJsonVo;
 import demo.spring.boot.demospringboot.jpa.vo.HotMovieJsonVo;
@@ -23,9 +24,9 @@ import demo.spring.boot.demospringboot.jpa.vo.MovieDetailJsonVo;
 import demo.spring.boot.demospringboot.thrid.party.util.Http;
 
 @Component
-public class CinemasFactory {
+public class MaoyanCinemasFactory {
 
-    private static Logger LOGGER = LoggerFactory.getLogger(CinemasFactory.class);
+    private static Logger LOGGER = LoggerFactory.getLogger(MaoyanCinemasFactory.class);
 
     @Autowired
     private Http http;
@@ -129,6 +130,83 @@ public class CinemasFactory {
             commentJsonVos.add(vo);
         }
         return commentJsonVos;
+    }
+
+
+    /**
+     * 获取CinemasDeatil
+     */
+    public List<CinemasDetailVo> loadInCinemasDetail(String ip, List<String> movieIds,
+                                                     Integer cinemasId) throws InterruptedException {
+        HttpHeaders requestHeaders = new HttpHeaders();
+        requestHeaders.add("user-agent",
+                "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) " +
+                        "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.3");
+        requestHeaders.add("x-forwarded-for", ip);
+        List<CinemasDetailVo> cinemasDetailVos
+                = new ArrayList<>();
+        for (String movieId : movieIds) {
+            String url = Config.CINEMAS_DETAILS
+                    + "?cinemaid=" + cinemasId
+                    + "&movieid=" + movieId;
+            Thread.sleep(2000);
+            ResponseEntity<String> result =
+                    this.http.http(url,
+                            requestHeaders, HttpMethod.GET);
+            JSONObject jsonObject = JSON.parseObject(result.getBody());
+            Map<String, Object> innerMap =
+                    jsonObject.getInnerMap();
+            if (!innerMap.get("status").equals(0)) {
+                //状态如果不为0
+                //跳过当前进入下一个循环
+                continue;
+            }
+            String content = ((JSONObject) innerMap.get("data")).toString();
+            //数据填充
+            CinemasDetailVo vo = new CinemasDetailVo();
+            vo.setCinemasId(cinemasId);
+            vo.setContent(content);
+            vo.setMovieId(Integer.valueOf(movieId));
+            cinemasDetailVos.add(vo);
+        }
+        return cinemasDetailVos;
+    }
+
+
+    /**
+     * 根据电影院的id获取电影院的播放的电影id
+     */
+    public List<String> geCinemasMovieIds(String ip,
+                                          Integer cinemasId) {
+        HttpHeaders requestHeaders = new HttpHeaders();
+        requestHeaders.add("user-agent",
+                "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) " +
+                        "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.3");
+        requestHeaders.add("x-forwarded-for", ip);
+        String url = Config.CINEMAS_DETAILS
+                + "?cinemaid=" + cinemasId
+                + "&movieid=";
+        ResponseEntity<String> result =
+                this.http.http(url,
+                        requestHeaders, HttpMethod.GET);
+        JSONObject jsonObject = JSON.parseObject(result.getBody());
+        Map<String, Object> innerMap =
+                jsonObject.getInnerMap();
+        if (!innerMap.get("status").equals(0)) {
+            //状态如果不为0
+            //跳过当前进入下一个循环
+            return new ArrayList<>();
+        }
+        List<CinemasDetailVo> commentJsonVos = new ArrayList<>();
+        Map<String, JSONArray> map = (Map<String, JSONArray>) innerMap.get("data");
+        JSONArray jsonArray = map.get("movies");
+        List<String> ids = new ArrayList<>();
+        for (Object o : jsonArray) {
+            JSONObject vo = (JSONObject) o;
+            ids.add(vo.getString("id"));
+        }
+
+        return ids;
     }
 
 

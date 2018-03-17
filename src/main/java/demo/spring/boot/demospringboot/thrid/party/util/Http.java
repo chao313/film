@@ -34,7 +34,7 @@ public class Http {
         RestTemplate rt = new RestTemplate(Http.httpComponentsClientHttpRequestFactory);
         HttpEntity<String> requestEntity = new HttpEntity<>(null, httpHeaders);
         ResponseEntity<String> result = rt.exchange(url, HttpMethod.GET, requestEntity, String.class);
-        LOGGER.info("执行结果{}", result);
+        LOGGER.info("请求url:{} , 执行结果{}", url,result);
         return result;
     }
 }

@@ -15,6 +15,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.web.client.RestTemplate;
 
 import demo.spring.boot.demospringboot.DemoSpringBootApplication;
+import demo.spring.boot.demospringboot.jpa.service.CinemasDetailJpa;
 import demo.spring.boot.demospringboot.jpa.service.CinemasJpa;
 import demo.spring.boot.demospringboot.jpa.service.CommentJpa;
 import demo.spring.boot.demospringboot.jpa.service.HotMoviesJpa;
@@ -24,8 +25,7 @@ import demo.spring.boot.demospringboot.jpa.vo.CinemasJsonVo;
 import demo.spring.boot.demospringboot.jpa.vo.CommentJsonVo;
 import demo.spring.boot.demospringboot.jpa.vo.HotMovieJsonVo;
 import demo.spring.boot.demospringboot.jpa.vo.MovieDetailJsonVo;
-import demo.spring.boot.demospringboot.thrid.party.api.maoyan.CinemasFactory;
-import io.swagger.models.auth.In;
+import demo.spring.boot.demospringboot.thrid.party.api.maoyan.MaoyanCinemasFactory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -128,7 +128,7 @@ public class cinemasTest {
     }
 
     @Autowired
-    private CinemasFactory cinemasFactory;
+    private MaoyanCinemasFactory maoyanCinemasFactory;
 
     @Autowired
     private CinemasJpa cinemasJpa;
@@ -285,7 +285,7 @@ public class cinemasTest {
 
         for (String ip : list) {
             try {
-                for (CinemasJsonVo vo : cinemasFactory.loadInCinemas(ip)) {
+                for (CinemasJsonVo vo : maoyanCinemasFactory.loadInCinemas(ip)) {
                     LOGGER.info("保存{}", vo);
                     cinemasJpa.save(vo);
                 }
@@ -302,7 +302,7 @@ public class cinemasTest {
     public void moviesLoadinTest() {
         String ip = "43.241.51.255";
         try {
-            for (HotMovieJsonVo vo : cinemasFactory.loadInMovies(ip)) {
+            for (HotMovieJsonVo vo : maoyanCinemasFactory.loadInMovies(ip)) {
                 LOGGER.info("保存{}", vo);
                 hotMoviesJpa.save(vo);
             }
@@ -319,7 +319,7 @@ public class cinemasTest {
         String ip = "43.241.51.255";
         try {
             for (HotMovieJsonVo hotMovieJsonVo : hotMoviesJpa.findAll()) {
-                MovieDetailJsonVo movieDetailJsonVo = cinemasFactory.loadInMoviesDetail(ip,
+                MovieDetailJsonVo movieDetailJsonVo = maoyanCinemasFactory.loadInMoviesDetail(ip,
                         String.valueOf(hotMovieJsonVo.getId()));
                 LOGGER.info("保存{}", movieDetailJsonVo);
                 movieDetailJpa.save(movieDetailJsonVo);
@@ -346,7 +346,7 @@ public class cinemasTest {
                 offset = i * limit;
                 Thread.sleep(1000 * 2);
                 List<CommentJsonVo> commentJsonVos
-                        = cinemasFactory.loadInComments(ip, movieId, limit, offset);
+                        = maoyanCinemasFactory.loadInComments(ip, movieId, limit, offset);
                 for (CommentJsonVo vo : commentJsonVos) {
                     try {
                         commentJpa.save(vo);
@@ -363,6 +363,16 @@ public class cinemasTest {
         }
 
 
+    }
+
+    @Autowired
+    private CinemasDetailJpa cinemasDetailJpa;
+
+    @Test
+    public void loadInCinemasDetail(){
+        hotMoviesJpa.findAll().stream().forEach(hotMovie->{
+
+        });
     }
 
 }

@@ -128,7 +128,7 @@ public class FilmController {
      * 获取 电影院
      */
     @GetMapping(value = "/getCinemas/{lat}/{lng}/{page}/{size}")
-    public Response<List<CinemasJsonVo>> getComments(
+    public Response<List<CinemasJsonVo>> getCinemas(
             @PathVariable(value = "lat") Integer lat,
             @PathVariable(value = "lng") Integer lng,
             @PathVariable(value = "page") Integer page,
