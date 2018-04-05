@@ -13,6 +13,7 @@ import java.util.List;
 import demo.spring.boot.demospringboot.framework.Code;
 import demo.spring.boot.demospringboot.framework.Response;
 import demo.spring.boot.demospringboot.jpa.service.CinemasDetailJpa;
+import demo.spring.boot.demospringboot.jpa.service.CinemasJpa;
 import demo.spring.boot.demospringboot.jpa.service.HotMoviesJpa;
 import demo.spring.boot.demospringboot.jpa.vo.CinemasDetailVo;
 import demo.spring.boot.demospringboot.jpa.vo.HotMovieJsonVo;
@@ -33,6 +34,9 @@ public class DataFactoryController {
 
     @Autowired
     private HotMoviesJpa hotMoviesJpa;
+
+    @Autowired
+    private CinemasJpa cinemasJpa;
 
     @GetMapping("/load-in-cinemas-detail-one")
     public Response<Boolean> loadInCinemasDetailOne(String ip,
@@ -69,7 +73,7 @@ public class DataFactoryController {
         Response<Boolean> response = new Response<>();
         try {
             final String ip = "202.96.128.166";
-            hotMoviesJpa.findAll().stream().forEach(hotMovie -> {
+            cinemasJpa.findAll().stream().forEach(hotMovie -> {
                 List<String> movieIds = null;
                 try {
                     movieIds = maoyanCinemasFactory

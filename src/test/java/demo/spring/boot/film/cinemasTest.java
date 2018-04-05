@@ -1,5 +1,8 @@
 package demo.spring.boot.film;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -25,10 +28,13 @@ import demo.spring.boot.demospringboot.jpa.vo.CinemasJsonVo;
 import demo.spring.boot.demospringboot.jpa.vo.CommentJsonVo;
 import demo.spring.boot.demospringboot.jpa.vo.HotMovieJsonVo;
 import demo.spring.boot.demospringboot.jpa.vo.MovieDetailJsonVo;
+import demo.spring.boot.demospringboot.thrid.party.api.maoyan.Config;
 import demo.spring.boot.demospringboot.thrid.party.api.maoyan.MaoyanCinemasFactory;
+import demo.spring.boot.demospringboot.thrid.party.util.Http;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -369,10 +375,38 @@ public class cinemasTest {
     private CinemasDetailJpa cinemasDetailJpa;
 
     @Test
-    public void loadInCinemasDetail(){
-        hotMoviesJpa.findAll().stream().forEach(hotMovie->{
+    public void loadInCinemasDetail() {
+        hotMoviesJpa.findAll().stream().forEach(hotMovie -> {
 
         });
+    }
+
+    @Autowired
+    private Http http;
+
+
+    @Test
+    public void taopp() {
+        String url2 = "https://h5.m.taopiaopiao.com/app/moviemain/pages/index/index.html?from=outer";
+        HttpHeaders requestHeaders = new HttpHeaders();
+        requestHeaders.add("user-agent",
+                "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) " +
+                        "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.3");
+        ResponseEntity<String> result =
+                this.http.http(url2, requestHeaders, HttpMethod.GET);
+
+        /**
+         * 第二次请求，携带cookie
+         */
+        List<String> cookies = new ArrayList<>();
+        // result.getHeaders()
+        cookies.add("cna=Ki80E20ZUDECAXOs8u7rHts3; t=aa43c800edda2ab9ac8c12a71fcc25a8; _tb_token_=b039e3ee9634; cookie2=126929bdfb6c5cb90bc7f7dd57fae66a; _m_h5_tk=7e37609259b92daa48a57444bd06cadf_1521306459258; _m_h5_tk_enc=5d62bfd72b04222fd08f9efdd140e2bd; isg=BOXl2uSe00kRWzeVZqbXJfjM9KffipjcqeCGqefKoZxZ_gVwr3KphHOQjWSIfrFs");
+        requestHeaders.put(HttpHeaders.COOKIE, cookies);
+        String url = "https://acs.m.taopiaopiao.com/h5/mtop.film.mtopshowapi.getshowsbycitycode/4.0/?jsv=2.4.11&appKey=12574478&t=1521301311191&sign=08affc5139f37648e3037e9f93ae3d52&api=mtop.film.MtopShowAPI.getShowsByCityCode&v=4.0&expire_time=180000&timeout=10000&forceAntiCreep=true&AntiCreep=true&type=jsonp&dataType=jsonp&callback=mtopjsonp4&data={\"field\":\"i:id;poster;showName;showMark;remark;director;leadingRole;previewNum;openDay;openTime;wantCount;fantastic;specialSchedules(i:id;tag;title;description)-1;derivationList(i:id;label;title;links;advertiseType);activities(i:id;activityTag;activityExtType;activityTitle;longDescription);type;duration;country;openCountry;friendCount;friends;starMeeting;preScheduleDates;soldTitle;soldType\",\"pageIndex\":2,\"pagesize\":10,\"citycode\":310100,\"pageCode\":\"\",\"platform\":\"8\"}";
+        ResponseEntity<String> result2 =
+                this.http.http(url, requestHeaders, HttpMethod.GET);
+        LOGGER.info("result2:{}", result2);
+
     }
 
 }

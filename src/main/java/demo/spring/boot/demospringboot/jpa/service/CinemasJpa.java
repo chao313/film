@@ -1,9 +1,12 @@
 package demo.spring.boot.demospringboot.jpa.service;
 
 
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
+
+import java.util.List;
 
 import demo.spring.boot.demospringboot.jpa.vo.CinemasJsonVo;
 
@@ -24,5 +27,9 @@ public interface CinemasJpa extends JpaRepository<CinemasJsonVo, Integer> {
 //     */
 //    public List<CinemasVo> findJpaVosByNameAndId(String name, Integer id);
 
+    /**
+     * 根据
+     */
+    public List<CinemasJsonVo> findCinemasJsonVoByNmLike(String nm, Pageable pageable);
 
 }
