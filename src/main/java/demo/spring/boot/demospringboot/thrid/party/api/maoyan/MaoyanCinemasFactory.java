@@ -21,6 +21,7 @@ import demo.spring.boot.demospringboot.jpa.vo.CinemasJsonVo;
 import demo.spring.boot.demospringboot.jpa.vo.CommentJsonVo;
 import demo.spring.boot.demospringboot.jpa.vo.HotMovieJsonVo;
 import demo.spring.boot.demospringboot.jpa.vo.MovieDetailJsonVo;
+import demo.spring.boot.demospringboot.jpa.vo.SeatJson;
 import demo.spring.boot.demospringboot.thrid.party.util.Http;
 
 @Component
@@ -208,6 +209,51 @@ public class MaoyanCinemasFactory {
         }
 
         return ids;
+    }
+
+
+    public SeatJson getSeats(Integer showId, String showDate, String ip) throws InterruptedException {
+        HttpHeaders requestHeaders = new HttpHeaders();
+        requestHeaders.add("user-agent",
+                "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) " +
+                        "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.3");
+        requestHeaders.add("x-forwarded-for", ip);
+        requestHeaders.add("Host", "m.maoyan.com");
+        requestHeaders.add("Upgrade-Insecure-Requests", "1");
+        requestHeaders.add("Pragma", "no-cache");
+        String url = Config.SEATS
+                + "?showId=" + showId
+                + "&showDate=" + showDate;
+        //  Thread.sleep(1000);
+        ResponseEntity<String> result =
+                this.http.http(url,
+                        requestHeaders, HttpMethod.GET);
+
+
+        SeatJson seatJson = JSON.parseObject(result.getBody(), SeatJson.class);
+        return seatJson;
+
+    }
+
+    public String getSeatsString(Integer showId, String showDate, String ip) throws InterruptedException {
+        HttpHeaders requestHeaders = new HttpHeaders();
+        requestHeaders.add("user-agent",
+                "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) " +
+                        "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.3");
+        requestHeaders.add("x-forwarded-for", ip);
+        requestHeaders.add("Host", "m.maoyan.com");
+        requestHeaders.add("Upgrade-Insecure-Requests", "1");
+        requestHeaders.add("Pragma", "no-cache");
+        requestHeaders.add("Cookie", "_lx_utm=utm_source%3Dbaidu%26utm_medium%3Dorganic; v=3; iuuid=1A6E888B4A4B29B16FBA1299108DBE9C3B4875CF6218F71ABAF9253534349662; _lx_utm=utm_source%3Dbaidu%26utm_medium%3Dorganic; isWebp=1; __utmz=17099173.1520147187.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); __mta=143545866.1520144472913.1520769516692.1521291379848.17; __utma=17099173.512769798.1520147187.1521291379.1521296563.4; ci=10; _lxsdk_cuid=1629404bc8cc8-028eb3c9291128-33697b04-13c680-1629404bc8cc8; _lxsdk=1A6E888B4A4B29B16FBA1299108DBE9C53D2DC452615728BC9FC0C8DA28112C2; __mta=143545866.1520144472913.1521300897553.1522901761310.19; JSESSIONID=19myb6yxrpc23ip7iuhqtb6hx");
+        String url = Config.SEATS
+                + "?showId=" + showId
+                + "&showDate=" + showDate;
+        Thread.sleep(4000);
+        ResponseEntity<String> result =
+                this.http.http(url,
+                        requestHeaders, HttpMethod.GET);
+        return result.getBody();
+
     }
 
 

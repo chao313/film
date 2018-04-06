@@ -10,7 +10,12 @@ import lombok.ToString;
  */
 @Data
 @ToString
-public class DateShowIndex {
+public class DateShowIndex implements Comparable<DateShowIndex> {
     private String date;
     private List<DateShow> dateShows;
+
+    @Override
+    public int compareTo(DateShowIndex o) {
+        return this.date.compareTo(o.date);
+    }
 }

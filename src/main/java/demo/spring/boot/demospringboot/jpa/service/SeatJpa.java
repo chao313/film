@@ -6,25 +6,10 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 import demo.spring.boot.demospringboot.jpa.vo.CinemasDetailVo;
+import demo.spring.boot.demospringboot.jpa.vo.SeatJson;
+import demo.spring.boot.demospringboot.jpa.vo.SeatJsonVo;
 
 @Service
-public interface CinemasDetailJpa extends JpaRepository<CinemasDetailVo, Integer> {
+public interface SeatJpa extends JpaRepository<SeatJsonVo, Integer> {
 
-
-    CinemasDetailVo getFirstByCinemasId(Integer cinemasId);
-
-    /**
-     *
-     * @param cinemasId
-     * @return
-     */
-    List<CinemasDetailVo> findCinemasDetailVoByCinemasId(Integer cinemasId);
-
-    /**
-     *
-     * @param cinemasId
-     * @param movieId
-     * @return
-     */
-    CinemasDetailVo findCinemasDetailVoByCinemasIdAndMovieId(Integer cinemasId, Integer movieId);
 }

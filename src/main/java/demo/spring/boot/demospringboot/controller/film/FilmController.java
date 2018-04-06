@@ -17,6 +17,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import demo.spring.boot.demospringboot.framework.Code;
@@ -32,8 +35,12 @@ import demo.spring.boot.demospringboot.jpa.vo.CommentJsonVo;
 import demo.spring.boot.demospringboot.jpa.vo.CinemasDetailJosnParse;
 import demo.spring.boot.demospringboot.jpa.vo.HotMovieJsonVo;
 import demo.spring.boot.demospringboot.jpa.vo.MovieDetailJsonVo;
+import demo.spring.boot.demospringboot.jpa.vo.SeatJson;
 import demo.spring.boot.demospringboot.jpa.vo.other.DateShow;
 import demo.spring.boot.demospringboot.jpa.vo.other.DateShowIndex;
+import demo.spring.boot.demospringboot.jpa.vo.other.Sections;
+import demo.spring.boot.demospringboot.thrid.party.api.maoyan.MaoyanCinemasFactory;
+import demo.spring.boot.demospringboot.util.IP;
 
 @RestController
 @RequestMapping(value = "/film")
@@ -55,6 +62,8 @@ public class FilmController {
     @Autowired
     private CinemasDetailJpa cinemasDetailJpa;
 
+    @Autowired
+    private MaoyanCinemasFactory maoyanCinemasFactory;
 
     @GetMapping(value = "/getCinems/{page}/{limit}")
     public List<CinemasJsonVo> getCinems(
@@ -216,6 +225,7 @@ public class FilmController {
                     JSON.parseObject(cinemasDetailVo.getContent(), CinemasDetailJosnParse.class);
             List<DateShowIndex> dateShowIndexList = new ArrayList<>();
             this.getDateShows(cinemasDetailVo, dateShowIndexList);
+            Collections.sort(dateShowIndexList);//按时间排序
             cinemasDetailJosnParse.setDateShow(dateShowIndexList);
              response.setContent(cinemasDetailJosnParse);
         } catch (Exception e) {
@@ -225,6 +235,47 @@ public class FilmController {
         }
         return response;
     }
+
+    /**
+     * 获取 电影院 正在播放的电影 电影院id必填 //
+     */
+    @GetMapping(value = "/get-seats")
+    public Response<SeatJson> getSeats(
+            @RequestParam(value = "showDate") String showDate,
+            @RequestParam(value = "showId") Integer showId) {
+        Response<SeatJson> response
+                = new Response<>();
+        try {
+            response.setCode(Code.System.OK);
+            response.setMsg(Code.System.SERVER_SUCCESS_MSG);
+            SeatJson seats = maoyanCinemasFactory.getSeats(showId, showDate, IP.getNextRandow());
+            Sections sections = seats.getSections().get(0);
+            Integer[][] map = new Integer[sections.getRows()][sections.getColumns()];
+            sections.getSeatRows().stream().forEach(vo -> {
+                vo.getSeats().stream().forEach(vo2 -> {
+                    if ("E".equals(vo2.getType())) {
+                        map[vo2.getRowNum() - 1][vo2.getColumnNum()] = 0;
+                    } else if ("N".equals(vo2.getType())) {
+                        map[vo2.getRowNum() - 1][vo2.getColumnNum()] = 1;
+                    } else {
+                        map[vo2.getRowNum() - 1][vo2.getColumnNum()] = 3;
+                    }
+
+                });
+            });
+            sections.setMap(map);
+            response.setContent(seats);
+        } catch (Exception e) {
+            response.setCode(Code.System.FAIL);
+            response.setMsg(Code.SystemError.SERVER_INTERNAL_ERROR_MSG);
+            response.addException(e);
+        }
+        return response;
+    }
+
+
+
+
 
     private void getDateShows(CinemasDetailVo cinemasDetailVo, List<DateShowIndex> dateShowIndexList) {
         JSONObject jsonObject = JSON.parseObject(cinemasDetailVo.getContent());
