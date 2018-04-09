@@ -2,63 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4bff9ac7-cff3-4c09-ad62-df8ed7127cd5" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/resources/static/1.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/resources/static/2.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/resources/static/3.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/demo/spring/boot/demospringboot/controller/thrid/party/data/service/DataFactoryService.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/demo/spring/boot/demospringboot/controller/thrid/party/data/vmovie/VmovieController.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/demo/spring/boot/demospringboot/controller/user/StorageContoller.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/demo/spring/boot/demospringboot/controller/user/UserController.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/demo/spring/boot/demospringboot/jpa/constant/StorageEnum.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/demo/spring/boot/demospringboot/jpa/service/StorageVoJpa.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/demo/spring/boot/demospringboot/jpa/service/UserJpa.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/demo/spring/boot/demospringboot/jpa/service/VMovieJpa.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/demo/spring/boot/demospringboot/jpa/vo/StorageVo.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/demo/spring/boot/demospringboot/jpa/vo/UserVo.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/demo/spring/boot/demospringboot/jpa/vo/VMovieVo.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/demo/spring/boot/demospringboot/mybatis/mapper/CinemasMapper.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/demo/spring/boot/demospringboot/mybatis/service/CinemasService.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/demo/spring/boot/demospringboot/mybatis/vo/CinemasJsonBo.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/demo/spring/boot/demospringboot/task/Task.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/demo/spring/boot/demospringboot/thrid/party/api/vmovie/Config.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/demo/spring/boot/demospringboot/thrid/party/api/vmovie/VmovieFactory.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/demo/spring/boot/demospringboot/util/DateUtils.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/resources/templates/model.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/java/demo/spring/boot/film/CinemasServiceTest.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/java/demo/spring/boot/film/UserJpaTest.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/java/demo/spring/boot/film/VmovieFactoryTest.java" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/demo/spring/boot/demospringboot/BannerOffApplication.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/demo/spring/boot/demospringboot/CustomInterceptConfig.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/demo/spring/boot/demospringboot/controller/thrid/party/data/service/DataFactoryUtil.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/demo/spring/boot/demospringboot/jpa/service/CinemasJPQL.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/resources/img/mapmark.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/demo/spring/boot/demospringboot/BannerOffApplication.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/demo/spring/boot/demospringboot/CustomInterceptConfig$1.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/demo/spring/boot/demospringboot/CustomInterceptConfig.class" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/demo/spring/boot/demospringboot/jpa/service/CommentJpa.java" afterPath="$PROJECT_DIR$/src/main/java/demo/spring/boot/demospringboot/jpa/service/HotMovieDetailJpa.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/demo/spring/boot/demospringboot/jpa/service/MovieDetailJpa.java" afterPath="$PROJECT_DIR$/src/main/java/demo/spring/boot/demospringboot/jpa/service/HotMovieDetailCommentJpa.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/demo/spring/boot/demospringboot/jpa/vo/CinemasDetailJosnParse.java" afterPath="$PROJECT_DIR$/src/main/java/demo/spring/boot/demospringboot/jpa/vo/other/CinemasDetailJosnParse.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/demo/spring/boot/demospringboot/jpa/vo/CinemasJsonVo.java" afterPath="$PROJECT_DIR$/src/main/java/demo/spring/boot/demospringboot/jpa/vo/CinemasVo.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/demo/spring/boot/demospringboot/jpa/vo/CommentJsonVo.java" afterPath="$PROJECT_DIR$/src/main/java/demo/spring/boot/demospringboot/jpa/vo/HotMovieDetailCommentVo.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/demo/spring/boot/demospringboot/jpa/vo/HotMovieJsonVo.java" afterPath="$PROJECT_DIR$/src/main/java/demo/spring/boot/demospringboot/jpa/vo/HotMovieVo.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/demo/spring/boot/demospringboot/jpa/vo/MovieDetailJsonVo.java" afterPath="$PROJECT_DIR$/src/main/java/demo/spring/boot/demospringboot/jpa/vo/HotMovieDetailVo.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/demo/spring/boot/demospringboot/jpa/vo/SeatJson.java" afterPath="$PROJECT_DIR$/src/main/java/demo/spring/boot/demospringboot/jpa/vo/other/SeatJson.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/compiler.xml" afterPath="$PROJECT_DIR$/.idea/compiler.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/demo/spring/boot/demospringboot/controller/film/FilmController.java" afterPath="$PROJECT_DIR$/src/main/java/demo/spring/boot/demospringboot/controller/film/FilmController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/demo/spring/boot/demospringboot/controller/thrid/party/data/maoyan/DataFactoryController.java" afterPath="$PROJECT_DIR$/src/main/java/demo/spring/boot/demospringboot/controller/thrid/party/data/maoyan/DataFactoryController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/demo/spring/boot/demospringboot/jpa/service/CinemasJpa.java" afterPath="$PROJECT_DIR$/src/main/java/demo/spring/boot/demospringboot/jpa/service/CinemasJpa.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/demo/spring/boot/demospringboot/jpa/service/HotMoviesJpa.java" afterPath="$PROJECT_DIR$/src/main/java/demo/spring/boot/demospringboot/jpa/service/HotMoviesJpa.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/demo/spring/boot/demospringboot/jpa/service/SeatJpa.java" afterPath="$PROJECT_DIR$/src/main/java/demo/spring/boot/demospringboot/jpa/service/SeatJpa.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/demo/spring/boot/demospringboot/jpa/vo/SeatJsonVo.java" afterPath="$PROJECT_DIR$/src/main/java/demo/spring/boot/demospringboot/jpa/vo/SeatJsonVo.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/demo/spring/boot/demospringboot/thrid/party/api/maoyan/MaoyanCinemasFactory.java" afterPath="$PROJECT_DIR$/src/main/java/demo/spring/boot/demospringboot/thrid/party/api/maoyan/MaoyanCinemasFactory.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/demo/spring/boot/demospringboot/thrid/party/util/Http.java" afterPath="$PROJECT_DIR$/src/main/java/demo/spring/boot/demospringboot/thrid/party/util/Http.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/application-dev.yml" afterPath="$PROJECT_DIR$/src/main/resources/application-dev.yml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/application-pro.yml" afterPath="$PROJECT_DIR$/src/main/resources/application-pro.yml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/demo/spring/boot/film/cinemasTest.java" afterPath="$PROJECT_DIR$/src/test/java/demo/spring/boot/film/cinemasTest.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/application-dev.yml" afterPath="$PROJECT_DIR$/target/classes/application-dev.yml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/application-pro.yml" afterPath="$PROJECT_DIR$/target/classes/application-pro.yml" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -81,8 +28,8 @@
       <file leaf-file-name="application-dev.yml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/resources/application-dev.yml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="30">
-              <caret line="2" column="12" lean-forward="false" selection-start-line="2" selection-start-column="12" selection-end-line="2" selection-end-column="12" />
+            <state relative-caret-position="170">
+              <caret line="55" column="18" lean-forward="false" selection-start-line="55" selection-start-column="18" selection-end-line="55" selection-end-column="18" />
               <folding />
             </state>
           </provider>
@@ -92,7 +39,7 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/demo/spring/boot/demospringboot/controller/thrid/party/data/service/DataFactoryService.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="375">
-              <caret line="40" column="19" lean-forward="true" selection-start-line="40" selection-start-column="19" selection-end-line="40" selection-end-column="19" />
+              <caret line="40" column="19" lean-forward="false" selection-start-line="40" selection-start-column="19" selection-end-line="40" selection-end-column="19" />
               <folding />
             </state>
           </provider>
@@ -101,31 +48,11 @@
       <file leaf-file-name="DataFactoryController.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/demo/spring/boot/demospringboot/controller/thrid/party/data/maoyan/DataFactoryController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-11">
+            <state relative-caret-position="1005">
               <caret line="67" column="25" lean-forward="false" selection-start-line="67" selection-start-column="25" selection-end-line="67" selection-end-column="25" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CinemasServiceTest.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/test/java/demo/spring/boot/film/CinemasServiceTest.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="390">
-              <caret line="38" column="0" lean-forward="false" selection-start-line="38" selection-start-column="0" selection-end-line="38" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="cinemasTest.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/test/java/demo/spring/boot/film/cinemasTest.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="500">
-              <caret line="288" column="57" lean-forward="false" selection-start-line="288" selection-start-column="57" selection-end-line="288" selection-end-column="57" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -142,10 +69,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Swagger2Configuration.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Swagger2Configuration.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/demo/spring/boot/demospringboot/config/Swagger2Configuration.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="58">
+            <state relative-caret-position="210">
               <caret line="24" column="62" lean-forward="false" selection-start-line="24" selection-start-column="62" selection-end-line="24" selection-end-column="62" />
               <folding />
             </state>
@@ -177,6 +104,26 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="0">
               <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="application-pro.yml" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/application-pro.yml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="272">
+              <caret line="57" column="5" lean-forward="true" selection-start-line="57" selection-start-column="5" selection-end-line="57" selection-end-column="5" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="application.yml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/application.yml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="45">
+              <caret line="3" column="18" lean-forward="false" selection-start-line="3" selection-start-column="18" selection-end-line="3" selection-end-column="18" />
               <folding />
             </state>
           </provider>
@@ -287,11 +234,11 @@
         <option value="$PROJECT_DIR$/src/main/java/demo/spring/boot/demospringboot/jpa/vo/VMovieVo.java" />
         <option value="$PROJECT_DIR$/src/main/resources/application.yml" />
         <option value="$PROJECT_DIR$/src/main/java/demo/spring/boot/demospringboot/task/Task.java" />
-        <option value="$PROJECT_DIR$/src/main/resources/application-pro.yml" />
         <option value="$PROJECT_DIR$/src/main/java/demo/spring/boot/demospringboot/controller/film/FilmController.java" />
-        <option value="$PROJECT_DIR$/src/main/resources/application-dev.yml" />
         <option value="$PROJECT_DIR$/src/main/java/demo/spring/boot/demospringboot/controller/thrid/party/data/maoyan/DataFactoryController.java" />
         <option value="$PROJECT_DIR$/src/main/java/demo/spring/boot/demospringboot/config/Swagger2Configuration.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/application-dev.yml" />
+        <option value="$PROJECT_DIR$/src/main/resources/application-pro.yml" />
       </list>
     </option>
   </component>
@@ -381,7 +328,9 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="AndroidView" />
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -464,9 +413,7 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scratches" />
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
+      <pane id="AndroidView" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -794,6 +741,7 @@
       <workItem from="1523193299486" duration="5781000" />
       <workItem from="1523241393841" duration="2340000" />
       <workItem from="1523258790559" duration="1253000" />
+      <workItem from="1523262063057" duration="301000" />
     </task>
     <servers />
   </component>
@@ -830,10 +778,11 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="171281000" />
+    <option name="totallyTimeSpent" value="171582000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -842,22 +791,22 @@
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39925373" sideWeight="0.5028612" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.11802575" sideWeight="0.4934334" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.329602" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.119456366" sideWeight="0.4934334" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33706468" sideWeight="0.49427754" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.329602" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3283582" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2825465" sideWeight="0.4925926" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2825465" sideWeight="0.4925926" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Bean Validation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3297568" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24964234" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3211731" sideWeight="0.5074074" order="6" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3097015" sideWeight="0.49713877" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3211731" sideWeight="0.5074074" order="6" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -1037,7 +986,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
           <caret line="22" column="23" lean-forward="false" selection-start-line="22" selection-start-column="23" selection-end-line="22" selection-end-column="23" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1096,7 +1044,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
           <caret line="8" column="36" lean-forward="false" selection-start-line="8" selection-start-column="17" selection-end-line="8" selection-end-column="41" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1104,9 +1051,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="120">
           <caret line="11" column="29" lean-forward="false" selection-start-line="11" selection-start-column="17" selection-end-line="11" selection-end-column="29" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1114,9 +1058,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="180">
           <caret line="15" column="0" lean-forward="false" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1124,9 +1065,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="210">
           <caret line="20" column="0" lean-forward="false" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1134,7 +1072,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="120">
           <caret line="16" column="13" lean-forward="false" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1142,7 +1079,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="135">
           <caret line="15" column="13" lean-forward="false" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1150,7 +1086,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="120">
           <caret line="14" column="27" lean-forward="false" selection-start-line="14" selection-start-column="27" selection-end-line="14" selection-end-column="27" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1158,7 +1093,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="150">
           <caret line="15" column="21" lean-forward="false" selection-start-line="15" selection-start-column="21" selection-end-line="15" selection-end-column="21" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1166,7 +1100,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="120">
           <caret line="16" column="14" lean-forward="false" selection-start-line="16" selection-start-column="14" selection-end-line="16" selection-end-column="14" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1184,9 +1117,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="80">
           <caret line="20" column="13" lean-forward="false" selection-start-line="20" selection-start-column="13" selection-end-line="20" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1202,7 +1132,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="242">
           <caret line="27" column="22" lean-forward="false" selection-start-line="27" selection-start-column="22" selection-end-line="27" selection-end-column="22" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1210,7 +1139,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="225">
           <caret line="21" column="28" lean-forward="false" selection-start-line="21" selection-start-column="19" selection-end-line="21" selection-end-column="28" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1273,14 +1201,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/application.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="3" column="18" lean-forward="false" selection-start-line="3" selection-start-column="18" selection-end-line="3" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/demo/spring/boot/film/VmovieFactoryTest.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="150">
@@ -1293,7 +1213,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
           <caret line="8" column="26" lean-forward="false" selection-start-line="8" selection-start-column="17" selection-end-line="8" selection-end-column="34" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1301,7 +1220,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="105">
           <caret line="12" column="29" lean-forward="false" selection-start-line="12" selection-start-column="29" selection-end-line="12" selection-end-column="29" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1321,17 +1239,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/application-pro.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1065">
-          <caret line="71" column="37" lean-forward="false" selection-start-line="71" selection-start-column="37" selection-end-line="71" selection-end-column="37" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/demo/spring/boot/film/cinemasTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="500">
+        <state relative-caret-position="3885">
           <caret line="288" column="57" lean-forward="false" selection-start-line="288" selection-start-column="57" selection-end-line="288" selection-end-column="57" />
           <folding />
         </state>
@@ -1363,25 +1273,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/application-dev.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" column="12" lean-forward="false" selection-start-line="2" selection-start-column="12" selection-end-line="2" selection-end-column="12" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/demo/spring/boot/demospringboot/controller/thrid/party/data/service/DataFactoryService.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="375">
-          <caret line="40" column="19" lean-forward="true" selection-start-line="40" selection-start-column="19" selection-end-line="40" selection-end-column="19" />
+          <caret line="40" column="19" lean-forward="false" selection-start-line="40" selection-start-column="19" selection-end-line="40" selection-end-column="19" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/demo/spring/boot/demospringboot/controller/thrid/party/data/maoyan/DataFactoryController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-11">
+        <state relative-caret-position="1005">
           <caret line="67" column="25" lean-forward="false" selection-start-line="67" selection-start-column="25" selection-end-line="67" selection-end-column="25" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -1407,8 +1309,32 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/demo/spring/boot/demospringboot/config/Swagger2Configuration.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="58">
+        <state relative-caret-position="210">
           <caret line="24" column="62" lean-forward="false" selection-start-line="24" selection-start-column="62" selection-end-line="24" selection-end-column="62" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/application.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="3" column="18" lean-forward="false" selection-start-line="3" selection-start-column="18" selection-end-line="3" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/application-dev.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="55" column="18" lean-forward="false" selection-start-line="55" selection-start-column="18" selection-end-line="55" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/application-pro.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="57" column="5" lean-forward="true" selection-start-line="57" selection-start-column="5" selection-end-line="57" selection-end-column="5" />
           <folding />
         </state>
       </provider>
