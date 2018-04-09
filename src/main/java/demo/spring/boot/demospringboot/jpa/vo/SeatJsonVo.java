@@ -14,7 +14,7 @@ import lombok.ToString;
  * 2018/4/6    Created by   chao
  */
 @Entity
-@Table
+@Table(name = "t_seat")
 @Data
 @ToString
 public class SeatJsonVo {

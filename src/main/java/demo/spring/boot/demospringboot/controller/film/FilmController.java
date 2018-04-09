@@ -4,6 +4,8 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
@@ -17,28 +19,30 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 import demo.spring.boot.demospringboot.framework.Code;
 import demo.spring.boot.demospringboot.framework.Response;
 import demo.spring.boot.demospringboot.jpa.service.CinemasDetailJpa;
 import demo.spring.boot.demospringboot.jpa.service.CinemasJpa;
-import demo.spring.boot.demospringboot.jpa.service.CommentJpa;
+import demo.spring.boot.demospringboot.jpa.service.HotMovieDetailCommentJpa;
 import demo.spring.boot.demospringboot.jpa.service.HotMoviesJpa;
-import demo.spring.boot.demospringboot.jpa.service.MovieDetailJpa;
+import demo.spring.boot.demospringboot.jpa.service.HotMovieDetailJpa;
+import demo.spring.boot.demospringboot.jpa.service.VMovieJpa;
+import demo.spring.boot.demospringboot.jpa.vo.other.CinemasDetailJosnParse;
 import demo.spring.boot.demospringboot.jpa.vo.CinemasDetailVo;
-import demo.spring.boot.demospringboot.jpa.vo.CinemasJsonVo;
-import demo.spring.boot.demospringboot.jpa.vo.CommentJsonVo;
-import demo.spring.boot.demospringboot.jpa.vo.CinemasDetailJosnParse;
-import demo.spring.boot.demospringboot.jpa.vo.HotMovieJsonVo;
-import demo.spring.boot.demospringboot.jpa.vo.MovieDetailJsonVo;
-import demo.spring.boot.demospringboot.jpa.vo.SeatJson;
+import demo.spring.boot.demospringboot.jpa.vo.CinemasVo;
+import demo.spring.boot.demospringboot.jpa.vo.HotMovieDetailCommentVo;
+import demo.spring.boot.demospringboot.jpa.vo.HotMovieVo;
+import demo.spring.boot.demospringboot.jpa.vo.HotMovieDetailVo;
+import demo.spring.boot.demospringboot.jpa.vo.other.SeatJson;
+import demo.spring.boot.demospringboot.jpa.vo.VMovieVo;
 import demo.spring.boot.demospringboot.jpa.vo.other.DateShow;
 import demo.spring.boot.demospringboot.jpa.vo.other.DateShowIndex;
 import demo.spring.boot.demospringboot.jpa.vo.other.Sections;
+import demo.spring.boot.demospringboot.mybatis.service.CinemasService;
+import demo.spring.boot.demospringboot.mybatis.vo.CinemasJsonBo;
 import demo.spring.boot.demospringboot.thrid.party.api.maoyan.MaoyanCinemasFactory;
 import demo.spring.boot.demospringboot.util.IP;
 
@@ -46,14 +50,16 @@ import demo.spring.boot.demospringboot.util.IP;
 @RequestMapping(value = "/film")
 public class FilmController {
 
+    private static Logger LOGGER = LoggerFactory.getLogger(FilmController.class);
+
     @Autowired
     private HotMoviesJpa hotMoviesJpa;
 
     @Autowired
-    private MovieDetailJpa movieDetailJpa;
+    private HotMovieDetailJpa hotMovieDetailJpa;
 
     @Autowired
-    private CommentJpa commentJpa;
+    private HotMovieDetailCommentJpa hotMovieDetailCommentJpa;
 
 
     @Autowired
@@ -65,8 +71,14 @@ public class FilmController {
     @Autowired
     private MaoyanCinemasFactory maoyanCinemasFactory;
 
+    @Autowired
+    private CinemasService cinemasService;
+
+    @Autowired
+    private VMovieJpa vMovieJpa;
+
     @GetMapping(value = "/getCinems/{page}/{limit}")
-    public List<CinemasJsonVo> getCinems(
+    public List<CinemasVo> getCinems(
             @PathVariable(value = "page") Integer page,
             @PathVariable(value = "limit") Integer limit) {
 
@@ -76,14 +88,14 @@ public class FilmController {
     }
 
     @GetMapping(value = "/getHotMovies/{page}/{size}")
-    public Response<List<HotMovieJsonVo>> getHotMovies(
+    public Response<List<HotMovieVo>> getHotMovies(
             @PathVariable(value = "page") Integer page,
             @PathVariable(value = "size") Integer size) {
-        Response<List<HotMovieJsonVo>> response
+        Response<List<HotMovieVo>> response
                 = new Response<>();
         try {
             Pageable pageable = new PageRequest(page, size);
-            Page<HotMovieJsonVo> result = hotMoviesJpa.findAll(pageable);
+            Page<HotMovieVo> result = hotMoviesJpa.findAll(pageable);
             response.setCode(Code.System.OK);
             response.setMsg(Code.System.SERVER_SUCCESS_MSG);
             response.setContent(result.getContent());
@@ -96,16 +108,16 @@ public class FilmController {
     }
 
     @GetMapping(value = "/getHotMovieDetail/{movieId}")
-    public Response<MovieDetailJsonVo> getHotMovies(
+    public Response<HotMovieDetailVo> getHotMovies(
             @PathVariable(value = "movieId") Integer movieId) {
-        Response<MovieDetailJsonVo> response
+        Response<HotMovieDetailVo> response
                 = new Response<>();
         try {
-            MovieDetailJsonVo movieDetailJsonVo
-                    = movieDetailJpa.findOne(movieId);
+            HotMovieDetailVo hotMovieDetailVo
+                    = hotMovieDetailJpa.findOne(movieId);
             response.setCode(Code.System.OK);
             response.setMsg(Code.System.SERVER_SUCCESS_MSG);
-            response.setContent(movieDetailJsonVo);
+            response.setContent(hotMovieDetailVo);
         } catch (Exception e) {
             response.setCode(Code.System.FAIL);
             response.setMsg(Code.SystemError.SERVER_INTERNAL_ERROR_MSG);
@@ -118,25 +130,25 @@ public class FilmController {
      * 获取 评论
      */
     @GetMapping(value = "/getComments/{movieId}/{page}/{size}")
-    public Response<List<CommentJsonVo>> getComments(
+    public Response<List<HotMovieDetailCommentVo>> getComments(
             @PathVariable(value = "movieId") Integer movieId,
             @PathVariable(value = "page") Integer page,
             @PathVariable(value = "size") Integer size) {
-        Response<List<CommentJsonVo>> response
+        Response<List<HotMovieDetailCommentVo>> response
                 = new Response<>();
         try {
 
             //构造查询条件
-            CommentJsonVo commentJsonVo = new CommentJsonVo();
-            commentJsonVo.setMovieId(movieId);
+            HotMovieDetailCommentVo HotMovieDetailCommentVo = new HotMovieDetailCommentVo();
+            HotMovieDetailCommentVo.setMovieId(movieId);
 
             ExampleMatcher matcher = ExampleMatcher.matching() //构建对象
                     //姓名采用“开始匹配”的方式查询
                     .withIgnoreNullValues();
-            Example<CommentJsonVo> example = Example.of(commentJsonVo);
+            Example<HotMovieDetailCommentVo> example = Example.of(HotMovieDetailCommentVo);
             //分页查询
             Pageable pageable = new PageRequest(page, size);
-            Page<CommentJsonVo> result = commentJpa.findAll(example, pageable);
+            Page<HotMovieDetailCommentVo> result = hotMovieDetailCommentJpa.findAll(example, pageable);
             response.setCode(Code.System.OK);
             response.setMsg(Code.System.SERVER_SUCCESS_MSG);
             response.setContent(result.getContent());
@@ -152,19 +164,18 @@ public class FilmController {
      * 获取 电影院
      */
     @GetMapping(value = "/getCinemas/{lat}/{lng}/{page}/{size}")
-    public Response<List<CinemasJsonVo>> getCinemas(
-            @PathVariable(value = "lat") Integer lat,
-            @PathVariable(value = "lng") Integer lng,
+    public Response<List<CinemasJsonBo>> getCinemas(
+            @PathVariable(value = "lat") String lat,
+            @PathVariable(value = "lng") String lng,
             @PathVariable(value = "page") Integer page,
             @PathVariable(value = "size") Integer size) {
-        Response<List<CinemasJsonVo>> response
+        Response<List<CinemasJsonBo>> response
                 = new Response<>();
         try {
-            Pageable pageable = new PageRequest(page, size);
-            Page<CinemasJsonVo> result = cinemasJpa.findAll(pageable);
+            List<CinemasJsonBo> cinemasJsonBos = cinemasService.queryCinemasByDist(lat, lng, page, size);
             response.setCode(Code.System.OK);
             response.setMsg(Code.System.SERVER_SUCCESS_MSG);
-            response.setContent(result.getContent());
+            response.setContent(cinemasJsonBos);
         } catch (Exception e) {
             response.setCode(Code.System.FAIL);
             response.setMsg(Code.SystemError.SERVER_INTERNAL_ERROR_MSG);
@@ -177,17 +188,17 @@ public class FilmController {
      * 搜索 电影院
      */
     @GetMapping(value = "/search/{key}/{page}/{size}")
-    public Response<List<CinemasJsonVo>> getCinemas(
+    public Response<List<CinemasVo>> getCinemas(
             @PathVariable(value = "key") String key,
             @PathVariable(value = "page") Integer page,
             @PathVariable(value = "size") Integer size) {
-        Response<List<CinemasJsonVo>> response
+        Response<List<CinemasVo>> response
                 = new Response<>();
         try {
 
             //分页查询
             Pageable pageable = new PageRequest(page, size);
-            List<CinemasJsonVo> result =
+            List<CinemasVo> result =
                     cinemasJpa.findCinemasJsonVoByNmLike("%" + key + "%", pageable);
             response.setCode(Code.System.OK);
             response.setMsg(Code.System.SERVER_SUCCESS_MSG);
@@ -219,6 +230,19 @@ public class FilmController {
                 cinemasDetailVo = cinemasDetailJpa.
                         findCinemasDetailVoByCinemasIdAndMovieId(cinemaId, movieId);
             }
+            if (null == cinemasDetailVo) {
+                //如果数据库中没有，就抓取
+                this.getDataFromWeb(cinemaId);
+                if (null == movieId) {
+                    //根据电影院id来查询
+                    cinemasDetailVo = cinemasDetailJpa.getFirstByCinemasId(cinemaId);
+                } else {
+                    //根据电影院id和电影id来查询
+                    cinemasDetailVo = cinemasDetailJpa.
+                            findCinemasDetailVoByCinemasIdAndMovieId(cinemaId, movieId);
+                }
+            }
+
             response.setCode(Code.System.OK);
             response.setMsg(Code.System.SERVER_SUCCESS_MSG);
             CinemasDetailJosnParse cinemasDetailJosnParse =
@@ -231,6 +255,7 @@ public class FilmController {
         } catch (Exception e) {
             response.setCode(Code.System.FAIL);
             response.setMsg(Code.SystemError.SERVER_INTERNAL_ERROR_MSG);
+            response.setMsg(e.getMessage());
             response.addException(e);
         }
         return response;
@@ -273,7 +298,32 @@ public class FilmController {
         return response;
     }
 
-
+    /**
+     * 获取 电影院
+     */
+    @GetMapping(value = "/getVMovie/{page}/{size}")
+    public Response<List<VMovieVo>> getVMovie(
+            @PathVariable(value = "page") Integer page,
+            @PathVariable(value = "size") Integer size) {
+        Response<List<VMovieVo>> response
+                = new Response<>();
+        try {
+            Pageable pageable = new PageRequest(page, size);
+            List<VMovieVo> vMovieVos = vMovieJpa.findVMovieVosByVideoUrlIsNot("-2", pageable);
+//            vMovieVos.stream().filter(vo->{
+//                vo.setVideoUrl(vo.getVideoUrl().substring(2));
+//                return true;
+//            }).collect(Collectors.toList());;
+            response.setCode(Code.System.OK);
+            response.setMsg(Code.System.SERVER_SUCCESS_MSG);
+            response.setContent(vMovieVos);
+        } catch (Exception e) {
+            response.setCode(Code.System.FAIL);
+            response.setMsg(Code.SystemError.SERVER_INTERNAL_ERROR_MSG);
+            response.addException(e);
+        }
+        return response;
+    }
 
 
 
@@ -293,5 +343,22 @@ public class FilmController {
             });
 
         }
+    }
+
+    private void getDataFromWeb(Integer cinemasId) {
+        List<String> movieIds = null;
+        try {
+            movieIds = maoyanCinemasFactory
+                    .geCinemasMovieIds(IP.getNextRandow(), cinemasId);
+            maoyanCinemasFactory.
+                    loadInCinemasDetail(IP.getNextRandow(), movieIds, cinemasId).stream()
+                    .forEach(vo -> {
+                        cinemasDetailJpa.save(vo);
+                    });
+        } catch (InterruptedException e) {
+            LOGGER.error("爬取数据异常");
+            e.printStackTrace();
+        }
+
     }
 }

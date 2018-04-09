@@ -9,10 +9,10 @@ import lombok.Data;
 import lombok.ToString;
 
 @Entity
-@Table(name = "cinemas_json")
+@Table(name = "t_cinemas")
 @Data
 @ToString
-public class CinemasJsonVo {
+public class CinemasVo {
     private String area;//地区
     private int deal;
     private int distance;//折扣

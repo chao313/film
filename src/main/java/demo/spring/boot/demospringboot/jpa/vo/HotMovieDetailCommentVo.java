@@ -10,10 +10,10 @@ import lombok.Data;
 import lombok.ToString;
 
 @Entity
-@Table(name = "comment_json")
+@Table(name = "t_hot_movie_detail_comment")
 @Data
 @ToString
-public class CommentJsonVo {
+public class HotMovieDetailCommentVo {
     private Integer movieId;
 
     private String vipInfo;

@@ -1,5 +1,5 @@
 
-package demo.spring.boot.demospringboot.jpa.vo;
+package demo.spring.boot.demospringboot.jpa.vo.other;
 
 import java.util.List;
 

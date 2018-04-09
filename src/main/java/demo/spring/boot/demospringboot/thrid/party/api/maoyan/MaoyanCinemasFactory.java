@@ -17,11 +17,11 @@ import java.util.List;
 import java.util.Map;
 
 import demo.spring.boot.demospringboot.jpa.vo.CinemasDetailVo;
-import demo.spring.boot.demospringboot.jpa.vo.CinemasJsonVo;
-import demo.spring.boot.demospringboot.jpa.vo.CommentJsonVo;
-import demo.spring.boot.demospringboot.jpa.vo.HotMovieJsonVo;
-import demo.spring.boot.demospringboot.jpa.vo.MovieDetailJsonVo;
-import demo.spring.boot.demospringboot.jpa.vo.SeatJson;
+import demo.spring.boot.demospringboot.jpa.vo.CinemasVo;
+import demo.spring.boot.demospringboot.jpa.vo.HotMovieDetailCommentVo;
+import demo.spring.boot.demospringboot.jpa.vo.HotMovieVo;
+import demo.spring.boot.demospringboot.jpa.vo.HotMovieDetailVo;
+import demo.spring.boot.demospringboot.jpa.vo.other.SeatJson;
 import demo.spring.boot.demospringboot.thrid.party.util.Http;
 
 @Component
@@ -33,7 +33,7 @@ public class MaoyanCinemasFactory {
     private Http http;
 
 
-    public List<CinemasJsonVo> loadInCinemas(String ip) {
+    public List<CinemasVo> loadInCinemas(String ip) {
         HttpHeaders requestHeaders = new HttpHeaders();
         requestHeaders.add("user-agent",
                 "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) " +
@@ -45,22 +45,22 @@ public class MaoyanCinemasFactory {
         Map<String, Object> innerMap =
                 jsonObject.getInnerMap();
         Map<String, JSONArray> map = (Map<String, JSONArray>) innerMap.get("data");
-        List<CinemasJsonVo> cinemasJsonVos = new ArrayList<>();
+        List<CinemasVo> cinemasVos = new ArrayList<>();
         for (String key : map.keySet()) {
             LOGGER.info("key{}", key);
             LOGGER.info("value{}", map.get(key));
             JSONArray jsonArray = map.get(key);
-            for (CinemasJsonVo vo : jsonArray.toJavaList(CinemasJsonVo.class)) {
-                cinemasJsonVos.add(vo);
+            for (CinemasVo vo : jsonArray.toJavaList(CinemasVo.class)) {
+                cinemasVos.add(vo);
             }
         }
-        return cinemasJsonVos;
+        return cinemasVos;
     }
 
     /**
      * 获取movie
      */
-    public List<HotMovieJsonVo> loadInMovies(String ip) {
+    public List<HotMovieVo> loadInMovies(String ip) {
         HttpHeaders requestHeaders = new HttpHeaders();
         requestHeaders.add("user-agent",
                 "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) " +
@@ -72,20 +72,20 @@ public class MaoyanCinemasFactory {
         Map<String, Object> innerMap =
                 jsonObject.getInnerMap();
         Map<String, JSONArray> map = (Map<String, JSONArray>) innerMap.get("data");
-        List<HotMovieJsonVo> hotMovieJsonVos = new ArrayList<>();
+        List<HotMovieVo> hotMovieVos = new ArrayList<>();
 
         JSONArray jsonArray = map.get("movies");
-        for (HotMovieJsonVo vo : jsonArray.toJavaList(HotMovieJsonVo.class)) {
-            hotMovieJsonVos.add(vo);
+        for (HotMovieVo vo : jsonArray.toJavaList(HotMovieVo.class)) {
+            hotMovieVos.add(vo);
 
         }
-        return hotMovieJsonVos;
+        return hotMovieVos;
     }
 
     /**
      * 获取movieDeatil
      */
-    public MovieDetailJsonVo loadInMoviesDetail(String ip, String movieId) {
+    public HotMovieDetailVo loadInMoviesDetail(String ip, String movieId) {
         HttpHeaders requestHeaders = new HttpHeaders();
         requestHeaders.add("user-agent",
                 "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) " +
@@ -101,14 +101,14 @@ public class MaoyanCinemasFactory {
 
         JSONObject jsonObject1 = map.get("MovieDetailModel");
 
-        return jsonObject1.toJavaObject(MovieDetailJsonVo.class);
+        return jsonObject1.toJavaObject(HotMovieDetailVo.class);
     }
 
     /**
      * 获取movieDeatil
      */
-    public List<CommentJsonVo> loadInComments(String ip, Integer movieId,
-                                              Integer limit, Integer offset) {
+    public List<HotMovieDetailCommentVo> loadInComments(String ip, Integer movieId,
+                                                        Integer limit, Integer offset) {
         HttpHeaders requestHeaders = new HttpHeaders();
         requestHeaders.add("user-agent",
                 "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) " +
@@ -123,14 +123,14 @@ public class MaoyanCinemasFactory {
         JSONObject jsonObject = JSON.parseObject(result.getBody());
         Map<String, Object> innerMap =
                 jsonObject.getInnerMap();
-        List<CommentJsonVo> commentJsonVos = new ArrayList<>();
+        List<HotMovieDetailCommentVo> HotMovieDetailCommentVos = new ArrayList<>();
         Map<String, JSONObject> map = (Map<String, JSONObject>) innerMap.get("data");
         JSONObject jsonObject1 = map.get("CommentResponseModel");
-        for (CommentJsonVo vo : ((JSONArray) jsonObject1.get("cmts")).toJavaList(CommentJsonVo.class)) {
+        for (HotMovieDetailCommentVo vo : ((JSONArray) jsonObject1.get("cmts")).toJavaList(HotMovieDetailCommentVo.class)) {
             vo.setMovieId(movieId);
-            commentJsonVos.add(vo);
+            HotMovieDetailCommentVos.add(vo);
         }
-        return commentJsonVos;
+        return HotMovieDetailCommentVos;
     }
 
 

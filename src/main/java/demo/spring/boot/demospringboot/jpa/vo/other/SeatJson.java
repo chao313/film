@@ -1,8 +1,7 @@
-package demo.spring.boot.demospringboot.jpa.vo;
+package demo.spring.boot.demospringboot.jpa.vo.other;
 
 import java.util.List;
 
-import demo.spring.boot.demospringboot.jpa.vo.other.Sections;
 import lombok.Data;
 import lombok.ToString;
 

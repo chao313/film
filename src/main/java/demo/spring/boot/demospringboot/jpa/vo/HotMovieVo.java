@@ -10,10 +10,10 @@ import lombok.Data;
 import lombok.ToString;
 
 @Entity
-@Table(name = "hot_movie_json")
+@Table(name = "t_hot_movie")
 @Data
 @ToString
-public class HotMovieJsonVo {
+public class HotMovieVo {
     private String showInfo;
 
     private int cnms;

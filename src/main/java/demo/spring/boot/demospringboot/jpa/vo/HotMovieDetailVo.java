@@ -9,10 +9,10 @@ import lombok.Data;
 import lombok.ToString;
 
 @Entity
-@Table(name = "movie_detail_json")
+@Table(name = "t_hot_movie_detail")
 @Data
 @ToString
-public class MovieDetailJsonVo {
+public class HotMovieDetailVo {
     private String cat;
 
     private int dealsum;

@@ -1,8 +1,5 @@
 package demo.spring.boot.film;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -20,21 +17,19 @@ import org.springframework.web.client.RestTemplate;
 import demo.spring.boot.demospringboot.DemoSpringBootApplication;
 import demo.spring.boot.demospringboot.jpa.service.CinemasDetailJpa;
 import demo.spring.boot.demospringboot.jpa.service.CinemasJpa;
-import demo.spring.boot.demospringboot.jpa.service.CommentJpa;
+import demo.spring.boot.demospringboot.jpa.service.HotMovieDetailCommentJpa;
 import demo.spring.boot.demospringboot.jpa.service.HotMoviesJpa;
 
-import demo.spring.boot.demospringboot.jpa.service.MovieDetailJpa;
-import demo.spring.boot.demospringboot.jpa.vo.CinemasJsonVo;
-import demo.spring.boot.demospringboot.jpa.vo.CommentJsonVo;
-import demo.spring.boot.demospringboot.jpa.vo.HotMovieJsonVo;
-import demo.spring.boot.demospringboot.jpa.vo.MovieDetailJsonVo;
-import demo.spring.boot.demospringboot.thrid.party.api.maoyan.Config;
+import demo.spring.boot.demospringboot.jpa.service.HotMovieDetailJpa;
+import demo.spring.boot.demospringboot.jpa.vo.CinemasVo;
+import demo.spring.boot.demospringboot.jpa.vo.HotMovieDetailCommentVo;
+import demo.spring.boot.demospringboot.jpa.vo.HotMovieVo;
+import demo.spring.boot.demospringboot.jpa.vo.HotMovieDetailVo;
 import demo.spring.boot.demospringboot.thrid.party.api.maoyan.MaoyanCinemasFactory;
 import demo.spring.boot.demospringboot.thrid.party.util.Http;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -291,7 +286,7 @@ public class cinemasTest {
 
         for (String ip : list) {
             try {
-                for (CinemasJsonVo vo : maoyanCinemasFactory.loadInCinemas(ip)) {
+                for (CinemasVo vo : maoyanCinemasFactory.loadInCinemas(ip)) {
                     LOGGER.info("保存{}", vo);
                     cinemasJpa.save(vo);
                 }
@@ -308,7 +303,7 @@ public class cinemasTest {
     public void moviesLoadinTest() {
         String ip = "43.241.51.255";
         try {
-            for (HotMovieJsonVo vo : maoyanCinemasFactory.loadInMovies(ip)) {
+            for (HotMovieVo vo : maoyanCinemasFactory.loadInMovies(ip)) {
                 LOGGER.info("保存{}", vo);
                 hotMoviesJpa.save(vo);
             }
@@ -318,17 +313,17 @@ public class cinemasTest {
     }
 
     @Autowired
-    private MovieDetailJpa movieDetailJpa;
+    private HotMovieDetailJpa hotMovieDetailJpa;
 
     @Test
     public void movieDetailLoadinTest() {
         String ip = "43.241.51.255";
         try {
-            for (HotMovieJsonVo hotMovieJsonVo : hotMoviesJpa.findAll()) {
-                MovieDetailJsonVo movieDetailJsonVo = maoyanCinemasFactory.loadInMoviesDetail(ip,
-                        String.valueOf(hotMovieJsonVo.getId()));
-                LOGGER.info("保存{}", movieDetailJsonVo);
-                movieDetailJpa.save(movieDetailJsonVo);
+            for (HotMovieVo hotMovieVo : hotMoviesJpa.findAll()) {
+                HotMovieDetailVo hotMovieDetailVo = maoyanCinemasFactory.loadInMoviesDetail(ip,
+                        String.valueOf(hotMovieVo.getId()));
+                LOGGER.info("保存{}", hotMovieDetailVo);
+                hotMovieDetailJpa.save(hotMovieDetailVo);
             }
 
 
@@ -338,30 +333,30 @@ public class cinemasTest {
     }
 
     @Autowired
-    CommentJpa commentJpa;
+    HotMovieDetailCommentJpa hotMovieDetailCommentJpa;
 
     @Test
     public void loadInComments() throws InterruptedException {
         String ip = "43.241.51.255";
 
-        for (HotMovieJsonVo hotMovieJsonVo : hotMoviesJpa.findAll()) {
-            Integer movieId = hotMovieJsonVo.getId();
+        for (HotMovieVo hotMovieVo : hotMoviesJpa.findAll()) {
+            Integer movieId = hotMovieVo.getId();
             Integer limit = 14;
             Integer offset = 0;
             for (int i = 0; i < 20; i++) {
                 offset = i * limit;
                 Thread.sleep(1000 * 2);
-                List<CommentJsonVo> commentJsonVos
+                List<HotMovieDetailCommentVo> HotMovieDetailCommentVos
                         = maoyanCinemasFactory.loadInComments(ip, movieId, limit, offset);
-                for (CommentJsonVo vo : commentJsonVos) {
+                for (HotMovieDetailCommentVo vo : HotMovieDetailCommentVos) {
                     try {
-                        commentJpa.save(vo);
+                        hotMovieDetailCommentJpa.save(vo);
                     } catch (Exception e) {
                         LOGGER.error("数据插入异常：{}", vo, e);
                     }
 
                 }
-                if (commentJsonVos.size() == 0) {
+                if (HotMovieDetailCommentVos.size() == 0) {
                     break;
                 }
 

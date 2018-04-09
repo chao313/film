@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,15 +17,19 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import demo.spring.boot.demospringboot.controller.thrid.party.data.service.DataFactoryService;
 import demo.spring.boot.demospringboot.framework.Code;
 import demo.spring.boot.demospringboot.framework.Response;
 import demo.spring.boot.demospringboot.jpa.service.CinemasDetailJpa;
 import demo.spring.boot.demospringboot.jpa.service.CinemasJpa;
+import demo.spring.boot.demospringboot.jpa.service.HotMovieDetailCommentJpa;
 import demo.spring.boot.demospringboot.jpa.service.HotMoviesJpa;
+import demo.spring.boot.demospringboot.jpa.service.HotMovieDetailJpa;
 import demo.spring.boot.demospringboot.jpa.service.SeatJpa;
-import demo.spring.boot.demospringboot.jpa.vo.CinemasDetailJosnParse;
+import demo.spring.boot.demospringboot.jpa.vo.other.CinemasDetailJosnParse;
 import demo.spring.boot.demospringboot.jpa.vo.CinemasDetailVo;
-import demo.spring.boot.demospringboot.jpa.vo.HotMovieJsonVo;
+import demo.spring.boot.demospringboot.jpa.vo.HotMovieDetailCommentVo;
+import demo.spring.boot.demospringboot.jpa.vo.HotMovieVo;
 import demo.spring.boot.demospringboot.jpa.vo.SeatJsonVo;
 import demo.spring.boot.demospringboot.jpa.vo.other.DateShow;
 import demo.spring.boot.demospringboot.jpa.vo.other.DateShowIndex;
@@ -53,7 +58,32 @@ public class DataFactoryController {
     @Autowired
     private SeatJpa seatJpa;
 
-    @GetMapping("/load-in-cinemas-detail-one")
+    @Autowired
+    private HotMovieDetailJpa hotMovieDetailJpa;
+
+    @Autowired
+    private HotMovieDetailCommentJpa hotMovieDetailCommentJpa;
+
+    @Autowired
+    private DataFactoryService dataFactoryService;
+
+    @GetMapping("/load-in-cinemas-by-ip")
+    public Response<Boolean> loadInCinemasByIp(@RequestParam(name = "ip") String ip) {
+        Response<Boolean> response = new Response<>();
+        try {
+            maoyanCinemasFactory.loadInCinemas(ip);
+            response.setCode(Code.System.OK);
+            response.setContent(true);
+        } catch (Exception e) {
+            response.setCode(Code.System.FAIL);
+            response.setMsg(Code.SystemError.SERVER_INTERNAL_ERROR_MSG);
+            response.addException(e);
+        }
+        return response;
+    }
+
+
+    @GetMapping("/load-in-cinemas-detail-one-one")
     public Response<Boolean> loadInCinemasDetailOne(String ip,
                                                     @RequestParam(name = "电影id") Integer movieId,
                                                     @RequestParam(name = "电影院id") Integer cinemasId) {
@@ -83,22 +113,47 @@ public class DataFactoryController {
         return response;
     }
 
+    @GetMapping("/load-in-cinemas-detail-one/{cinemasId}")
+    public Response<Boolean> loadInCinemasDetailOneByCinemasId(@PathVariable(value = "cinemasId") Integer cinemasId) {
+        Response<Boolean> response = new Response<>();
+
+        List<String> movieIds = null;
+        try {
+            movieIds = maoyanCinemasFactory
+                    .geCinemasMovieIds(IP.getNextRandow(), cinemasId);
+
+            maoyanCinemasFactory.
+                    loadInCinemasDetail(IP.getNextRandow(), movieIds, cinemasId).stream()
+                    .forEach(vo -> {
+                        cinemasDetailJpa.save(vo);
+                    });
+            response.setCode(Code.System.OK);
+            response.setContent(true);
+        } catch (Exception e)
+
+        {
+            response.setCode(Code.System.FAIL);
+            response.setMsg(Code.SystemError.SERVER_INTERNAL_ERROR_MSG);
+            response.addException(e);
+        }
+        return response;
+    }
+
     @GetMapping("/load-in-cinemas-detail-all")
     public Response<Boolean> loadInCinemasDetailAll() {
         Response<Boolean> response = new Response<>();
         try {
-            final String ip = "202.96.128.166";
             cinemasJpa.findAll().stream().forEach(hotMovie -> {
                 List<String> movieIds = null;
                 try {
                     movieIds = maoyanCinemasFactory
-                            .geCinemasMovieIds(ip, hotMovie.getId());
+                            .geCinemasMovieIds(IP.getNextRandow(), hotMovie.getId());
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
                 try {
                     maoyanCinemasFactory.
-                            loadInCinemasDetail(ip, movieIds, hotMovie.getId()).stream()
+                            loadInCinemasDetail(IP.getNextRandow(), movieIds, hotMovie.getId()).stream()
                             .forEach(vo -> {
                                 cinemasDetailJpa.save(vo);
                             });
@@ -121,13 +176,7 @@ public class DataFactoryController {
             @RequestParam(name = "ip", defaultValue = "43.241.51.255") String ip) {
         Response<Boolean> response = new Response<>();
         try {
-            hotMoviesJpa.deleteAll();
-            maoyanCinemasFactory.loadInMovies(ip)
-                    .stream()
-                    .forEach(vo -> {
-                        LOGGER.info("保存{}", vo);
-                        hotMoviesJpa.save(vo);
-                    });
+            dataFactoryService.loadInHotMovie();
             response.setCode(Code.System.OK);
             response.setContent(true);
         } catch (Exception e) {
@@ -135,6 +184,39 @@ public class DataFactoryController {
             response.setCode(Code.System.FAIL);
             response.setContent(false);
             response.addException(e);
+        }
+        return response;
+    }
+
+    @GetMapping("load-in-hotmoives-details")
+    public Response<Boolean> loadInHotMoviesDetail() {
+
+        Response<Boolean> response = new Response<>();
+        try {
+            dataFactoryService.loadInHotMoviesDetail();
+            response.setCode(Code.System.OK);
+            response.setContent(true);
+        } catch (Exception e) {
+            response.setCode(Code.System.FAIL);
+            response.setContent(false);
+            response.addException(e);
+            response.setMsg(e.getMessage());
+        }
+        return response;
+    }
+
+    @GetMapping("load-in-hotmoives-details-comment")
+    public Response<Boolean> loadInHotMoviesDetailComment() {
+        Response<Boolean> response = new Response<>();
+        try {
+            dataFactoryService.loadInHotMoviesDetailComment();
+            response.setCode(Code.System.OK);
+            response.setContent(true);
+        } catch (Exception e) {
+            response.setCode(Code.System.FAIL);
+            response.setContent(false);
+            response.addException(e);
+            response.setMsg(e.getMessage());
         }
         return response;
     }

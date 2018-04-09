@@ -8,13 +8,13 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-import demo.spring.boot.demospringboot.jpa.vo.CinemasJsonVo;
+import demo.spring.boot.demospringboot.jpa.vo.CinemasVo;
 
 /**
  * jpa增删改查
  */
 @Service
-public interface CinemasJpa extends JpaRepository<CinemasJsonVo, Integer> {
+public interface CinemasJpa extends JpaRepository<CinemasVo, Integer> {
 //    /**
 //     * 拓展的增删改查方法 查询方法以find | read | get开头
 //     */
@@ -30,6 +30,6 @@ public interface CinemasJpa extends JpaRepository<CinemasJsonVo, Integer> {
     /**
      * 根据
      */
-    public List<CinemasJsonVo> findCinemasJsonVoByNmLike(String nm, Pageable pageable);
+    public List<CinemasVo> findCinemasJsonVoByNmLike(String nm, Pageable pageable);
 
 }

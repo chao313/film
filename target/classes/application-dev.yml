@@ -1,7 +1,9 @@
 ## dev环境使用是配置
 server:
-  port: 8081
+  port: 8080
   context-path: /chao
+
+
 
 
 spring:
@@ -53,9 +55,24 @@ spring:
        password: 123456
        port: 16379
 
+      ##静态资源
+     resources:
+         ##静态资源
+         ## -- 如果不配置，都可以访问
+         ## -- 如果配置，都可以只能访问指定路径下的
+         ## http://localhost:8081/chao/static.txt
+         ## http://localhost:8081/chao/public.txt
+       static-locations: classpath:/static/,classpath:/public/,file:/Users/chao/Desktop/xxx/work/Tomcat/localhost/chao
 
 
+path:
+   videofile: /usr/local/tomcat/webapps
 
+task:
+ movieTask: 0 1 * * * *
+ makeUpMovieTask: 0/1 * * * * *
+ movieDetailTask: 0/1 * * * * *
+ movieDetailCommontTask: 0/1 * * * * *
 
 
 
