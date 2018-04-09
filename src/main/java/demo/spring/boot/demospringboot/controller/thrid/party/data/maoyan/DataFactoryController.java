@@ -68,10 +68,11 @@ public class DataFactoryController {
     private DataFactoryService dataFactoryService;
 
     @GetMapping("/load-in-cinemas-by-ip")
-    public Response<Boolean> loadInCinemasByIp(@RequestParam(name = "ip") String ip) {
+    public Response<Boolean> loadInCinemasByIp(@RequestParam(name = "ip") String ip,
+                                               @RequestParam(name = "city") String city) {
         Response<Boolean> response = new Response<>();
         try {
-            maoyanCinemasFactory.loadInCinemas(ip);
+            maoyanCinemasFactory.loadInCinemas(ip, city);
             response.setCode(Code.System.OK);
             response.setContent(true);
         } catch (Exception e) {

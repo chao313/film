@@ -36,6 +36,7 @@ public class CinemasVo {
     private String addr;//详细地址
     private double lat;//纬度
     private String nm;//电影院名称
+    private String city;//影院所在的城市
 
 }
 

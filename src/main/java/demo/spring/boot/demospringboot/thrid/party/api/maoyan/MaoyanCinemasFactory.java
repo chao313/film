@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import demo.spring.boot.demospringboot.jpa.service.CinemasJpa;
 import demo.spring.boot.demospringboot.jpa.vo.CinemasDetailVo;
 import demo.spring.boot.demospringboot.jpa.vo.CinemasVo;
 import demo.spring.boot.demospringboot.jpa.vo.HotMovieDetailCommentVo;
@@ -32,8 +33,11 @@ public class MaoyanCinemasFactory {
     @Autowired
     private Http http;
 
+    @Autowired
+    private CinemasJpa cinemasJpa;
 
-    public List<CinemasVo> loadInCinemas(String ip) {
+
+    public boolean loadInCinemas(String ip, String city) {
         HttpHeaders requestHeaders = new HttpHeaders();
         requestHeaders.add("user-agent",
                 "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) " +
@@ -51,10 +55,14 @@ public class MaoyanCinemasFactory {
             LOGGER.info("value{}", map.get(key));
             JSONArray jsonArray = map.get(key);
             for (CinemasVo vo : jsonArray.toJavaList(CinemasVo.class)) {
+                vo.setCity(city);
                 cinemasVos.add(vo);
             }
         }
-        return cinemasVos;
+        cinemasVos.stream().forEach(vo -> {
+            cinemasJpa.save(vo);
+        });
+        return true;
     }
 
     /**

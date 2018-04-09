@@ -286,10 +286,7 @@ public class cinemasTest {
 
         for (String ip : list) {
             try {
-                for (CinemasVo vo : maoyanCinemasFactory.loadInCinemas(ip)) {
-                    LOGGER.info("保存{}", vo);
-                    cinemasJpa.save(vo);
-                }
+                maoyanCinemasFactory.loadInCinemas(ip,"xx");
             } catch (Exception e) {
                 LOGGER.info("error ip:{}", ip, e);
             }
