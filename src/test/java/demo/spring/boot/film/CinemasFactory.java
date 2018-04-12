@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import demo.spring.boot.demospringboot.DemoSpringBootApplication;
+import demo.spring.boot.demospringboot.Application;
 import demo.spring.boot.demospringboot.thrid.party.api.maoyan.MaoyanCinemasFactory;
 
 /**
@@ -15,7 +15,7 @@ import demo.spring.boot.demospringboot.thrid.party.api.maoyan.MaoyanCinemasFacto
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest(
-        classes = DemoSpringBootApplication.class)
+        classes = Application.class)
 public class CinemasFactory {
 
     @Autowired

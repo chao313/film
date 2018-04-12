@@ -12,41 +12,44 @@ import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
+import demo.spring.boot.demospringboot.data.jpa.service.CinemasDealJpa;
+import demo.spring.boot.demospringboot.data.jpa.service.CinemasMoviePlistJpa;
+import demo.spring.boot.demospringboot.data.jpa.service.CinemasMoviesJpa;
+import demo.spring.boot.demospringboot.data.jpa.service.CinemasVipInfoJpa;
+import demo.spring.boot.demospringboot.data.jpa.vo.CinemasMoviePlistVo;
+import demo.spring.boot.demospringboot.data.jpa.vo.CinemasMoviesVo;
 import demo.spring.boot.demospringboot.framework.Code;
 import demo.spring.boot.demospringboot.framework.Response;
-import demo.spring.boot.demospringboot.jpa.service.CinemasDetailJpa;
-import demo.spring.boot.demospringboot.jpa.service.CinemasJpa;
-import demo.spring.boot.demospringboot.jpa.service.HotMovieDetailCommentJpa;
-import demo.spring.boot.demospringboot.jpa.service.HotMoviesJpa;
-import demo.spring.boot.demospringboot.jpa.service.HotMovieDetailJpa;
-import demo.spring.boot.demospringboot.jpa.service.VMovieJpa;
-import demo.spring.boot.demospringboot.jpa.vo.other.CinemasDetailJosnParse;
-import demo.spring.boot.demospringboot.jpa.vo.CinemasDetailVo;
-import demo.spring.boot.demospringboot.jpa.vo.CinemasVo;
-import demo.spring.boot.demospringboot.jpa.vo.HotMovieDetailCommentVo;
-import demo.spring.boot.demospringboot.jpa.vo.HotMovieVo;
-import demo.spring.boot.demospringboot.jpa.vo.HotMovieDetailVo;
-import demo.spring.boot.demospringboot.jpa.vo.other.SeatJson;
-import demo.spring.boot.demospringboot.jpa.vo.VMovieVo;
-import demo.spring.boot.demospringboot.jpa.vo.other.DateShow;
-import demo.spring.boot.demospringboot.jpa.vo.other.DateShowIndex;
-import demo.spring.boot.demospringboot.jpa.vo.other.Sections;
-import demo.spring.boot.demospringboot.mybatis.service.CinemasService;
-import demo.spring.boot.demospringboot.mybatis.vo.CinemasJsonBo;
+import demo.spring.boot.demospringboot.data.jpa.service.CinemasDetailJpa;
+import demo.spring.boot.demospringboot.data.jpa.service.CinemasJpa;
+import demo.spring.boot.demospringboot.data.jpa.service.HotMovieDetailCommentJpa;
+import demo.spring.boot.demospringboot.data.jpa.service.HotMoviesJpa;
+import demo.spring.boot.demospringboot.data.jpa.service.HotMovieDetailJpa;
+import demo.spring.boot.demospringboot.data.jpa.service.VMovieJpa;
+import demo.spring.boot.demospringboot.data.jpa.vo.other.CinemasDetailJosnParse;
+import demo.spring.boot.demospringboot.data.jpa.vo.CinemasDetailVo;
+import demo.spring.boot.demospringboot.data.jpa.vo.CinemasVo;
+import demo.spring.boot.demospringboot.data.jpa.vo.HotMovieDetailCommentVo;
+import demo.spring.boot.demospringboot.data.jpa.vo.HotMovieVo;
+import demo.spring.boot.demospringboot.data.jpa.vo.HotMovieDetailVo;
+import demo.spring.boot.demospringboot.data.jpa.vo.other.SeatJson;
+import demo.spring.boot.demospringboot.data.jpa.vo.VMovieVo;
+import demo.spring.boot.demospringboot.data.jpa.vo.other.DateShow;
+import demo.spring.boot.demospringboot.data.jpa.vo.other.DateShowIndex;
+import demo.spring.boot.demospringboot.data.jpa.vo.other.Sections;
+import demo.spring.boot.demospringboot.data.mybatis.service.CinemasService;
+import demo.spring.boot.demospringboot.data.mybatis.vo.CinemasJsonBo;
 import demo.spring.boot.demospringboot.thrid.party.api.maoyan.MaoyanCinemasFactory;
 import demo.spring.boot.demospringboot.util.IP;
 
@@ -81,15 +84,17 @@ public class FilmController {
     @Autowired
     private VMovieJpa vMovieJpa;
 
-    @GetMapping(value = "/getCinems/{page}/{limit}")
-    public List<CinemasVo> getCinems(
-            @PathVariable(value = "page") Integer page,
-            @PathVariable(value = "limit") Integer limit) {
+    @Autowired
+    private CinemasDealJpa cinemasDealJpa;
 
-        return null;
+    @Autowired
+    private CinemasMoviesJpa cinemasMoviesJpa;
 
+    @Autowired
+    private CinemasMoviePlistJpa cinemasMoviePlistJpa;
 
-    }
+    @Autowired
+    private CinemasVipInfoJpa cinemasVipInfoJpa;
 
     @GetMapping(value = "/getHotMovies/{page}/{size}")
     public Response<List<HotMovieVo>> getHotMovies(
@@ -192,7 +197,7 @@ public class FilmController {
      * 搜索 电影院
      */
     @GetMapping(value = "/search/{key}/{page}/{size}")
-    public Response<List<CinemasVo>> getCinemas(
+    public Response<List<CinemasVo>> SearchCinemas(
             @PathVariable(value = "key") String key,
             @PathVariable(value = "page") Integer page,
             @PathVariable(value = "size") Integer size) {
@@ -209,11 +214,60 @@ public class FilmController {
             response.setContent(result);
         } catch (Exception e) {
             response.setCode(Code.System.FAIL);
-            response.setMsg(Code.SystemError.SERVER_INTERNAL_ERROR_MSG);
+            response.setMsg(e.getMessage());
             response.addException(e);
         }
         return response;
     }
+
+    /**
+     * @description 根据影院id获取正在放映的电影
+     */
+    @GetMapping(value = "/get-cinemas-movies/{cinemasId}")
+    public Response<List<CinemasMoviesVo>> getCinemaMoviesByCinemasId(
+            @PathVariable(value = "cinemasId") Integer cinemasId) {
+
+        Response<List<CinemasMoviesVo>> response = new Response<>();
+        try {
+            List<CinemasMoviesVo> result
+                    = cinemasMoviesJpa.findCinemasMoviesVosByCinemasId(cinemasId);
+            result.stream().filter(cinemasMoviesVo -> {
+                cinemasMoviesVo.setImg(cinemasMoviesVo.getImg().replace("w.h", "165.220"));
+                return true;
+            }).collect(Collectors.toList());
+            response.setCode(Code.System.OK);
+            response.setMsg(Code.System.SERVER_SUCCESS_MSG);
+            response.setContent(result);
+        } catch (Exception e) {
+            response.setCode(Code.System.FAIL);
+            response.setMsg(e.getMessage());
+            response.addException(e);
+        }
+        return response;
+    }
+
+    /**
+     * @description 根据影院id和电影id  获取播放场次
+     */
+    @GetMapping(value = "/get-show-movies/{cinemasId}/{movieid}")
+    public Response<List<CinemasMoviePlistVo>> getCinemaPlistByCinemasIdAndMovieId(
+            @PathVariable(value = "cinemasId") Integer cinemasId,
+            @PathVariable(value = "movieid") Long movieid) {
+        Response<List<CinemasMoviePlistVo>> response = new Response<>();
+        try {
+            List<CinemasMoviePlistVo> result
+                    = cinemasMoviePlistJpa.findCinemasMoviePlistVosByCinemasIdAndMovieId(cinemasId, movieid);
+            response.setCode(Code.System.OK);
+            response.setMsg(Code.System.SERVER_SUCCESS_MSG);
+            response.setContent(result);
+        } catch (Exception e) {
+            response.setCode(Code.System.FAIL);
+            response.setMsg(e.getMessage());
+            response.addException(e);
+        }
+        return response;
+    }
+
 
     /**
      * 获取 电影院 正在播放的电影 电影院id必填
@@ -255,7 +309,7 @@ public class FilmController {
             this.getDateShows(cinemasDetailVo, dateShowIndexList);
             Collections.sort(dateShowIndexList);//按时间排序
             cinemasDetailJosnParse.setDateShow(dateShowIndexList);
-             response.setContent(cinemasDetailJosnParse);
+            response.setContent(cinemasDetailJosnParse);
         } catch (Exception e) {
             response.setCode(Code.System.FAIL);
             response.setMsg(Code.SystemError.SERVER_INTERNAL_ERROR_MSG);

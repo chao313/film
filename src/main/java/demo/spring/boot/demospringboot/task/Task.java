@@ -10,7 +10,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 
 import java.util.Date;
 
-import demo.spring.boot.demospringboot.controller.thrid.party.data.service.DataFactoryService;
+import demo.spring.boot.demospringboot.service.DataFactoryService;
 import demo.spring.boot.demospringboot.util.DateUtils;
 
 /**
@@ -81,15 +81,16 @@ public class Task {
      * @description 定时加载 loadInCinemasWithFilm
      * @description 只要数据不为空 所以需要执行多次
      */
-    @Scheduled(cron = "${task.loadInCinemasWithFilmTask}")
-    public void loadInCinemasWithFilm() {
-        LOGGER.info("Task 载入 loadInCinemasWithFilm 开始执行时间:{}", this.getTime());
+    @Scheduled(cron = "${task.loadInCinemasWithMovieTask}")
+    public void loadInCinemasWithMovie() {
+        LOGGER.info("Task 载入 loadInCinemasWithMovie 开始执行时间:{}", this.getTime());
         try {
-            dataFactoryService.loadInCinemasWithFilm();
+            //上次执行到14470
+            dataFactoryService.loadInCinemasWithMovie();
         } catch (Exception e) {
-            LOGGER.info("Task 载入 loadInCinemasWithFilm  执行异常:{}", this.getTime(), e);
+            LOGGER.info("Task 载入 loadInCinemasWithMovie  执行异常:{}", this.getTime(), e);
         }
-        LOGGER.info("Task 载入 loadInCinemasWithFilm 结束执行时间:{}", this.getTime());
+        LOGGER.info("Task 载入 loadInCinemasWithMovie 结束执行时间:{}", this.getTime());
     }
 
 

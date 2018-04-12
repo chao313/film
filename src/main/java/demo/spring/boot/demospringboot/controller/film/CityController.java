@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import demo.spring.boot.demospringboot.framework.Code;
 import demo.spring.boot.demospringboot.framework.Response;
-import demo.spring.boot.demospringboot.jpa.service.CityJpa;
-import demo.spring.boot.demospringboot.jpa.vo.CityVo;
+import demo.spring.boot.demospringboot.data.jpa.service.CityJpa;
+import demo.spring.boot.demospringboot.data.jpa.vo.CityVo;
 
 /**
  * 2018/4/10    Created by   chao

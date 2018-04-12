@@ -14,17 +14,17 @@ import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.web.client.RestTemplate;
 
-import demo.spring.boot.demospringboot.DemoSpringBootApplication;
-import demo.spring.boot.demospringboot.jpa.service.CinemasDetailJpa;
-import demo.spring.boot.demospringboot.jpa.service.CinemasJpa;
-import demo.spring.boot.demospringboot.jpa.service.HotMovieDetailCommentJpa;
-import demo.spring.boot.demospringboot.jpa.service.HotMoviesJpa;
+import demo.spring.boot.demospringboot.Application;
+import demo.spring.boot.demospringboot.data.jpa.service.CinemasDetailJpa;
+import demo.spring.boot.demospringboot.data.jpa.service.CinemasJpa;
+import demo.spring.boot.demospringboot.data.jpa.service.HotMovieDetailCommentJpa;
+import demo.spring.boot.demospringboot.data.jpa.service.HotMoviesJpa;
 
-import demo.spring.boot.demospringboot.jpa.service.HotMovieDetailJpa;
-import demo.spring.boot.demospringboot.jpa.vo.CinemasVo;
-import demo.spring.boot.demospringboot.jpa.vo.HotMovieDetailCommentVo;
-import demo.spring.boot.demospringboot.jpa.vo.HotMovieVo;
-import demo.spring.boot.demospringboot.jpa.vo.HotMovieDetailVo;
+import demo.spring.boot.demospringboot.data.jpa.service.HotMovieDetailJpa;
+import demo.spring.boot.demospringboot.data.jpa.vo.CinemasVo;
+import demo.spring.boot.demospringboot.data.jpa.vo.HotMovieDetailCommentVo;
+import demo.spring.boot.demospringboot.data.jpa.vo.HotMovieVo;
+import demo.spring.boot.demospringboot.data.jpa.vo.HotMovieDetailVo;
 import demo.spring.boot.demospringboot.thrid.party.api.maoyan.MaoyanCinemasFactory;
 import demo.spring.boot.demospringboot.thrid.party.util.Http;
 
@@ -34,7 +34,7 @@ import java.util.List;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest(
-        classes = DemoSpringBootApplication.class)
+        classes = Application.class)
 public class cinemasTest {
 
     @Autowired

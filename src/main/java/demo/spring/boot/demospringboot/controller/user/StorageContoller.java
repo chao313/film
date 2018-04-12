@@ -4,19 +4,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.sql.Timestamp;
 import java.util.Date;
 
-import javax.ws.rs.BeanParam;
-
 import demo.spring.boot.demospringboot.framework.Code;
 import demo.spring.boot.demospringboot.framework.Response;
-import demo.spring.boot.demospringboot.jpa.constant.StorageEnum;
-import demo.spring.boot.demospringboot.jpa.service.StorageVoJpa;
-import demo.spring.boot.demospringboot.jpa.vo.StorageVo;
+import demo.spring.boot.demospringboot.data.jpa.constant.StorageEnum;
+import demo.spring.boot.demospringboot.data.jpa.service.StorageVoJpa;
+import demo.spring.boot.demospringboot.data.jpa.vo.StorageVo;
 
 /**
  * 2018/4/8    Created by   chao

@@ -10,8 +10,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.List;
 
-import demo.spring.boot.demospringboot.DemoSpringBootApplication;
-import demo.spring.boot.demospringboot.jpa.vo.VMovieVo;
+import demo.spring.boot.demospringboot.Application;
+import demo.spring.boot.demospringboot.data.jpa.vo.VMovieVo;
 import demo.spring.boot.demospringboot.thrid.party.api.vmovie.Config;
 import demo.spring.boot.demospringboot.thrid.party.api.vmovie.VmovieFactory;
 
@@ -20,7 +20,7 @@ import demo.spring.boot.demospringboot.thrid.party.api.vmovie.VmovieFactory;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest(
-        classes = DemoSpringBootApplication.class)
+        classes = Application.class)
 public class VmovieFactoryTest {
 
     private static Logger LOGGER = LoggerFactory.getLogger(VmovieFactoryTest.class);

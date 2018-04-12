@@ -12,8 +12,8 @@ import javax.ws.rs.BeanParam;
 
 import demo.spring.boot.demospringboot.framework.Code;
 import demo.spring.boot.demospringboot.framework.Response;
-import demo.spring.boot.demospringboot.jpa.service.UserJpa;
-import demo.spring.boot.demospringboot.jpa.vo.UserVo;
+import demo.spring.boot.demospringboot.data.jpa.service.UserJpa;
+import demo.spring.boot.demospringboot.data.jpa.vo.UserVo;
 
 /**
  * 2018/4/8    Created by   chao

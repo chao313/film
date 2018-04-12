@@ -1,4 +1,4 @@
-//package demo.spring.boot.demospringboot.jpa.vo;
+//package demo.spring.boot.demospringboot.data.jpa.vo;
 //
 //import javax.persistence.Column;
 //import javax.persistence.Entity;

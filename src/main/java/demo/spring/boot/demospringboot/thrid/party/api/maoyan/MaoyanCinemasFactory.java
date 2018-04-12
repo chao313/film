@@ -16,19 +16,18 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import demo.spring.boot.demospringboot.jpa.service.CinemasDealJpa;
-import demo.spring.boot.demospringboot.jpa.service.CinemasJpa;
-import demo.spring.boot.demospringboot.jpa.service.CinemasMoviePlistJpa;
-import demo.spring.boot.demospringboot.jpa.service.CinemasMoviesJpa;
-import demo.spring.boot.demospringboot.jpa.service.CinemasVipInfoJpa;
-import demo.spring.boot.demospringboot.jpa.vo.CinemasDealVo;
-import demo.spring.boot.demospringboot.jpa.vo.CinemasDetailVo;
-import demo.spring.boot.demospringboot.jpa.vo.CinemasVo;
-import demo.spring.boot.demospringboot.jpa.vo.HotMovieDetailCommentVo;
-import demo.spring.boot.demospringboot.jpa.vo.HotMovieVo;
-import demo.spring.boot.demospringboot.jpa.vo.HotMovieDetailVo;
-import demo.spring.boot.demospringboot.jpa.vo.other.CinemasWithMovie;
-import demo.spring.boot.demospringboot.jpa.vo.other.SeatJson;
+import demo.spring.boot.demospringboot.data.jpa.service.CinemasDealJpa;
+import demo.spring.boot.demospringboot.data.jpa.service.CinemasJpa;
+import demo.spring.boot.demospringboot.data.jpa.service.CinemasMoviePlistJpa;
+import demo.spring.boot.demospringboot.data.jpa.service.CinemasMoviesJpa;
+import demo.spring.boot.demospringboot.data.jpa.service.CinemasVipInfoJpa;
+import demo.spring.boot.demospringboot.data.jpa.vo.CinemasDetailVo;
+import demo.spring.boot.demospringboot.data.jpa.vo.CinemasVo;
+import demo.spring.boot.demospringboot.data.jpa.vo.HotMovieDetailCommentVo;
+import demo.spring.boot.demospringboot.data.jpa.vo.HotMovieVo;
+import demo.spring.boot.demospringboot.data.jpa.vo.HotMovieDetailVo;
+import demo.spring.boot.demospringboot.data.jpa.vo.other.CinemasWithMovie;
+import demo.spring.boot.demospringboot.data.jpa.vo.other.SeatJson;
 import demo.spring.boot.demospringboot.thrid.party.util.Http;
 
 @Component
@@ -220,29 +219,29 @@ public class MaoyanCinemasFactory {
         CinemasWithMovie cinemasWithMovie =
                 JSONObject.parseObject(result.getBody(), CinemasWithMovie.class);
 
-        cinemasWithMovie.getDealList().getDealList().forEach(cinemasDealVo -> {
-            //用于处理 商品
-            cinemasDealVo.setCinemasId(Integer.valueOf(cinemasWithMovie.getCinemaId()));
-            cinemasDealJpa.save(cinemasDealVo);
-        });
-        cinemasWithMovie.getShowData().getMovies().forEach(moviesVo -> {
-            moviesVo.setCinemasId(Integer.valueOf(cinemasWithMovie.getCinemaId()));
-            cinemasMoviesJpa.save(moviesVo);
-            //用于处理电影院播放的电影
-            moviesVo.getShows().forEach(shows -> {
-                shows.getPlist().forEach(cinemasMoviePlistVo -> {
-                    //用于处理 场次
-                    cinemasMoviePlistVo.setCinemasId(Integer.valueOf(cinemasWithMovie.getCinemaId()));
-                    cinemasMoviePlistVo.setMovieId(moviesVo.getId());
-                    cinemasMoviePlistJpa.save(cinemasMoviePlistVo);
-                });
-            });
-        });
-        cinemasWithMovie.getShowData().getVipInfo().forEach(cinemasVipInfoVo -> {
-            //处理会员 数据
-            cinemasVipInfoVo.setCinemasId(Integer.valueOf(cinemasWithMovie.getCinemaId()));
-            cinemasVipInfoJpa.save(cinemasVipInfoVo);
-        });
+//        cinemasWithMovie.getDealList().getDealList().forEach(cinemasDealVo -> {
+//            //用于处理 商品
+//            cinemasDealVo.setCinemasId(Integer.valueOf(cinemasWithMovie.getCinemaId()));
+//            cinemasDealJpa.save(cinemasDealVo);
+//        });
+//        cinemasWithMovie.getShowData().getMovies().forEach(moviesVo -> {
+//            moviesVo.setCinemasId(Integer.valueOf(cinemasWithMovie.getCinemaId()));
+//            cinemasMoviesJpa.save(moviesVo);
+//            //用于处理电影院播放的电影
+//            moviesVo.getShows().forEach(shows -> {
+//                shows.getPlist().forEach(cinemasMoviePlistVo -> {
+//                    //用于处理 场次
+//                    cinemasMoviePlistVo.setCinemasId(Integer.valueOf(cinemasWithMovie.getCinemaId()));
+//                    cinemasMoviePlistVo.setMovieId(moviesVo.getId());
+//                    cinemasMoviePlistJpa.save(cinemasMoviePlistVo);
+//                });
+//            });
+//        });
+//        cinemasWithMovie.getShowData().getVipInfo().forEach(cinemasVipInfoVo -> {
+//            //处理会员 数据
+//            cinemasVipInfoVo.setCinemasId(Integer.valueOf(cinemasWithMovie.getCinemaId()));
+//            cinemasVipInfoJpa.save(cinemasVipInfoVo);
+//        });
         return null;
 
         //((JSONObject)(jsonObject.getInnerMap().get("showData"))).get("movies")

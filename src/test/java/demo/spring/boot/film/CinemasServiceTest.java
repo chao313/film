@@ -10,9 +10,9 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.List;
 
-import demo.spring.boot.demospringboot.DemoSpringBootApplication;
-import demo.spring.boot.demospringboot.mybatis.service.CinemasService;
-import demo.spring.boot.demospringboot.mybatis.vo.CinemasJsonBo;
+import demo.spring.boot.demospringboot.Application;
+import demo.spring.boot.demospringboot.data.mybatis.service.CinemasService;
+import demo.spring.boot.demospringboot.data.mybatis.vo.CinemasJsonBo;
 
 /**
  * 2018/4/6    Created by   chao
@@ -20,7 +20,7 @@ import demo.spring.boot.demospringboot.mybatis.vo.CinemasJsonBo;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest(
-        classes = DemoSpringBootApplication.class)
+        classes = Application.class)
 public class CinemasServiceTest {
 
     private static Logger LOGGER = LoggerFactory.getLogger(CinemasServiceTest.class);

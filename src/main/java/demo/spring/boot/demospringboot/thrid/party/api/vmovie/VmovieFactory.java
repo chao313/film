@@ -19,8 +19,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import demo.spring.boot.demospringboot.jpa.service.VMovieJpa;
-import demo.spring.boot.demospringboot.jpa.vo.VMovieVo;
+import demo.spring.boot.demospringboot.data.jpa.service.VMovieJpa;
+import demo.spring.boot.demospringboot.data.jpa.vo.VMovieVo;
 import demo.spring.boot.demospringboot.thrid.party.util.Http;
 import demo.spring.boot.demospringboot.util.IP;
 

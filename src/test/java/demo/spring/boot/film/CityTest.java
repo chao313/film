@@ -17,10 +17,10 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
-import demo.spring.boot.demospringboot.DemoSpringBootApplication;
-import demo.spring.boot.demospringboot.jpa.service.CityJpa;
-import demo.spring.boot.demospringboot.jpa.vo.other.City;
-import demo.spring.boot.demospringboot.jpa.vo.CityVo;
+import demo.spring.boot.demospringboot.Application;
+import demo.spring.boot.demospringboot.data.jpa.service.CityJpa;
+import demo.spring.boot.demospringboot.data.jpa.vo.other.City;
+import demo.spring.boot.demospringboot.data.jpa.vo.CityVo;
 
 /**
  * 2018/4/10    Created by   chao
@@ -28,7 +28,7 @@ import demo.spring.boot.demospringboot.jpa.vo.CityVo;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest(
-        classes = DemoSpringBootApplication.class)
+        classes = Application.class)
 public class CityTest {
 
     private static Logger LOGGER = LoggerFactory.getLogger(CityTest.class);
