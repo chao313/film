@@ -11,7 +11,7 @@ public interface Config {
     String CINEMAS_URL = "http://m.maoyan.com/cinemas.json";
 
     //http://m.maoyan.com/showtime/wrap.json?cinemaid=9271&movieid=341138
-    String CINEMAS_DETAILS = "http://m.maoyan.com/showtime/wrap.json";
+    String CINEMAS_DETAILS = "http://m.maoyan.com/ajax/cinemaDetail";
     String SEATS = "http://m.maoyan.com/show/seats";
 
 }

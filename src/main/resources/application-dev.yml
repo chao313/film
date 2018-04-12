@@ -60,10 +60,11 @@ path:
    videofile: /usr/local/tomcat/webapps
 
 task:
- movieTask: 0 1 * * * *
- makeUpMovieTask: 0/1 * * * * *
- movieDetailTask: 0/1 * * * * *
- movieDetailCommontTask: 0/1 * * * * *
+ movieTask: 0 0 1 * * ?
+ makeUpMovieTask: 0 0 1,2,3,4,5 * * ?
+ movieDetailTask: 0 0 1,2,3,4,5 * * ?
+ movieDetailCommontTask: 0 0 1,2,3,4,5 * * ?
+ loadInCinemasWithFilmTask: 1 * * * * ?
 
 
 

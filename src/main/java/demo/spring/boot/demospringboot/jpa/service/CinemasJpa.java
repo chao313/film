@@ -28,8 +28,12 @@ public interface CinemasJpa extends JpaRepository<CinemasVo, Integer> {
 //    public List<CinemasVo> findJpaVosByNameAndId(String name, Integer id);
 
     /**
-     * 根据
+     * 根据nm查询
      */
-    public List<CinemasVo> findCinemasJsonVoByNmLike(String nm, Pageable pageable);
+    List<CinemasVo> findCinemasJsonVoByNmLike(String nm, Pageable pageable);
+
+    List<CinemasVo> findCinemasVoByCityIsIn(List<String> citys);
+
+
 
 }

@@ -19,7 +19,7 @@ public interface CinemasMapper {
             " ,nm,poi_id as poiId ,preferential,reference_price  as referencePrice  ,sell   " +
             " ,sell_price as sellPrice,sellmin ,show_count as showCount ," +
             " acos(cos(${theLat}*pi()/180 )*cos(lat*pi()/180)*cos(${thelng}*pi()/180 -lng*pi()/180)+sin(${theLat}*pi()/180 )*sin(lat*pi()/180))*6370996.81/1000  as dist" +
-            " from t_cinemas  order by dist asc limit ${start}, ${size}")
+            " from t_cinemas where nm is not null order by dist asc limit ${start}, ${size}")
     List<CinemasJsonBo> queryCinemasByDist(@Param(value = "theLat") String theLat,
                                            @Param(value = "thelng") String thelng,
                                            @Param(value = "start") Integer start,

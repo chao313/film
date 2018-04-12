@@ -134,7 +134,7 @@ public class DataFactoryController {
 
         {
             response.setCode(Code.System.FAIL);
-            response.setMsg(Code.SystemError.SERVER_INTERNAL_ERROR_MSG);
+            response.setMsg(e.getMessage());
             response.addException(e);
         }
         return response;

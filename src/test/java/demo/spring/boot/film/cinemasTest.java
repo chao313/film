@@ -401,4 +401,14 @@ public class cinemasTest {
 
     }
 
+    @Test
+    public void testInsert() {
+        CinemasVo vo = new CinemasVo();
+        for (int i = 1; i < 30000; i++) {
+            vo.setId(i);
+            cinemasJpa.save(vo);
+        }
+
+    }
+
 }

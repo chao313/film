@@ -29,29 +29,43 @@ public class Task {
     @Value("${path.videofile}")
     private String path;
 
-    // @Scheduled(cron = "${task.movieTask}")
+    /**
+     * 定时加载 hotMovie
+     */
+    @Scheduled(cron = "${task.movieTask}")
     public void HotMovieTask() {
         LOGGER.info("Task 载入hotMovie 开始执行时间:{}", this.getTime());
         dataFactoryService.loadInHotMovie();
         LOGGER.info("Task 载入hotMovie 结束执行时间:{}", this.getTime());
     }
 
-    // @Scheduled(cron = "${task.makeUpMovieTask}")
+    /**
+     * @description 检查 hotMovie 是否正常
+     * @description 需要执行多次
+     */
+    @Scheduled(cron = "${task.makeUpMovieTask}")
     public void makeUpHotMovieTask() {
         LOGGER.info("Task 补充hotMovie 开始执行时间:{}", this.getTime());
         dataFactoryService.makeUpHotMovie();
         LOGGER.info("Task 补充hotMovie 结束执行时间:{}", this.getTime());
     }
 
-
-    // @Scheduled(cron = "${task.movieDetailTask}")
+    /**
+     * @description 定时加载 hotMovieDetail
+     * @description 因为只是补全数据所以需要执行多次
+     */
+    @Scheduled(cron = "${task.movieDetailTask}")
     public void loadInHotMoviesDetail() {
         LOGGER.info("Task 载入hotMovieDetail 开始执行时间:{}", this.getTime());
         dataFactoryService.loadInHotMoviesDetail();
         LOGGER.info("Task 载入hotMovieDetail 结束执行时间:{}", this.getTime());
     }
 
-    //@Scheduled(cron = "${task.movieDetailCommontTask}")
+    /**
+     * @description 定时加载 hotMovieDetailComment
+     * @description 因为只是补全数据所以需要执行多次
+     */
+    @Scheduled(cron = "${task.movieDetailCommontTask}")
     public void loadInHotMoviesDetailComment() {
         LOGGER.info("Task 载入hotMovieDetail 开始执行时间:{}", this.getTime());
         try {
@@ -61,6 +75,23 @@ public class Task {
         }
         LOGGER.info("Task 载入hotMovieDetail 结束执行时间:{}", this.getTime());
     }
+
+
+    /**
+     * @description 定时加载 loadInCinemasWithFilm
+     * @description 只要数据不为空 所以需要执行多次
+     */
+    @Scheduled(cron = "${task.loadInCinemasWithFilmTask}")
+    public void loadInCinemasWithFilm() {
+        LOGGER.info("Task 载入 loadInCinemasWithFilm 开始执行时间:{}", this.getTime());
+        try {
+            dataFactoryService.loadInCinemasWithFilm();
+        } catch (Exception e) {
+            LOGGER.info("Task 载入 loadInCinemasWithFilm  执行异常:{}", this.getTime(), e);
+        }
+        LOGGER.info("Task 载入 loadInCinemasWithFilm 结束执行时间:{}", this.getTime());
+    }
+
 
 
 

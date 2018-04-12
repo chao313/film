@@ -16,12 +16,18 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import demo.spring.boot.demospringboot.jpa.service.CinemasDealJpa;
 import demo.spring.boot.demospringboot.jpa.service.CinemasJpa;
+import demo.spring.boot.demospringboot.jpa.service.CinemasMoviePlistJpa;
+import demo.spring.boot.demospringboot.jpa.service.CinemasMoviesJpa;
+import demo.spring.boot.demospringboot.jpa.service.CinemasVipInfoJpa;
+import demo.spring.boot.demospringboot.jpa.vo.CinemasDealVo;
 import demo.spring.boot.demospringboot.jpa.vo.CinemasDetailVo;
 import demo.spring.boot.demospringboot.jpa.vo.CinemasVo;
 import demo.spring.boot.demospringboot.jpa.vo.HotMovieDetailCommentVo;
 import demo.spring.boot.demospringboot.jpa.vo.HotMovieVo;
 import demo.spring.boot.demospringboot.jpa.vo.HotMovieDetailVo;
+import demo.spring.boot.demospringboot.jpa.vo.other.CinemasWithMovie;
 import demo.spring.boot.demospringboot.jpa.vo.other.SeatJson;
 import demo.spring.boot.demospringboot.thrid.party.util.Http;
 
@@ -35,6 +41,18 @@ public class MaoyanCinemasFactory {
 
     @Autowired
     private CinemasJpa cinemasJpa;
+
+    @Autowired
+    private CinemasDealJpa cinemasDealJpa;
+
+    @Autowired
+    private CinemasMoviesJpa cinemasMoviesJpa;
+
+    @Autowired
+    private CinemasMoviePlistJpa cinemasMoviePlistJpa;
+
+    @Autowired
+    private CinemasVipInfoJpa cinemasVipInfoJpa;
 
 
     public boolean loadInCinemas(String ip, String city) {
@@ -156,7 +174,7 @@ public class MaoyanCinemasFactory {
                 = new ArrayList<>();
         for (String movieId : movieIds) {
             String url = Config.CINEMAS_DETAILS
-                    + "?cinemaid=" + cinemasId
+                    + "?cinemaId=" + cinemasId
                     + "&movieid=" + movieId;
             Thread.sleep(4000);
             ResponseEntity<String> result =
@@ -193,30 +211,41 @@ public class MaoyanCinemasFactory {
                         "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.3");
         requestHeaders.add("x-forwarded-for", ip);
         String url = Config.CINEMAS_DETAILS
-                + "?cinemaid=" + cinemasId
+                + "?cinemaId=" + cinemasId
                 + "&movieid=";
         Thread.sleep(4000);
         ResponseEntity<String> result =
                 this.http.http(url,
                         requestHeaders, HttpMethod.GET);
-        JSONObject jsonObject = JSON.parseObject(result.getBody());
-        Map<String, Object> innerMap =
-                jsonObject.getInnerMap();
-        if (!innerMap.get("status").equals(0)) {
-            //状态如果不为0
-            //跳过当前进入下一个循环
-            return new ArrayList<>();
-        }
-        List<CinemasDetailVo> commentJsonVos = new ArrayList<>();
-        Map<String, JSONArray> map = (Map<String, JSONArray>) innerMap.get("data");
-        JSONArray jsonArray = map.get("movies");
-        List<String> ids = new ArrayList<>();
-        for (Object o : jsonArray) {
-            JSONObject vo = (JSONObject) o;
-            ids.add(vo.getString("id"));
-        }
+        CinemasWithMovie cinemasWithMovie =
+                JSONObject.parseObject(result.getBody(), CinemasWithMovie.class);
 
-        return ids;
+        cinemasWithMovie.getDealList().getDealList().forEach(cinemasDealVo -> {
+            //用于处理 商品
+            cinemasDealVo.setCinemasId(Integer.valueOf(cinemasWithMovie.getCinemaId()));
+            cinemasDealJpa.save(cinemasDealVo);
+        });
+        cinemasWithMovie.getShowData().getMovies().forEach(moviesVo -> {
+            moviesVo.setCinemasId(Integer.valueOf(cinemasWithMovie.getCinemaId()));
+            cinemasMoviesJpa.save(moviesVo);
+            //用于处理电影院播放的电影
+            moviesVo.getShows().forEach(shows -> {
+                shows.getPlist().forEach(cinemasMoviePlistVo -> {
+                    //用于处理 场次
+                    cinemasMoviePlistVo.setCinemasId(Integer.valueOf(cinemasWithMovie.getCinemaId()));
+                    cinemasMoviePlistVo.setMovieId(moviesVo.getId());
+                    cinemasMoviePlistJpa.save(cinemasMoviePlistVo);
+                });
+            });
+        });
+        cinemasWithMovie.getShowData().getVipInfo().forEach(cinemasVipInfoVo -> {
+            //处理会员 数据
+            cinemasVipInfoVo.setCinemasId(Integer.valueOf(cinemasWithMovie.getCinemaId()));
+            cinemasVipInfoJpa.save(cinemasVipInfoVo);
+        });
+        return null;
+
+        //((JSONObject)(jsonObject.getInnerMap().get("showData"))).get("movies")
     }
 
 
@@ -263,6 +292,29 @@ public class MaoyanCinemasFactory {
         return result.getBody();
 
     }
+
+    /**
+     * 根据电影院的id获取电影院播放的电影 场次...
+     */
+    public CinemasWithMovie geCinemasWithMovie(String ip,
+                                               Integer cinemasId) throws InterruptedException {
+        HttpHeaders requestHeaders = new HttpHeaders();
+        requestHeaders.add("user-agent",
+                "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) " +
+                        "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.3");
+        requestHeaders.add("x-forwarded-for", ip);
+        String url = Config.CINEMAS_DETAILS
+                + "?cinemaId=" + cinemasId;
+        Thread.sleep(4000);
+        ResponseEntity<String> result =
+                this.http.http(url,
+                        requestHeaders, HttpMethod.GET);
+        CinemasWithMovie cinemasWithMovie =
+                JSONObject.parseObject(result.getBody(), CinemasWithMovie.class);
+        return cinemasWithMovie;
+
+    }
+
 
 
 }
