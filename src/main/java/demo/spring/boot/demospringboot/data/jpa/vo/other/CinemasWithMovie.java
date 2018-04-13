@@ -12,6 +12,7 @@ import lombok.ToString;
 @Data
 @ToString
 public class CinemasWithMovie {
+    private CinemaData cinemaData;
     private ShowData showData;
     private String membercardDetail;
     private String cinemaId;

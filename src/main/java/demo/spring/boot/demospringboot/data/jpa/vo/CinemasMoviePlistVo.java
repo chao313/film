@@ -50,4 +50,10 @@ public class CinemasMoviePlistVo {
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
     private Integer id;
+
+    /**
+     * 为了前端展示
+     */
+    private String price;
+    private String start;
 }

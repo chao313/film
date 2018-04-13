@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 
+import org.apache.commons.lang3.StringEscapeUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,8 +19,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -31,6 +35,7 @@ import demo.spring.boot.demospringboot.data.jpa.service.CinemasVipInfoJpa;
 import demo.spring.boot.demospringboot.data.jpa.vo.CinemasMoviePlistVo;
 import demo.spring.boot.demospringboot.data.jpa.vo.CinemasMoviesShowsVo;
 import demo.spring.boot.demospringboot.data.jpa.vo.CinemasMoviesVo;
+import demo.spring.boot.demospringboot.data.jpa.vo.other.CinemasWithMovie;
 import demo.spring.boot.demospringboot.framework.Code;
 import demo.spring.boot.demospringboot.framework.Response;
 import demo.spring.boot.demospringboot.data.jpa.service.CinemasDetailJpa;
@@ -53,6 +58,7 @@ import demo.spring.boot.demospringboot.data.jpa.vo.other.Sections;
 import demo.spring.boot.demospringboot.data.mybatis.service.CinemasService;
 import demo.spring.boot.demospringboot.data.mybatis.vo.CinemasJsonBo;
 import demo.spring.boot.demospringboot.thrid.party.api.maoyan.MaoyanCinemasFactory;
+import demo.spring.boot.demospringboot.util.DateUtils;
 import demo.spring.boot.demospringboot.util.IP;
 
 @RestController
@@ -131,6 +137,8 @@ public class FilmController {
                     = hotMovieDetailJpa.findOne(movieId);
             response.setCode(Code.System.OK);
             response.setMsg(Code.System.SERVER_SUCCESS_MSG);
+            String dra = hotMovieDetailVo.getDra().replace("<p>", "").replace("</p>", "");
+            hotMovieDetailVo.setDra(dra);
             response.setContent(hotMovieDetailVo);
         } catch (Exception e) {
             response.setCode(Code.System.FAIL);
@@ -301,46 +309,41 @@ public class FilmController {
      * 获取 电影院 正在播放的电影 电影院id必填
      */
     @GetMapping(value = "/get-cinema-and-movie/{cinemaId}")
-    public Response<CinemasDetailJosnParse> getCinemaAndMovie(
+    public Response<CinemasWithMovie> getCinemaAndMovie(
             @PathVariable(value = "cinemaId") Integer cinemaId,
             @RequestParam(value = "movieId", required = false) Integer movieId) {
-        Response<CinemasDetailJosnParse> response
+        Response<CinemasWithMovie> response
                 = new Response<>();
         try {
-            CinemasDetailVo cinemasDetailVo = null;
-            if (null == movieId) {
-                //根据电影院id来查询
-                cinemasDetailVo = cinemasDetailJpa.getFirstByCinemasId(cinemaId);
-            } else {
-                //根据电影院id和电影id来查询
-                cinemasDetailVo = cinemasDetailJpa.
-                        findCinemasDetailVoByCinemasIdAndMovieId(cinemaId, movieId);
-            }
-            if (null == cinemasDetailVo) {
-                //如果数据库中没有，就抓取
-                this.getDataFromWeb(cinemaId);
-                if (null == movieId) {
-                    //根据电影院id来查询
-                    cinemasDetailVo = cinemasDetailJpa.getFirstByCinemasId(cinemaId);
-                } else {
-                    //根据电影院id和电影id来查询
-                    cinemasDetailVo = cinemasDetailJpa.
-                            findCinemasDetailVoByCinemasIdAndMovieId(cinemaId, movieId);
-                }
-            }
-
+            CinemasDetailVo cinemasDetailVo
+                    = cinemasDetailJpa.getFirstByCinemasId(cinemaId);
             response.setCode(Code.System.OK);
             response.setMsg(Code.System.SERVER_SUCCESS_MSG);
-            CinemasDetailJosnParse cinemasDetailJosnParse =
-                    JSON.parseObject(cinemasDetailVo.getContent(), CinemasDetailJosnParse.class);
-            List<DateShowIndex> dateShowIndexList = new ArrayList<>();
-            this.getDateShows(cinemasDetailVo, dateShowIndexList);
-            Collections.sort(dateShowIndexList);//按时间排序
-            cinemasDetailJosnParse.setDateShow(dateShowIndexList);
-            response.setContent(cinemasDetailJosnParse);
+            CinemasWithMovie result =
+                    JSON.parseObject(cinemasDetailVo.getContent(), CinemasWithMovie.class);
+            result.getShowData().getMovies().forEach(cinemasMoviesVo -> {
+                cinemasMoviesVo.setImg(cinemasMoviesVo.getImg().replace("w.h", "165.220"));
+            });
+            result.getShowData().getMovies().forEach(cinemasMoviesVo -> {
+                cinemasMoviesVo.getShows().forEach(cinemasMoviesShowsVo -> {
+                    cinemasMoviesShowsVo.getPlist().forEach(cinemasMoviePlistVo -> {
+                        //处理价格
+                        BigDecimal bigDecimal = new BigDecimal(cinemasMoviePlistVo.getVipPrice());
+                        String privce =
+                                bigDecimal.add(new BigDecimal(10)).toString();
+
+                        cinemasMoviePlistVo.setPrice(privce);
+                        //处理日期
+                        Date convert =
+                                DateUtils.convert(cinemasMoviePlistVo.getTm(), "HH:mm");
+                        Date date = DateUtils.addMinutes(convert, -cinemasMoviesVo.getDur());
+                        cinemasMoviePlistVo.setStart(DateUtils.convert(date,"HH:mm"));
+                    });
+                });
+            });
+            response.setContent(result);
         } catch (Exception e) {
             response.setCode(Code.System.FAIL);
-            response.setMsg(Code.SystemError.SERVER_INTERNAL_ERROR_MSG);
             response.setMsg(e.getMessage());
             response.addException(e);
         }
@@ -412,24 +415,23 @@ public class FilmController {
     }
 
 
-
-    private void getDateShows(CinemasDetailVo cinemasDetailVo, List<DateShowIndex> dateShowIndexList) {
-        JSONObject jsonObject = JSON.parseObject(cinemasDetailVo.getContent());
-        JSONObject dateShowIndexJSONObject = (JSONObject) jsonObject.getInnerMap().get("DateShow");
-        if (null != dateShowIndexJSONObject) {
-            dateShowIndexJSONObject.getInnerMap().forEach((k, v) -> {
-                //k就是日期  eg. 2018-4-6
-                DateShowIndex dateShowIndex = new DateShowIndex();
-                //填充日期
-                dateShowIndex.setDate(k);
-                //获取放映list
-                List<DateShow> dateShows = ((JSONArray) v).toJavaList(DateShow.class);
-                dateShowIndex.setDateShows(dateShows);
-                dateShowIndexList.add(dateShowIndex);
-            });
-
-        }
-    }
+//    private void getDateShows(CinemasDetailVo cinemasDetailVo, List<DateShowIndex> dateShowIndexList) {
+//        JSONObject jsonObject = JSON.parseObject(cinemasDetailVo.getContent());
+//        JSONObject dateShowIndexJSONObject = (JSONObject) jsonObject.getInnerMap().get("DateShow");
+//        if (null != dateShowIndexJSONObject) {
+//            dateShowIndexJSONObject.getInnerMap().forEach((k, v) -> {
+//                //k就是日期  eg. 2018-4-6
+//                DateShowIndex dateShowIndex = new DateShowIndex();
+//                //填充日期
+//                dateShowIndex.setDate(k);
+//                //获取放映list
+//                List<DateShow> dateShows = ((JSONArray) v).toJavaList(DateShow.class);
+//                dateShowIndex.setDateShows(dateShows);
+//                dateShowIndexList.add(dateShowIndex);
+//            });
+//
+//        }
+//    }
 
     private void getDataFromWeb(Integer cinemasId) {
         List<String> movieIds = null;
