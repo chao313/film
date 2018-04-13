@@ -17,6 +17,7 @@ import java.util.List;
 import java.util.Map;
 
 import demo.spring.boot.demospringboot.data.jpa.service.CinemasDealJpa;
+import demo.spring.boot.demospringboot.data.jpa.service.CinemasDetailJpa;
 import demo.spring.boot.demospringboot.data.jpa.service.CinemasJpa;
 import demo.spring.boot.demospringboot.data.jpa.service.CinemasMoviePlistJpa;
 import demo.spring.boot.demospringboot.data.jpa.service.CinemasMoviesJpa;
@@ -52,6 +53,9 @@ public class MaoyanCinemasFactory {
 
     @Autowired
     private CinemasVipInfoJpa cinemasVipInfoJpa;
+
+    @Autowired
+    private CinemasDetailJpa cinemasDetailJpa;
 
 
     public boolean loadInCinemas(String ip, String city) {
@@ -308,6 +312,11 @@ public class MaoyanCinemasFactory {
         ResponseEntity<String> result =
                 this.http.http(url,
                         requestHeaders, HttpMethod.GET);
+        CinemasDetailVo vo = new CinemasDetailVo();
+        vo.setCinemasId(cinemasId);
+        vo.setContent(result.getBody());
+        vo.setMovieId(111);
+        cinemasDetailJpa.save(vo);
         CinemasWithMovie cinemasWithMovie =
                 JSONObject.parseObject(result.getBody(), CinemasWithMovie.class);
         return cinemasWithMovie;

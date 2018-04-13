@@ -26,8 +26,10 @@ import java.util.stream.Collectors;
 import demo.spring.boot.demospringboot.data.jpa.service.CinemasDealJpa;
 import demo.spring.boot.demospringboot.data.jpa.service.CinemasMoviePlistJpa;
 import demo.spring.boot.demospringboot.data.jpa.service.CinemasMoviesJpa;
+import demo.spring.boot.demospringboot.data.jpa.service.CinemasMoviesShowsJpa;
 import demo.spring.boot.demospringboot.data.jpa.service.CinemasVipInfoJpa;
 import demo.spring.boot.demospringboot.data.jpa.vo.CinemasMoviePlistVo;
+import demo.spring.boot.demospringboot.data.jpa.vo.CinemasMoviesShowsVo;
 import demo.spring.boot.demospringboot.data.jpa.vo.CinemasMoviesVo;
 import demo.spring.boot.demospringboot.framework.Code;
 import demo.spring.boot.demospringboot.framework.Response;
@@ -95,6 +97,9 @@ public class FilmController {
 
     @Autowired
     private CinemasVipInfoJpa cinemasVipInfoJpa;
+
+    @Autowired
+    private CinemasMoviesShowsJpa cinemasMoviesShowsJpa;
 
     @GetMapping(value = "/getHotMovies/{page}/{size}")
     public Response<List<HotMovieVo>> getHotMovies(
@@ -249,8 +254,31 @@ public class FilmController {
     /**
      * @description 根据影院id和电影id  获取播放场次
      */
+    @GetMapping(value = "/get-show/{cinemasId}/{movieid}")
+    public Response<List<CinemasMoviesShowsVo>> getShowByCinemasIdAndMovieId(
+            @PathVariable(value = "cinemasId") Integer cinemasId,
+            @PathVariable(value = "movieid") Long movieid) {
+        Response<List<CinemasMoviesShowsVo>> response = new Response<>();
+        try {
+            List<CinemasMoviesShowsVo> result
+                    = cinemasMoviesShowsJpa.findDistinctByCinemasIdAndMovieId(cinemasId, movieid);
+            response.setCode(Code.System.OK);
+            response.setMsg(Code.System.SERVER_SUCCESS_MSG);
+            response.setContent(result);
+        } catch (Exception e) {
+            response.setCode(Code.System.FAIL);
+            response.setMsg(e.getMessage());
+            response.addException(e);
+        }
+        return response;
+    }
+
+
+    /**
+     * @description 根据影院id和电影id  获取播放场次
+     */
     @GetMapping(value = "/get-show-movies/{cinemasId}/{movieid}")
-    public Response<List<CinemasMoviePlistVo>> getCinemaPlistByCinemasIdAndMovieId(
+    public Response<List<CinemasMoviePlistVo>> getCinemaShowByCinemasIdAndMovieId(
             @PathVariable(value = "cinemasId") Integer cinemasId,
             @PathVariable(value = "movieid") Long movieid) {
         Response<List<CinemasMoviePlistVo>> response = new Response<>();

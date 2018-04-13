@@ -1,8 +1,9 @@
+
 package demo.spring.boot.demospringboot.data.jpa.vo;
 
 import java.util.List;
+import java.util.Date;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -10,32 +11,34 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import demo.spring.boot.demospringboot.data.jpa.vo.CinemasMoviePlistVo;
 import lombok.Data;
 import lombok.ToString;
+
 
 @Data
 @ToString
 @Entity
-@Table(name = "t_cinemas_movie")
-public class CinemasMoviesVo {
-    private int dur;
-    private String sc;
-    private long wish;
+@Table(name = "t_cinemas_movie_shows")
+public class CinemasMoviesShowsVo {
+
     private int preferential;
-    private String img;
-    private int showCount;
+    private String dateShow;
     @Transient
-    private List<CinemasMoviesShowsVo> shows;
-    private boolean globalReleased;
+    private List<CinemasMoviePlistVo> plist;
+    private int hasShow;
+    private Date showDate;
+
+
+    //补充的关联数据
+    private Integer cinemasId;
     private Long movieId;
-    @Id
-    @GeneratedValue(strategy = GenerationType.TABLE)
-    private Long id;
-    @Column(name = "des")
-    private String desc;
-    private String nm;
 
     //补充
-    private Integer cinemasId;
+    @Id
+    @GeneratedValue(strategy = GenerationType.TABLE)
+    private Integer id;
+
+
 
 }

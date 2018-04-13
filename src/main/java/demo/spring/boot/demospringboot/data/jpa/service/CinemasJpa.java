@@ -36,4 +36,5 @@ public interface CinemasJpa extends JpaRepository<CinemasVo, Integer> {
 
 
 
+
 }

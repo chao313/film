@@ -19,11 +19,13 @@ import demo.spring.boot.demospringboot.data.jpa.service.CinemasDealJpa;
 import demo.spring.boot.demospringboot.data.jpa.service.CinemasJpa;
 import demo.spring.boot.demospringboot.data.jpa.service.CinemasMoviePlistJpa;
 import demo.spring.boot.demospringboot.data.jpa.service.CinemasMoviesJpa;
+import demo.spring.boot.demospringboot.data.jpa.service.CinemasMoviesShowsJpa;
 import demo.spring.boot.demospringboot.data.jpa.service.CinemasVipInfoJpa;
 import demo.spring.boot.demospringboot.data.jpa.service.CityJpa;
 import demo.spring.boot.demospringboot.data.jpa.service.HotMovieDetailCommentJpa;
 import demo.spring.boot.demospringboot.data.jpa.service.HotMoviesJpa;
 import demo.spring.boot.demospringboot.data.jpa.service.HotMovieDetailJpa;
+import demo.spring.boot.demospringboot.data.jpa.vo.CinemasMoviesShowsVo;
 import demo.spring.boot.demospringboot.data.jpa.vo.HotMovieDetailCommentVo;
 import demo.spring.boot.demospringboot.data.jpa.vo.HotMovieVo;
 import demo.spring.boot.demospringboot.data.jpa.vo.HotMovieDetailVo;
@@ -61,6 +63,9 @@ public class DataFactoryService {
 
     @Autowired
     private CinemasVipInfoJpa cinemasVipInfoJpa;
+
+    @Autowired
+    private CinemasMoviesShowsJpa cinemasMoviesShowsJpa;
 
     public void loadInHotMovie() {
         hotMoviesJpa.deleteAll();
@@ -179,11 +184,16 @@ public class DataFactoryService {
                     cinemasMoviesJpa.save(moviesVo);
                     LOGGER.info("保存 moviesVo：{} 成功", moviesVo);
                     //用于处理电影院播放的电影
-                    moviesVo.getShows().forEach(shows -> {
-                        shows.getPlist().forEach(cinemasMoviePlistVo -> {
+                    moviesVo.getShows().forEach(cinemasMoviesShowsVo -> {
+                        //保存show
+                        cinemasMoviesShowsVo.setCinemasId(Integer.valueOf(cinemasWithMovie.getCinemaId()));
+                        cinemasMoviesShowsVo.setMovieId(moviesVo.getId());
+                        cinemasMoviesShowsJpa.save(cinemasMoviesShowsVo);
+                        cinemasMoviesShowsVo.getPlist().forEach(cinemasMoviePlistVo -> {
                             //用于处理 场次
                             cinemasMoviePlistVo.setCinemasId(Integer.valueOf(cinemasWithMovie.getCinemaId()));
                             cinemasMoviePlistVo.setMovieId(moviesVo.getId());
+                            cinemasMoviePlistVo.setShowDate(cinemasMoviesShowsVo.getShowDate());
                             cinemasMoviePlistJpa.save(cinemasMoviePlistVo);
                             LOGGER.info("保存 cinemasMoviePlistVo：{} 成功", cinemasMoviePlistVo);
                         });

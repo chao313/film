@@ -44,6 +44,7 @@ public class CinemasMoviePlistVo {
     //补充的关联数据
     private Integer cinemasId;
     private Long movieId;
+    private Date showDate;
 
     //补充
     @Id
