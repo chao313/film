@@ -58,6 +58,7 @@ import demo.spring.boot.demospringboot.data.jpa.vo.other.Sections;
 import demo.spring.boot.demospringboot.data.mybatis.service.CinemasService;
 import demo.spring.boot.demospringboot.data.mybatis.vo.CinemasJsonBo;
 import demo.spring.boot.demospringboot.thrid.party.api.maoyan.MaoyanCinemasFactory;
+import demo.spring.boot.demospringboot.util.CommonUtil;
 import demo.spring.boot.demospringboot.util.DateUtils;
 import demo.spring.boot.demospringboot.util.IP;
 
@@ -139,6 +140,26 @@ public class FilmController {
             response.setMsg(Code.System.SERVER_SUCCESS_MSG);
             String dra = hotMovieDetailVo.getDra().replace("<p>", "").replace("</p>", "");
             hotMovieDetailVo.setDra(dra);
+            Double sc = hotMovieDetailVo.getSc();
+            Double floor = Math.floor(sc);//取下线
+            Double ceil = Math.ceil(sc);//取上线
+            Integer full;
+            Integer half;
+            Integer empty;
+            if (floor.equals(ceil)) {
+                //如果相等就是没有half
+                full = floor.intValue() / 2;
+                half = 0;
+                empty = 5 - full;
+            } else {
+                //否则 有一个half
+                full = floor.intValue() / 2;
+                half = 1;
+                empty = 4 - full;
+            }
+            hotMovieDetailVo.setFull(CommonUtil.generate(full));
+            hotMovieDetailVo.setHalf(CommonUtil.generate(half));
+            hotMovieDetailVo.setEmpty(CommonUtil.generate(empty));
             response.setContent(hotMovieDetailVo);
         } catch (Exception e) {
             response.setCode(Code.System.FAIL);
@@ -173,6 +194,28 @@ public class FilmController {
             Page<HotMovieDetailCommentVo> result = hotMovieDetailCommentJpa.findAll(example, pageable);
             response.setCode(Code.System.OK);
             response.setMsg(Code.System.SERVER_SUCCESS_MSG);
+            result.getContent().forEach(vo -> {
+                Double score = vo.getScore();
+                Double floor = Math.floor(score);//取下线
+                Double ceil = Math.ceil(score);//取上线
+                Integer full;
+                Integer half;
+                Integer empty;
+                if (floor.equals(ceil)) {
+                    //如果相等就是没有half
+                    full = floor.intValue();
+                    half = 0;
+                    empty = 5 - full;
+                } else {
+                    //否则 有一个half
+                    full = floor.intValue();
+                    half = 1;
+                    empty = 4 - full;
+                }
+                vo.setFull(CommonUtil.generate(full));
+                vo.setHalf(CommonUtil.generate(half));
+                vo.setEmpty(CommonUtil.generate(empty));
+            });
             response.setContent(result.getContent());
         } catch (Exception e) {
             response.setCode(Code.System.FAIL);
