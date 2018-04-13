@@ -20,4 +20,9 @@ public interface CinemasMoviesShowsJpa extends JpaRepository<CinemasMoviesShowsV
      * @return
      */
     List<CinemasMoviesShowsVo> findDistinctByCinemasIdAndMovieId(Integer cinemasId, Long movieId);
+
+    /**
+     * 根据热映电影来寻找数据
+     */
+    List<CinemasMoviesShowsVo> findDistinctByMovieId(Long movieId);
 }

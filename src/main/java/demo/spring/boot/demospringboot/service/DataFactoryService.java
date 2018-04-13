@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import demo.spring.boot.demospringboot.data.jpa.service.CinemasDealJpa;
+import demo.spring.boot.demospringboot.data.jpa.service.CinemasDetailJpa;
 import demo.spring.boot.demospringboot.data.jpa.service.CinemasJpa;
 import demo.spring.boot.demospringboot.data.jpa.service.CinemasMoviePlistJpa;
 import demo.spring.boot.demospringboot.data.jpa.service.CinemasMoviesJpa;
@@ -66,6 +67,9 @@ public class DataFactoryService {
 
     @Autowired
     private CinemasMoviesShowsJpa cinemasMoviesShowsJpa;
+
+    @Autowired
+    private CinemasDetailJpa cinemasDetailJpa;
 
     public void loadInHotMovie() {
         hotMoviesJpa.deleteAll();
@@ -167,7 +171,11 @@ public class DataFactoryService {
         citys.add("苏州市");
         citys.add("无锡市");
         citys.add("盐城市");
-        cinemasJpa.findCinemasVoByCityIsIn(citys).forEach(cinemasVo -> {
+        List<Integer> ids = new ArrayList<>();
+        cinemasDetailJpa.findAll().forEach(vo -> {
+            ids.add(vo.getCinemasId());
+        });
+        cinemasJpa.findCinemasVoByCityIsInAndIdIsNotIn(citys, ids).forEach(cinemasVo -> {
             try {
                 CinemasWithMovie cinemasWithMovie = maoyanCinemasFactory.
                         geCinemasWithMovie(IP.getNextRandow(), cinemasVo.getId());

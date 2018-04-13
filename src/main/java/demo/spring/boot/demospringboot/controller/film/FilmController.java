@@ -250,6 +250,38 @@ public class FilmController {
     }
 
     /**
+     * 获取 电影院
+     */
+    @GetMapping(value = "/getCinemas/{lat}/{lng}/{page}/{size}/{movieId}")
+    public Response<List<CinemasJsonBo>> getCinemasByMovieId(
+            @PathVariable(value = "lat") String lat,
+            @PathVariable(value = "lng") String lng,
+            @PathVariable(value = "page") Integer page,
+            @PathVariable(value = "size") Integer size,
+            @PathVariable(value = "movieId") Long movieId) {
+        Response<List<CinemasJsonBo>> response
+                = new Response<>();
+        try {
+
+            List<Integer> ids = new ArrayList<>();
+            cinemasMoviesShowsJpa.findDistinctByMovieId(movieId).forEach(vo->{
+                 ids.add(vo.getCinemasId());
+            });
+
+            List<CinemasJsonBo> cinemasJsonBos = cinemasService.queryCinemasByDist(lat, lng, page, size);
+            response.setCode(Code.System.OK);
+            response.setMsg(Code.System.SERVER_SUCCESS_MSG);
+            response.setContent(cinemasJsonBos);
+        } catch (Exception e) {
+            response.setCode(Code.System.FAIL);
+            response.setMsg(Code.SystemError.SERVER_INTERNAL_ERROR_MSG);
+            response.addException(e);
+        }
+        return response;
+    }
+
+
+    /**
      * 搜索 电影院
      */
     @GetMapping(value = "/search/{key}/{page}/{size}")
@@ -442,10 +474,6 @@ public class FilmController {
         try {
             Pageable pageable = new PageRequest(page, size);
             List<VMovieVo> vMovieVos = vMovieJpa.findVMovieVosByVideoUrlIsNot("-2", pageable);
-//            vMovieVos.stream().filter(vo->{
-//                vo.setVideoUrl(vo.getVideoUrl().substring(2));
-//                return true;
-//            }).collect(Collectors.toList());;
             response.setCode(Code.System.OK);
             response.setMsg(Code.System.SERVER_SUCCESS_MSG);
             response.setContent(vMovieVos);
@@ -458,38 +486,6 @@ public class FilmController {
     }
 
 
-//    private void getDateShows(CinemasDetailVo cinemasDetailVo, List<DateShowIndex> dateShowIndexList) {
-//        JSONObject jsonObject = JSON.parseObject(cinemasDetailVo.getContent());
-//        JSONObject dateShowIndexJSONObject = (JSONObject) jsonObject.getInnerMap().get("DateShow");
-//        if (null != dateShowIndexJSONObject) {
-//            dateShowIndexJSONObject.getInnerMap().forEach((k, v) -> {
-//                //k就是日期  eg. 2018-4-6
-//                DateShowIndex dateShowIndex = new DateShowIndex();
-//                //填充日期
-//                dateShowIndex.setDate(k);
-//                //获取放映list
-//                List<DateShow> dateShows = ((JSONArray) v).toJavaList(DateShow.class);
-//                dateShowIndex.setDateShows(dateShows);
-//                dateShowIndexList.add(dateShowIndex);
-//            });
-//
-//        }
-//    }
 
-    private void getDataFromWeb(Integer cinemasId) {
-        List<String> movieIds = null;
-        try {
-            movieIds = maoyanCinemasFactory
-                    .geCinemasMovieIds(IP.getNextRandow(), cinemasId);
-            maoyanCinemasFactory.
-                    loadInCinemasDetail(IP.getNextRandow(), movieIds, cinemasId).stream()
-                    .forEach(vo -> {
-                        cinemasDetailJpa.save(vo);
-                    });
-        } catch (InterruptedException e) {
-            LOGGER.error("爬取数据异常");
-            e.printStackTrace();
-        }
 
-    }
 }
