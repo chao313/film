@@ -1,10 +1,7 @@
 package demo.spring.boot.demospringboot.controller.film;
 
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONObject;
 
-import org.apache.commons.lang3.StringEscapeUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +10,7 @@ import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,42 +19,37 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import demo.spring.boot.demospringboot.data.jpa.service.CinemasDealJpa;
+import demo.spring.boot.demospringboot.data.jpa.service.CinemasDetailJpa;
+import demo.spring.boot.demospringboot.data.jpa.service.CinemasJpa;
 import demo.spring.boot.demospringboot.data.jpa.service.CinemasMoviePlistJpa;
 import demo.spring.boot.demospringboot.data.jpa.service.CinemasMoviesJpa;
 import demo.spring.boot.demospringboot.data.jpa.service.CinemasMoviesShowsJpa;
 import demo.spring.boot.demospringboot.data.jpa.service.CinemasVipInfoJpa;
+import demo.spring.boot.demospringboot.data.jpa.service.HotMovieDetailCommentJpa;
+import demo.spring.boot.demospringboot.data.jpa.service.HotMovieDetailJpa;
+import demo.spring.boot.demospringboot.data.jpa.service.HotMoviesJpa;
+import demo.spring.boot.demospringboot.data.jpa.service.VMovieJpa;
+import demo.spring.boot.demospringboot.data.jpa.vo.CinemasDetailVo;
 import demo.spring.boot.demospringboot.data.jpa.vo.CinemasMoviePlistVo;
 import demo.spring.boot.demospringboot.data.jpa.vo.CinemasMoviesShowsVo;
 import demo.spring.boot.demospringboot.data.jpa.vo.CinemasMoviesVo;
-import demo.spring.boot.demospringboot.data.jpa.vo.other.CinemasWithMovie;
-import demo.spring.boot.demospringboot.framework.Code;
-import demo.spring.boot.demospringboot.framework.Response;
-import demo.spring.boot.demospringboot.data.jpa.service.CinemasDetailJpa;
-import demo.spring.boot.demospringboot.data.jpa.service.CinemasJpa;
-import demo.spring.boot.demospringboot.data.jpa.service.HotMovieDetailCommentJpa;
-import demo.spring.boot.demospringboot.data.jpa.service.HotMoviesJpa;
-import demo.spring.boot.demospringboot.data.jpa.service.HotMovieDetailJpa;
-import demo.spring.boot.demospringboot.data.jpa.service.VMovieJpa;
-import demo.spring.boot.demospringboot.data.jpa.vo.other.CinemasDetailJosnParse;
-import demo.spring.boot.demospringboot.data.jpa.vo.CinemasDetailVo;
 import demo.spring.boot.demospringboot.data.jpa.vo.CinemasVo;
 import demo.spring.boot.demospringboot.data.jpa.vo.HotMovieDetailCommentVo;
-import demo.spring.boot.demospringboot.data.jpa.vo.HotMovieVo;
 import demo.spring.boot.demospringboot.data.jpa.vo.HotMovieDetailVo;
-import demo.spring.boot.demospringboot.data.jpa.vo.other.SeatJson;
+import demo.spring.boot.demospringboot.data.jpa.vo.HotMovieVo;
 import demo.spring.boot.demospringboot.data.jpa.vo.VMovieVo;
-import demo.spring.boot.demospringboot.data.jpa.vo.other.DateShow;
-import demo.spring.boot.demospringboot.data.jpa.vo.other.DateShowIndex;
+import demo.spring.boot.demospringboot.data.jpa.vo.other.CinemasWithMovie;
+import demo.spring.boot.demospringboot.data.jpa.vo.other.SeatJson;
 import demo.spring.boot.demospringboot.data.jpa.vo.other.Sections;
 import demo.spring.boot.demospringboot.data.mybatis.service.CinemasService;
 import demo.spring.boot.demospringboot.data.mybatis.vo.CinemasJsonBo;
+import demo.spring.boot.demospringboot.framework.Code;
+import demo.spring.boot.demospringboot.framework.Response;
 import demo.spring.boot.demospringboot.thrid.party.api.maoyan.MaoyanCinemasFactory;
 import demo.spring.boot.demospringboot.util.CommonUtil;
 import demo.spring.boot.demospringboot.util.DateUtils;
@@ -180,21 +173,13 @@ public class FilmController {
         Response<List<HotMovieDetailCommentVo>> response
                 = new Response<>();
         try {
-
-            //构造查询条件
-            HotMovieDetailCommentVo HotMovieDetailCommentVo = new HotMovieDetailCommentVo();
-            HotMovieDetailCommentVo.setMovieId(movieId);
-
-            ExampleMatcher matcher = ExampleMatcher.matching() //构建对象
-                    //姓名采用“开始匹配”的方式查询
-                    .withIgnoreNullValues();
-            Example<HotMovieDetailCommentVo> example = Example.of(HotMovieDetailCommentVo);
             //分页查询
-            Pageable pageable = new PageRequest(page, size);
-            Page<HotMovieDetailCommentVo> result = hotMovieDetailCommentJpa.findAll(example, pageable);
+            Pageable pageable = new PageRequest(page, size, Sort.Direction.DESC, "time");
+            List<HotMovieDetailCommentVo> reslut = hotMovieDetailCommentJpa.
+                    findHotMovieDetailCommentVosByMovieIdAndAvatarurlIsNot(movieId, "", pageable);
             response.setCode(Code.System.OK);
             response.setMsg(Code.System.SERVER_SUCCESS_MSG);
-            result.getContent().forEach(vo -> {
+            reslut.forEach(vo -> {
                 Double score = vo.getScore();
                 Double floor = Math.floor(score);//取下线
                 Double ceil = Math.ceil(score);//取上线
@@ -216,10 +201,10 @@ public class FilmController {
                 vo.setHalf(CommonUtil.generate(half));
                 vo.setEmpty(CommonUtil.generate(empty));
             });
-            response.setContent(result.getContent());
+            response.setContent(reslut);
         } catch (Exception e) {
             response.setCode(Code.System.FAIL);
-            response.setMsg(Code.SystemError.SERVER_INTERNAL_ERROR_MSG);
+            response.setMsg(e.toString());
             response.addException(e);
         }
         return response;

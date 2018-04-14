@@ -1,6 +1,8 @@
 package demo.spring.boot.demospringboot.data.jpa.vo;
 
 
+import java.sql.Timestamp;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -37,6 +39,9 @@ public class CinemasVo {
     private double lat;//纬度
     private String nm;//电影院名称
     private String city;//影院所在的城市
+
+    private Timestamp createTime;
+    private Timestamp updateTime;
 
 }
 

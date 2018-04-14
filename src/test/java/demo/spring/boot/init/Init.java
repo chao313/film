@@ -28,6 +28,14 @@ public class Init {
     @Test
     public void test() {
         LOGGER.info("初始化开始");
+//        dataFactoryService.loadInHotMovie();
+//        dataFactoryService.makeUpHotMovie();
+ //       dataFactoryService.loadInHotMoviesDetail();
+        try {
+            dataFactoryService.loadInHotMoviesDetailComment();
+        } catch (InterruptedException e) {
+            LOGGER.info("Task 载入hotMovieDetail 执行异常:{}", e.toString());
+        }
         dataFactoryService.loadInCinemasWithMovie();
         LOGGER.info("初始化结束");
 

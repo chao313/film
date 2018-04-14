@@ -1,5 +1,6 @@
 package demo.spring.boot.demospringboot.data.jpa.vo;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -37,5 +38,7 @@ public class CinemasMoviesVo {
 
     //补充
     private Integer cinemasId;
+    private Timestamp createTime;
+    private Timestamp updateTime;
 
 }

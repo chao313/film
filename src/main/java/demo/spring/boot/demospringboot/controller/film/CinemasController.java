@@ -37,7 +37,7 @@ public class CinemasController {
             response.setContent(vo);
         } catch (Exception e) {
             response.setCode(Code.System.FAIL);
-            response.setMsg(Code.SystemError.SERVER_INTERNAL_ERROR_MSG);
+            response.setMsg(e.toString());
             response.addException(e);
         }
         return response;

@@ -1,5 +1,7 @@
 package demo.spring.boot.demospringboot.data.jpa.vo;
 
+import java.sql.Timestamp;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -22,4 +24,6 @@ public class CinemasDetailVo {
     private Integer movieId;//电影id
     @Lob
     private String content;//电影内容
+    private Timestamp createTime;
+    private Timestamp updateTime;
 }

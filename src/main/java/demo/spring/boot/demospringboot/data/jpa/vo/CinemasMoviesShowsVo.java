@@ -1,6 +1,7 @@
 
 package demo.spring.boot.demospringboot.data.jpa.vo;
 
+import java.sql.Timestamp;
 import java.util.List;
 import java.util.Date;
 
@@ -38,6 +39,8 @@ public class CinemasMoviesShowsVo {
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
     private Integer id;
+    private Timestamp createTime;
+    private Timestamp updateTime;
 
 
 

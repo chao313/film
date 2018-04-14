@@ -1,5 +1,7 @@
 package demo.spring.boot.demospringboot.data.jpa.vo;
 
+import java.sql.Timestamp;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -25,4 +27,6 @@ public class SeatJsonVo {
     private String showDate;
     @Lob
     private String seatJson;
+    private Timestamp createTime;
+    private Timestamp updateTime;
 }

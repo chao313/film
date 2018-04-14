@@ -1,5 +1,6 @@
 package demo.spring.boot.demospringboot.data.jpa.vo;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -80,4 +81,7 @@ public class HotMovieDetailVo {
     private List<Integer> half;
     @Transient
     private List<Integer> empty;
+
+    private Timestamp createTime;
+    private Timestamp updateTime;
 }

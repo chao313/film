@@ -2,6 +2,8 @@
 package demo.spring.boot.demospringboot.data.jpa.vo;
 
 
+import java.sql.Timestamp;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -28,4 +30,8 @@ public class CinemasVipInfoVo {
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
     private Integer id;
+
+    private Timestamp createTime;
+    private Timestamp updateTime;
+
 }

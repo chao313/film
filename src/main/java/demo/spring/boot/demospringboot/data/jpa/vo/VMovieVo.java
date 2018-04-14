@@ -1,5 +1,7 @@
 package demo.spring.boot.demospringboot.data.jpa.vo;
 
+import java.sql.Timestamp;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -28,7 +30,8 @@ public class VMovieVo {
     private String tab;
     @Column(columnDefinition = "varchar(32) default '-2'")
     private String videoUrl;
-
+    private Timestamp createTime;
+    private Timestamp updateTime;
     private int flag;
 
     public VMovieVo(String title, String href, String imgUrl, String tab) {

@@ -12,8 +12,12 @@ import org.springframework.util.ResourceUtils;
 
 import java.io.File;
 import java.io.IOException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import demo.spring.boot.demospringboot.data.jpa.service.CinemasDealJpa;
 import demo.spring.boot.demospringboot.data.jpa.service.CinemasDetailJpa;
@@ -77,6 +81,8 @@ public class DataFactoryService {
                 .stream()
                 .forEach(vo -> {
                     LOGGER.info("保存{}", vo);
+                    vo.setCreateTime(this.getTimestamp());
+                    vo.setUpdateTime(this.getTimestamp());
                     hotMoviesJpa.save(vo);
                 });
     }
@@ -88,6 +94,8 @@ public class DataFactoryService {
                     .stream()
                     .forEach(vo -> {
                         LOGGER.info("保存{}", vo);
+                        vo.setCreateTime(this.getTimestamp());
+                        vo.setUpdateTime(this.getTimestamp());
                         hotMoviesJpa.save(vo);
                     });
             LOGGER.info("检查hotMovie数据异常 - 补充数据end");
@@ -101,6 +109,7 @@ public class DataFactoryService {
         hotMovieDetailJpa.findAll().stream().forEach(vo -> {
             ids.add(vo.getId());
         });
+        ids.add(1);
         List<HotMovieVo> byIdNotIn =
                 hotMoviesJpa.findByIdNotIn(ids);
         if (byIdNotIn.size() == 0) {
@@ -111,6 +120,8 @@ public class DataFactoryService {
                 HotMovieDetailVo hotMovieDetailVo =
                         maoyanCinemasFactory.loadInMoviesDetail(IP.getNextRandow(),
                                 String.valueOf(vo.getId()));
+                hotMovieDetailVo.setCreateTime(this.getTimestamp());
+                hotMovieDetailVo.setUpdateTime(this.getTimestamp());
                 LOGGER.info("保存{}", hotMovieDetailVo);
                 hotMovieDetailJpa.save(hotMovieDetailVo);
             });
@@ -140,18 +151,26 @@ public class DataFactoryService {
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
-                    List<HotMovieDetailCommentVo> HotMovieDetailCommentVos
-                            = maoyanCinemasFactory.loadInComments(IP.getNextRandow(), movieId, limit, offset);
-                    for (HotMovieDetailCommentVo vo2 : HotMovieDetailCommentVos) {
-                        try {
-                            hotMovieDetailCommentJpa.save(vo2);
-                        } catch (Exception e) {
-                            LOGGER.error("数据插入异常：{}", vo, e);
+                    try {
+                        List<HotMovieDetailCommentVo> HotMovieDetailCommentVos
+                                = maoyanCinemasFactory.loadInComments(IP.getNextRandow(), movieId, limit, offset);
+                        for (HotMovieDetailCommentVo vo2 : HotMovieDetailCommentVos) {
+                            try {
+                                vo2.setCreateTime(this.getTimestamp());
+                                vo2.setUpdateTime(this.getTimestamp());
+                                vo2.setContent(filterEmoji(vo2.getContent()));
+                                hotMovieDetailCommentJpa.save(vo2);
+                            } catch (Exception e) {
+                                LOGGER.error("数据插入异常：{}", vo, e);
+                            }
                         }
+                        if (HotMovieDetailCommentVos.size() == 0) {
+                            break;
+                        }
+                    } catch (Exception e) {
+                        LOGGER.error("异常：{}", e.toString(), e);
                     }
-                    if (HotMovieDetailCommentVos.size() == 0) {
-                        break;
-                    }
+
                 }
             });
             LOGGER.info("检查loadInHotMoviesDetailComment数据异常 - 补充数据 end");
@@ -182,6 +201,8 @@ public class DataFactoryService {
                 cinemasWithMovie.getDealList().getDealList().forEach(cinemasDealVo -> {
                     //用于处理 商品
                     cinemasDealVo.setCinemasId(Integer.valueOf(cinemasWithMovie.getCinemaId()));
+                    cinemasDealVo.setCreateTime(this.getTimestamp());
+                    cinemasDealVo.setUpdateTime(this.getTimestamp());
                     cinemasDealJpa.save(cinemasDealVo);
                     LOGGER.info("保存cinemasDealVo：{} 成功", cinemasDealVo);
                 });
@@ -189,6 +210,8 @@ public class DataFactoryService {
                     moviesVo.setCinemasId(Integer.valueOf(cinemasWithMovie.getCinemaId()));
                     moviesVo.setMovieId(moviesVo.getId());
                     moviesVo.setId(null);
+                    moviesVo.setCreateTime(this.getTimestamp());
+                    moviesVo.setUpdateTime(this.getTimestamp());
                     cinemasMoviesJpa.save(moviesVo);
                     LOGGER.info("保存 moviesVo：{} 成功", moviesVo);
                     //用于处理电影院播放的电影
@@ -196,12 +219,16 @@ public class DataFactoryService {
                         //保存show
                         cinemasMoviesShowsVo.setCinemasId(Integer.valueOf(cinemasWithMovie.getCinemaId()));
                         cinemasMoviesShowsVo.setMovieId(moviesVo.getId());
+                        cinemasMoviesShowsVo.setCreateTime(this.getTimestamp());
+                        cinemasMoviesShowsVo.setUpdateTime(this.getTimestamp());
                         cinemasMoviesShowsJpa.save(cinemasMoviesShowsVo);
                         cinemasMoviesShowsVo.getPlist().forEach(cinemasMoviePlistVo -> {
                             //用于处理 场次
                             cinemasMoviePlistVo.setCinemasId(Integer.valueOf(cinemasWithMovie.getCinemaId()));
                             cinemasMoviePlistVo.setMovieId(moviesVo.getId());
                             cinemasMoviePlistVo.setShowDate(cinemasMoviesShowsVo.getShowDate());
+                            cinemasMoviePlistVo.setCreateTime(this.getTimestamp());
+                            cinemasMoviePlistVo.setUpdateTime(this.getTimestamp());
                             cinemasMoviePlistJpa.save(cinemasMoviePlistVo);
                             LOGGER.info("保存 cinemasMoviePlistVo：{} 成功", cinemasMoviePlistVo);
                         });
@@ -210,6 +237,8 @@ public class DataFactoryService {
                 cinemasWithMovie.getShowData().getVipInfo().forEach(cinemasVipInfoVo -> {
                     //处理会员 数据
                     cinemasVipInfoVo.setCinemasId(Integer.valueOf(cinemasWithMovie.getCinemaId()));
+                    cinemasVipInfoVo.setCreateTime(this.getTimestamp());
+                    cinemasVipInfoVo.setUpdateTime(this.getTimestamp());
                     cinemasVipInfoJpa.save(cinemasVipInfoVo);
                     LOGGER.info("保存 cinemasVipInfoVo：{} 成功", cinemasVipInfoVo);
                 });
@@ -249,6 +278,8 @@ public class DataFactoryService {
                 cityVo.setLog(child.getLog());
                 try {
                     Thread.sleep(100);
+                    cityVo.setCreateTime(this.getTimestamp());
+                    cityVo.setUpdateTime(this.getTimestamp());
                     cityJpa.save(cityVo);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
@@ -259,7 +290,22 @@ public class DataFactoryService {
         LOGGER.info("执行城市init end");
     }
 
+    private Timestamp getTimestamp() {
+        return new Timestamp(new Date().getTime());
+    }
 
-
+    public static String filterEmoji(String source) {
+        if (source != null) {
+            Pattern emoji = Pattern.compile("[\ud83c\udc00-\ud83c\udfff]|[\ud83d\udc00-\ud83d\udfff]|[\u2600-\u27ff]",
+                    Pattern.UNICODE_CASE | Pattern.CASE_INSENSITIVE);
+            Matcher emojiMatcher = emoji.matcher(source);
+            if (emojiMatcher.find()) {
+                source = emojiMatcher.replaceAll("*");
+                return source;
+            }
+            return source;
+        }
+        return source;
+    }
 
 }

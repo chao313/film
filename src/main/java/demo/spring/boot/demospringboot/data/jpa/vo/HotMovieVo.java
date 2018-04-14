@@ -2,6 +2,8 @@ package demo.spring.boot.demospringboot.data.jpa.vo;
 
 
 
+import java.sql.Timestamp;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -64,4 +66,9 @@ public class HotMovieVo {
 
     @Id
     private int id;
+
+    private Timestamp createTime;
+    private Timestamp updateTime;
+
+
 }

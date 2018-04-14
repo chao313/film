@@ -1,5 +1,7 @@
 package demo.spring.boot.demospringboot.data.jpa.vo;
 
+import java.sql.Timestamp;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -42,4 +44,6 @@ public class UserVo {
     private String avatarUrl;
     @ApiModelProperty(value = "unionid")
     private String unionid;
+    private Timestamp createTime;
+    private Timestamp updateTime;
 }

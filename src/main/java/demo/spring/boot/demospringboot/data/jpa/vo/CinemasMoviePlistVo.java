@@ -1,6 +1,7 @@
 
 package demo.spring.boot.demospringboot.data.jpa.vo;
 
+import java.sql.Timestamp;
 import java.util.Date;
 
 import javax.persistence.Entity;
@@ -56,4 +57,6 @@ public class CinemasMoviePlistVo {
      */
     private String price;
     private String start;
+    private Timestamp createTime;
+    private Timestamp updateTime;
 }

@@ -1,5 +1,7 @@
 package demo.spring.boot.demospringboot.data.jpa.vo;
 
+import java.sql.Timestamp;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -28,4 +30,7 @@ public class CityVo {
     private String lat;
 
     private String belongCity;
+
+    private Timestamp createTime;
+    private Timestamp updateTime;
 }
