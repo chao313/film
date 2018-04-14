@@ -5,8 +5,6 @@ import com.alibaba.fastjson.JSON;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Example;
-import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -19,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -33,6 +32,7 @@ import demo.spring.boot.demospringboot.data.jpa.service.CinemasVipInfoJpa;
 import demo.spring.boot.demospringboot.data.jpa.service.HotMovieDetailCommentJpa;
 import demo.spring.boot.demospringboot.data.jpa.service.HotMovieDetailJpa;
 import demo.spring.boot.demospringboot.data.jpa.service.HotMoviesJpa;
+import demo.spring.boot.demospringboot.data.jpa.service.NewSeatsJpa;
 import demo.spring.boot.demospringboot.data.jpa.service.VMovieJpa;
 import demo.spring.boot.demospringboot.data.jpa.vo.CinemasDetailVo;
 import demo.spring.boot.demospringboot.data.jpa.vo.CinemasMoviePlistVo;
@@ -42,10 +42,13 @@ import demo.spring.boot.demospringboot.data.jpa.vo.CinemasVo;
 import demo.spring.boot.demospringboot.data.jpa.vo.HotMovieDetailCommentVo;
 import demo.spring.boot.demospringboot.data.jpa.vo.HotMovieDetailVo;
 import demo.spring.boot.demospringboot.data.jpa.vo.HotMovieVo;
+import demo.spring.boot.demospringboot.data.jpa.vo.NewSeatsVo;
 import demo.spring.boot.demospringboot.data.jpa.vo.VMovieVo;
 import demo.spring.boot.demospringboot.data.jpa.vo.other.CinemasWithMovie;
+import demo.spring.boot.demospringboot.data.jpa.vo.other.NewSeats;
 import demo.spring.boot.demospringboot.data.jpa.vo.other.SeatJson;
 import demo.spring.boot.demospringboot.data.jpa.vo.other.Sections;
+import demo.spring.boot.demospringboot.data.jpa.vo.other.seats.NewSections;
 import demo.spring.boot.demospringboot.data.mybatis.service.CinemasService;
 import demo.spring.boot.demospringboot.data.mybatis.vo.CinemasJsonBo;
 import demo.spring.boot.demospringboot.framework.Code;
@@ -100,6 +103,9 @@ public class FilmController {
 
     @Autowired
     private CinemasMoviesShowsJpa cinemasMoviesShowsJpa;
+
+    @Autowired
+    private NewSeatsJpa newSeatsJpa;
 
     @GetMapping(value = "/getHotMovies/{page}/{size}")
     public Response<List<HotMovieVo>> getHotMovies(
@@ -447,6 +453,62 @@ public class FilmController {
         return response;
     }
 
+
+    /**
+     * 获取 电影院 正在播放的电影 电影院id必填 //
+     */
+    @GetMapping(value = "/get-new-seats/{seqNo}")
+    public Response<NewSeats> getNewSeats(
+            @PathVariable(value = "seqNo") String seqNo) {
+        Response<NewSeats> response
+                = new Response<>();
+        try {
+            response.setCode(Code.System.OK);
+            response.setMsg(Code.System.SERVER_SUCCESS_MSG);
+            String json = maoyanCinemasFactory.getNewSeats(seqNo);
+            try {
+                json = maoyanCinemasFactory.getNewSeats(seqNo);
+                NewSeatsVo vo = new NewSeatsVo();
+                vo.setSeqNo(seqNo);
+                vo.setContent(json);
+                newSeatsJpa.save(vo);
+            } catch (Exception e) {
+                LOGGER.error("异常：{}", e.toString(), e);
+                NewSeatsVo one = newSeatsJpa.findOne(seqNo);
+                if (null != one) {
+                    json = one.getContent();
+                }
+            }
+
+            NewSeats vo = JSON.parseObject(json, NewSeats.class);
+            NewSections sections
+                    = vo.getSeatData().getSeat().getSections().get(0);
+            Integer[][] map = new Integer[sections.getRows()][sections.getCols()];
+            sections.getSeats().forEach(row -> {
+                Integer rowNum = row.getRowNum() - 1;
+                LOGGER.info("rowNum:{}", rowNum);
+                row.getColumns().forEach(column -> {
+                    Integer colNum = getNotNull(map[row.getRowNum() - 1]);
+                    LOGGER.info("col:{}", colNum);
+                    if ("E".equals(column.getSt())) {
+                        map[rowNum][colNum] = 0;
+                    } else if ("N".equals((column.getSt()))) {
+                        map[rowNum][colNum] = 1;
+                    } else {
+                        map[rowNum][colNum] = 3;
+                    }
+                });
+            });
+            sections.setSeats(null);
+            vo.setMap(map);
+            response.setContent(vo);
+        } catch (Exception e) {
+            response.setCode(Code.System.FAIL);
+            response.setMsg(e.toString());
+            response.addException(e);
+        }
+        return response;
+    }
     /**
      * 获取 电影院
      */
@@ -470,6 +532,16 @@ public class FilmController {
         return response;
     }
 
+    private Integer getNotNull(Integer[] col) {
+        List<Integer> list = new ArrayList<>();
+        Arrays.stream(col).forEach(vo -> {
+            if (vo != null) {
+                list.add(vo);
+            }
+        });
+        return list.size();
+
+    }
 
 
 

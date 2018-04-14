@@ -13,5 +13,7 @@ public interface Config {
     //http://m.maoyan.com/showtime/wrap.json?cinemaid=9271&movieid=341138
     String CINEMAS_DETAILS = "http://m.maoyan.com/ajax/cinemaDetail";
     String SEATS = "http://m.maoyan.com/show/seats";
+    //新的接口 http://m.maoyan.com/ajax/seatingPlan?seqNo=201804150149616
+    String NEW_SEATS = "http://m.maoyan.com/ajax/seatingPlan";
 
 }
