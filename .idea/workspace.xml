@@ -2,26 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4bff9ac7-cff3-4c09-ad62-df8ed7127cd5" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/demo/spring/boot/demospringboot/data/jpa/service/NewSeatsJpa.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/demo/spring/boot/demospringboot/data/jpa/vo/NewSeatsVo.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/demo/spring/boot/demospringboot/data/jpa/vo/other/NewSeats.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/demo/spring/boot/demospringboot/data/jpa/vo/other/seats/Cinema.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/demo/spring/boot/demospringboot/data/jpa/vo/other/seats/Columns.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/demo/spring/boot/demospringboot/data/jpa/vo/other/seats/Hall.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/demo/spring/boot/demospringboot/data/jpa/vo/other/seats/Movie.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/demo/spring/boot/demospringboot/data/jpa/vo/other/seats/NewSections.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/demo/spring/boot/demospringboot/data/jpa/vo/other/seats/Reminder.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/demo/spring/boot/demospringboot/data/jpa/vo/other/seats/Seat.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/demo/spring/boot/demospringboot/data/jpa/vo/other/seats/SeatData.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/demo/spring/boot/demospringboot/data/jpa/vo/other/seats/SeatDesc.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/demo/spring/boot/demospringboot/data/jpa/vo/other/seats/Seats.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/demo/spring/boot/demospringboot/data/jpa/vo/other/seats/Show.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/demo/spring/boot/demospringboot/data/jpa/vo/other/seats/User.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/resources/mac666.cn.jks" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/demo/spring/boot/demospringboot/controller/init/InitController.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/demo/spring/boot/demospringboot/data/jpa/vo/other/CinemasDetailResponseVo.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/demo/spring/boot/demospringboot/controller/film/FilmController.java" afterPath="$PROJECT_DIR$/src/main/java/demo/spring/boot/demospringboot/controller/film/FilmController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/demo/spring/boot/demospringboot/thrid/party/api/maoyan/Config.java" afterPath="$PROJECT_DIR$/src/main/java/demo/spring/boot/demospringboot/thrid/party/api/maoyan/Config.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/demo/spring/boot/demospringboot/data/jpa/service/CinemasDetailJpa.java" afterPath="$PROJECT_DIR$/src/main/java/demo/spring/boot/demospringboot/data/jpa/service/CinemasDetailJpa.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/demo/spring/boot/demospringboot/data/jpa/vo/CinemasDetailVo.java" afterPath="$PROJECT_DIR$/src/main/java/demo/spring/boot/demospringboot/data/jpa/vo/CinemasDetailVo.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/demo/spring/boot/demospringboot/service/DataFactoryService.java" afterPath="$PROJECT_DIR$/src/main/java/demo/spring/boot/demospringboot/service/DataFactoryService.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/demo/spring/boot/demospringboot/task/Task.java" afterPath="$PROJECT_DIR$/src/main/java/demo/spring/boot/demospringboot/task/Task.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/demo/spring/boot/demospringboot/thrid/party/api/maoyan/MaoyanCinemasFactory.java" afterPath="$PROJECT_DIR$/src/main/java/demo/spring/boot/demospringboot/thrid/party/api/maoyan/MaoyanCinemasFactory.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/demo/spring/boot/film/CinemasFactory.java" afterPath="$PROJECT_DIR$/src/test/java/demo/spring/boot/film/CinemasFactory.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/application-pro.yml" afterPath="$PROJECT_DIR$/src/main/resources/application-pro.yml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/demo/spring/boot/init/Init.java" afterPath="$PROJECT_DIR$/src/test/java/demo/spring/boot/init/Init.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/application-pro.yml" afterPath="$PROJECT_DIR$/target/classes/application-pro.yml" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -41,105 +33,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="FilmController.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/demo/spring/boot/demospringboot/controller/film/FilmController.java">
+      <file leaf-file-name="DataFactoryService.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/demo/spring/boot/demospringboot/service/DataFactoryService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="218">
-              <caret line="473" column="37" lean-forward="false" selection-start-line="473" selection-start-column="37" selection-end-line="473" selection-end-column="37" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="NewSeats.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/demo/spring/boot/demospringboot/data/jpa/vo/other/NewSeats.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="150">
-              <caret line="12" column="17" lean-forward="false" selection-start-line="12" selection-start-column="17" selection-end-line="12" selection-end-column="17" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SeatData.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/demo/spring/boot/demospringboot/data/jpa/vo/other/seats/SeatData.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="150">
-              <caret line="12" column="12" lean-forward="false" selection-start-line="12" selection-start-column="12" selection-end-line="12" selection-end-column="12" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Movie.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/demo/spring/boot/demospringboot/data/jpa/vo/other/seats/Movie.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="135">
-              <caret line="11" column="13" lean-forward="false" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Seat.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/demo/spring/boot/demospringboot/data/jpa/vo/other/seats/Seat.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="270">
-              <caret line="20" column="37" lean-forward="false" selection-start-line="20" selection-start-column="37" selection-end-line="20" selection-end-column="37" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Cinema.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/demo/spring/boot/demospringboot/data/jpa/vo/other/seats/Cinema.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="120">
-              <caret line="10" column="13" lean-forward="false" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Columns.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/demo/spring/boot/demospringboot/data/jpa/vo/other/seats/Columns.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="120">
-              <caret line="10" column="22" lean-forward="false" selection-start-line="10" selection-start-column="22" selection-end-line="10" selection-end-column="22" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Hall.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/demo/spring/boot/demospringboot/data/jpa/vo/other/seats/Hall.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="45">
-              <caret line="5" column="13" lean-forward="false" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
+            <state relative-caret-position="301">
+              <caret line="193" column="37" lean-forward="false" selection-start-line="193" selection-start-column="37" selection-end-line="193" selection-end-column="37" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="NewSeatsVo.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/demo/spring/boot/demospringboot/data/jpa/vo/NewSeatsVo.java">
+      <file leaf-file-name="InitController.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/demo/spring/boot/demospringboot/controller/init/InitController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="17" column="23" lean-forward="false" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="23" />
+            <state relative-caret-position="139">
+              <caret line="52" column="39" lean-forward="true" selection-start-line="52" selection-start-column="39" selection-end-line="52" selection-end-column="39" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -147,14 +55,89 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="NewSeatsJpa.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/demo/spring/boot/demospringboot/data/jpa/service/NewSeatsJpa.java">
+      <file leaf-file-name="MaoyanCinemasFactory.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/demo/spring/boot/demospringboot/thrid/party/api/maoyan/MaoyanCinemasFactory.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="165">
-              <caret line="11" column="28" lean-forward="false" selection-start-line="11" selection-start-column="17" selection-end-line="11" selection-end-column="28" />
+            <state relative-caret-position="164">
+              <caret line="198" column="44" lean-forward="true" selection-start-line="198" selection-start-column="44" selection-end-line="198" selection-end-column="44" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CinemasDetailJpa.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/demo/spring/boot/demospringboot/data/jpa/service/CinemasDetailJpa.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="390">
+              <caret line="32" column="79" lean-forward="false" selection-start-line="32" selection-start-column="79" selection-end-line="32" selection-end-column="79" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CinemasDetailVo.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/demo/spring/boot/demospringboot/data/jpa/vo/CinemasDetailVo.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="300">
+              <caret line="30" column="18" lean-forward="true" selection-start-line="30" selection-start-column="18" selection-end-line="30" selection-end-column="18" />
+              <folding>
+                <element signature="e#741#742#0" expanded="true" />
+                <element signature="e#783#784#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CinemasDetailResponseVo.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/demo/spring/boot/demospringboot/data/jpa/vo/other/CinemasDetailResponseVo.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="105">
+              <caret line="7" column="38" lean-forward="true" selection-start-line="7" selection-start-column="38" selection-end-line="7" selection-end-column="38" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="application-pro.yml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/application-pro.yml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="186">
+              <caret line="57" column="18" lean-forward="true" selection-start-line="57" selection-start-column="18" selection-end-line="57" selection-end-column="18" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="application-dev.yml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/application-dev.yml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="600">
+              <caret line="40" column="48" lean-forward="false" selection-start-line="40" selection-start-column="48" selection-end-line="40" selection-end-column="48" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="JpaRepository.java" pinned="false" current-in-tab="false">
+        <entry file="jar://$USER_HOME$/software/mavenRepository/org/springframework/data/spring-data-jpa/1.11.8.RELEASE/spring-data-jpa-1.11.8.RELEASE-sources.jar!/org/springframework/data/jpa/repository/JpaRepository.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="159">
+              <caret line="43" column="12" lean-forward="false" selection-start-line="43" selection-start-column="12" selection-end-line="43" selection-end-column="12" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="HotMovieDetailCommentJpa.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/demo/spring/boot/demospringboot/data/jpa/service/HotMovieDetailCommentJpa.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="75">
+              <caret line="12" column="17" lean-forward="false" selection-start-line="12" selection-start-column="17" selection-end-line="12" selection-end-column="17" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -166,8 +149,8 @@
       <list>
         <option value="HTML File" />
         <option value="FxmlFile" />
-        <option value="Class" />
         <option value="Interface" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -194,7 +177,6 @@
       <find>load-in-cinemas-by-ip</find>
       <find>t_cinemas_movie</find>
       <find>loadInCinemasWithFilmTask</find>
-      <find>loadInCinemasWithMovieTask</find>
       <find>cinemasId=252</find>
       <find>请求url:</find>
       <find>url</find>
@@ -203,6 +185,7 @@
       <find>exec</find>
       <find>请求url</find>
       <find>\n\/\*\*\n \* Auto\-generated\: 2018\-04\-14 12\:59\:27\n \*\n \* \@author bejson\.com \(i\@bejson\.com\)\n \* \@website http\:\/\/www\.bejson\.com\/java2pojo\/\n \*\/</find>
+      <find>loadInCinemasWithMovieTask</find>
     </findStrings>
     <replaceStrings>
       <replace>\n</replace>
@@ -226,13 +209,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/resources/hotCity.json" />
-        <option value="$PROJECT_DIR$/src/main/java/demo/spring/boot/demospringboot/controller/film/CinemasController.java" />
-        <option value="$PROJECT_DIR$/src/main/java/demo/spring/boot/demospringboot/data/jpa/vo/HotMovieVo.java" />
-        <option value="$PROJECT_DIR$/src/main/java/demo/spring/boot/demospringboot/data/jpa/vo/VMovieVo.java" />
-        <option value="$PROJECT_DIR$/src/main/java/demo/spring/boot/demospringboot/data/jpa/vo/UserVo.java" />
-        <option value="$PROJECT_DIR$/src/main/java/demo/spring/boot/demospringboot/data/jpa/vo/SeatJsonVo.java" />
-        <option value="$PROJECT_DIR$/src/main/java/demo/spring/boot/demospringboot/data/jpa/vo/HotMovieDetailVo.java" />
         <option value="$PROJECT_DIR$/src/main/java/demo/spring/boot/demospringboot/data/jpa/vo/HotMovieDetailCommentVo.java" />
         <option value="$PROJECT_DIR$/src/main/java/demo/spring/boot/demospringboot/data/jpa/vo/CityVo.java" />
         <option value="$PROJECT_DIR$/src/main/java/demo/spring/boot/demospringboot/data/jpa/vo/CinemasVo.java" />
@@ -240,15 +216,11 @@
         <option value="$PROJECT_DIR$/src/main/java/demo/spring/boot/demospringboot/data/jpa/vo/CinemasMoviesVo.java" />
         <option value="$PROJECT_DIR$/src/main/java/demo/spring/boot/demospringboot/data/jpa/vo/CinemasMoviesShowsVo.java" />
         <option value="$PROJECT_DIR$/src/main/java/demo/spring/boot/demospringboot/data/jpa/vo/CinemasMoviePlistVo.java" />
-        <option value="$PROJECT_DIR$/src/main/java/demo/spring/boot/demospringboot/data/jpa/vo/CinemasDetailVo.java" />
         <option value="$PROJECT_DIR$/src/main/java/demo/spring/boot/demospringboot/data/jpa/vo/CinemasDealVo.java" />
         <option value="$PROJECT_DIR$/src/main/resources/application-dev.yml" />
-        <option value="$PROJECT_DIR$/src/main/java/demo/spring/boot/demospringboot/service/DataFactoryService.java" />
-        <option value="$PROJECT_DIR$/src/test/java/demo/spring/boot/init/Init.java" />
         <option value="$PROJECT_DIR$/src/main/java/demo/spring/boot/demospringboot/data/jpa/service/HotMovieDetailCommentPageAndSortJpa.java" />
         <option value="$PROJECT_DIR$/src/main/java/demo/spring/boot/demospringboot/data/jpa/service/HotMovieDetailCommentJpa.java" />
         <option value="$PROJECT_DIR$/src/main/java/demo/spring/boot/demospringboot/thrid/party/api/maoyan/Config.java" />
-        <option value="$PROJECT_DIR$/src/main/java/demo/spring/boot/demospringboot/thrid/party/api/maoyan/MaoyanCinemasFactory.java" />
         <option value="$PROJECT_DIR$/src/main/java/demo/spring/boot/demospringboot/data/jpa/vo/other/seats/xx.java" />
         <option value="$PROJECT_DIR$/src/main/java/demo/spring/boot/demospringboot/data/jpa/vo/other/seats/BestFive.java" />
         <option value="$PROJECT_DIR$/src/main/java/demo/spring/boot/demospringboot/data/jpa/vo/other/seats/BestFour.java" />
@@ -277,6 +249,17 @@
         <option value="$PROJECT_DIR$/src/main/java/demo/spring/boot/demospringboot/data/jpa/vo/NewSeatsVo.java" />
         <option value="$PROJECT_DIR$/src/main/java/demo/spring/boot/demospringboot/data/jpa/service/NewSeatsJpa.java" />
         <option value="$PROJECT_DIR$/src/main/java/demo/spring/boot/demospringboot/controller/film/FilmController.java" />
+        <option value="$PROJECT_DIR$/src/test/java/demo/spring/boot/init/Init.java" />
+        <option value="$PROJECT_DIR$/src/main/java/demo/spring/boot/demospringboot/task/Task.java" />
+        <option value="$PROJECT_DIR$/src/main/java/demo/spring/boot/demospringboot/controller/InitController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/demo/spring/boot/demospringboot/controller/init/InitController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/demo/spring/boot/demospringboot/data/jpa/vo/other/CinemasDetailVo.java" />
+        <option value="$PROJECT_DIR$/src/main/java/demo/spring/boot/demospringboot/data/jpa/vo/other/CinemasDetailResponseVo.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/application-pro.yml" />
+        <option value="$PROJECT_DIR$/src/main/java/demo/spring/boot/demospringboot/thrid/party/api/maoyan/MaoyanCinemasFactory.java" />
+        <option value="$PROJECT_DIR$/src/main/java/demo/spring/boot/demospringboot/service/DataFactoryService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/demo/spring/boot/demospringboot/data/jpa/vo/CinemasDetailVo.java" />
+        <option value="$PROJECT_DIR$/src/main/java/demo/spring/boot/demospringboot/data/jpa/service/CinemasDetailJpa.java" />
       </list>
     </option>
   </component>
@@ -325,9 +308,9 @@
     </treeState>
   </component>
   <component name="ProjectFrameBounds" fullScreen="true">
-    <option name="x" value="38" />
+    <option name="x" value="39" />
     <option name="y" value="23" />
-    <option name="width" value="1402" />
+    <option name="width" value="1401" />
     <option name="height" value="877" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
@@ -436,17 +419,7 @@
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="demospringboot" type="462c0819:PsiDirectoryNode" />
               <item name="controller" type="462c0819:PsiDirectoryNode" />
-              <item name="city" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="film" type="b2602c69:ProjectViewProjectNode" />
-              <item name="film" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="demospringboot" type="462c0819:PsiDirectoryNode" />
-              <item name="controller" type="462c0819:PsiDirectoryNode" />
-              <item name="film" type="462c0819:PsiDirectoryNode" />
+              <item name="init" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="film" type="b2602c69:ProjectViewProjectNode" />
@@ -498,6 +471,18 @@
               <item name="data" type="462c0819:PsiDirectoryNode" />
               <item name="jpa" type="462c0819:PsiDirectoryNode" />
               <item name="vo" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="film" type="b2602c69:ProjectViewProjectNode" />
+              <item name="film" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="demospringboot" type="462c0819:PsiDirectoryNode" />
+              <item name="data" type="462c0819:PsiDirectoryNode" />
+              <item name="jpa" type="462c0819:PsiDirectoryNode" />
+              <item name="vo" type="462c0819:PsiDirectoryNode" />
+              <item name="other" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="film" type="b2602c69:ProjectViewProjectNode" />
@@ -740,8 +725,8 @@
       <recent name="demo.spring.boot.demospringboot.util" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/src/main/java/demo/spring/boot/demospringboot/data/jpa/vo/other/seats" />
       <recent name="$PROJECT_DIR$/src/main/resources" />
+      <recent name="$PROJECT_DIR$/src/main/java/demo/spring/boot/demospringboot/data/jpa/vo/other/seats" />
       <recent name="$PROJECT_DIR$/src/main/resources/static" />
       <recent name="$PROJECT_DIR$/src/main/resources/img" />
       <recent name="$PROJECT_DIR$" />
@@ -1037,7 +1022,7 @@
       <workItem from="1523258790559" duration="1253000" />
       <workItem from="1523262063057" duration="18404000" />
       <workItem from="1523441265051" duration="39574000" />
-      <workItem from="1523595164010" duration="27634000" />
+      <workItem from="1523595164010" duration="36949000" />
     </task>
     <servers />
   </component>
@@ -1074,7 +1059,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="256893000" />
+    <option name="totallyTimeSpent" value="266208000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
@@ -1089,7 +1074,7 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24964234" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.37313432" sideWeight="0.49713877" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.37313432" sideWeight="0.49713877" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3283582" sideWeight="0.49427754" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -1192,7 +1177,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/demo/spring/boot/demospringboot/thrid/party/api/maoyan/MaoyanCinemasFactory.java</url>
-          <line>292</line>
+          <line>294</line>
           <properties />
           <option name="timeStamp" value="74" />
         </line-breakpoint>
@@ -1234,7 +1219,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/demo/spring/boot/demospringboot/thrid/party/api/maoyan/MaoyanCinemasFactory.java</url>
-          <line>83</line>
+          <line>85</line>
           <properties />
           <option name="timeStamp" value="123" />
         </line-breakpoint>
@@ -1262,11 +1247,17 @@
           <properties />
           <option name="timeStamp" value="147" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/demo/spring/boot/demospringboot/service/DataFactoryService.java</url>
+          <line>196</line>
+          <properties />
+          <option name="timeStamp" value="149" />
+        </line-breakpoint>
       </breakpoints>
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
-      <option name="time" value="149" />
+      <option name="time" value="150" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -1275,136 +1266,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/demo/spring/boot/demospringboot/data/jpa/vo/CinemasDetailVo.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="27" column="33" lean-forward="false" selection-start-line="27" selection-start-column="33" selection-end-line="27" selection-end-column="33" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/demo/spring/boot/demospringboot/data/jpa/vo/CinemasDealVo.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="352">
-          <caret line="37" column="33" lean-forward="false" selection-start-line="37" selection-start-column="33" selection-end-line="37" selection-end-column="33" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/demo/spring/boot/demospringboot/data/jpa/vo/StorageVo.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="359">
-          <caret line="36" column="33" lean-forward="true" selection-start-line="36" selection-start-column="33" selection-end-line="36" selection-end-column="33" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/application-dev.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="40" column="48" lean-forward="false" selection-start-line="40" selection-start-column="48" selection-end-line="40" selection-end-column="48" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/software/mavenRepository/org/springframework/data/spring-data-commons/1.13.8.RELEASE/spring-data-commons-1.13.8.RELEASE-sources.jar!/org/springframework/data/repository/CrudRepository.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="159">
-          <caret line="35" column="20" lean-forward="false" selection-start-line="35" selection-start-column="20" selection-end-line="35" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/software/mavenRepository/org/springframework/data/spring-data-commons/1.13.8.RELEASE/spring-data-commons-1.13.8.RELEASE-sources.jar!/org/springframework/data/repository/query/QueryByExampleExecutor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="152">
-          <caret line="68" column="26" lean-forward="false" selection-start-line="68" selection-start-column="26" selection-end-line="68" selection-end-column="26" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/demo/spring/boot/init/Init.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="292">
-          <caret line="38" column="39" lean-forward="true" selection-start-line="38" selection-start-column="39" selection-end-line="38" selection-end-column="39" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/software/mavenRepository/org/springframework/data/spring-data-jpa/1.11.8.RELEASE/spring-data-jpa-1.11.8.RELEASE-sources.jar!/org/springframework/data/jpa/repository/JpaRepository.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="36" column="17" lean-forward="false" selection-start-line="36" selection-start-column="17" selection-end-line="36" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/demo/spring/boot/demospringboot/service/DataFactoryService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="164">
-          <caret line="133" column="42" lean-forward="false" selection-start-line="133" selection-start-column="42" selection-end-line="133" selection-end-column="42" />
-          <folding>
-            <element signature="e#12362#12363#0" expanded="true" />
-            <element signature="e#12420#12421#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/demo/spring/boot/demospringboot/data/jpa/service/HotMovieDetailCommentPageAndSortJpa.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="16" column="4" lean-forward="false" selection-start-line="16" selection-start-column="4" selection-end-line="16" selection-end-column="4" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/software/mavenRepository/org/springframework/data/spring-data-commons/1.13.8.RELEASE/spring-data-commons-1.13.8.RELEASE-sources.jar!/org/springframework/data/domain/Sort.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="152">
-          <caret line="194" column="23" lean-forward="false" selection-start-line="194" selection-start-column="23" selection-end-line="194" selection-end-column="23" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/software/mavenRepository/org/springframework/data/spring-data-commons/1.13.8.RELEASE/spring-data-commons-1.13.8.RELEASE-sources.jar!/org/springframework/data/domain/PageRequest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="38" column="11" lean-forward="false" selection-start-line="38" selection-start-column="11" selection-end-line="38" selection-end-column="11" />
-          <folding>
-            <element signature="e#1267#1268#0" expanded="false" />
-            <element signature="e#1296#1297#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/demo/spring/boot/demospringboot/data/jpa/service/HotMovieDetailCommentJpa.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="12" column="34" lean-forward="false" selection-start-line="12" selection-start-column="34" selection-end-line="12" selection-end-column="34" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/demo/spring/boot/demospringboot/controller/maoyan/DataFactoryController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="231">
-          <caret line="94" column="21" lean-forward="false" selection-start-line="94" selection-start-column="21" selection-end-line="94" selection-end-column="21" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/demo/spring/boot/demospringboot/thrid/party/api/maoyan/Config.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="16" column="11" lean-forward="false" selection-start-line="16" selection-start-column="11" selection-end-line="16" selection-end-column="11" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/demo/spring/boot/demospringboot/data/jpa/vo/other/seats/xx.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="157">
@@ -1517,16 +1378,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/demo/spring/boot/demospringboot/thrid/party/api/maoyan/MaoyanCinemasFactory.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="137">
-          <caret line="328" column="18" lean-forward="false" selection-start-line="328" selection-start-column="18" selection-end-line="328" selection-end-column="18" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/demo/spring/boot/demospringboot/data/jpa/vo/other/Sections.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -1580,7 +1431,7 @@
         <state relative-caret-position="135">
           <caret line="11" column="13" lean-forward="false" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1590,7 +1441,7 @@
         <state relative-caret-position="135">
           <caret line="11" column="13" lean-forward="false" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1610,7 +1461,7 @@
         <state relative-caret-position="270">
           <caret line="20" column="37" lean-forward="false" selection-start-line="20" selection-start-column="37" selection-end-line="20" selection-end-column="37" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1644,7 +1495,7 @@
         <state relative-caret-position="135">
           <caret line="11" column="13" lean-forward="false" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1654,7 +1505,7 @@
         <state relative-caret-position="150">
           <caret line="12" column="12" lean-forward="false" selection-start-line="12" selection-start-column="12" selection-end-line="12" selection-end-column="12" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1672,7 +1523,7 @@
         <state relative-caret-position="120">
           <caret line="10" column="13" lean-forward="false" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1682,7 +1533,7 @@
         <state relative-caret-position="120">
           <caret line="10" column="22" lean-forward="false" selection-start-line="10" selection-start-column="22" selection-end-line="10" selection-end-column="22" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1714,6 +1565,143 @@
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/application.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/demo/spring/boot/demospringboot/task/Task.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="408">
+          <caret line="88" column="41" lean-forward="false" selection-start-line="88" selection-start-column="41" selection-end-line="88" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/demo/spring/boot/init/Init.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="290">
+          <caret line="34" column="38" lean-forward="false" selection-start-line="34" selection-start-column="38" selection-end-line="34" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/demo/spring/boot/demospringboot/data/jpa/vo/CinemasMoviesVo.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="100">
+          <caret line="20" column="13" lean-forward="false" selection-start-line="20" selection-start-column="13" selection-end-line="20" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/demo/spring/boot/demospringboot/data/jpa/vo/other/ShowData.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="13" column="28" lean-forward="false" selection-start-line="13" selection-start-column="28" selection-end-line="13" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/demo/spring/boot/demospringboot/data/jpa/service/CinemasJpa.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="335">
+          <caret line="36" column="20" lean-forward="false" selection-start-line="36" selection-start-column="20" selection-end-line="36" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/demo/spring/boot/demospringboot/data/jpa/vo/other/CinemasDetailResponseVo.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="7" column="38" lean-forward="true" selection-start-line="7" selection-start-column="38" selection-end-line="7" selection-end-column="38" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/application-pro.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="186">
+          <caret line="57" column="18" lean-forward="true" selection-start-line="57" selection-start-column="18" selection-end-line="57" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/application-dev.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="600">
+          <caret line="40" column="48" lean-forward="false" selection-start-line="40" selection-start-column="48" selection-end-line="40" selection-end-column="48" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/demo/spring/boot/demospringboot/controller/init/InitController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="139">
+          <caret line="52" column="39" lean-forward="true" selection-start-line="52" selection-start-column="39" selection-end-line="52" selection-end-column="39" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/software/mavenRepository/org/springframework/data/spring-data-jpa/1.11.8.RELEASE/spring-data-jpa-1.11.8.RELEASE-sources.jar!/org/springframework/data/jpa/repository/JpaRepository.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="159">
+          <caret line="43" column="12" lean-forward="false" selection-start-line="43" selection-start-column="12" selection-end-line="43" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/demo/spring/boot/demospringboot/data/jpa/service/HotMovieDetailCommentJpa.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="12" column="17" lean-forward="false" selection-start-line="12" selection-start-column="17" selection-end-line="12" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/demo/spring/boot/demospringboot/service/DataFactoryService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="301">
+          <caret line="193" column="37" lean-forward="false" selection-start-line="193" selection-start-column="37" selection-end-line="193" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/demo/spring/boot/demospringboot/data/jpa/vo/CinemasDetailVo.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="30" column="18" lean-forward="true" selection-start-line="30" selection-start-column="18" selection-end-line="30" selection-end-column="18" />
+          <folding>
+            <element signature="e#741#742#0" expanded="true" />
+            <element signature="e#783#784#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/demo/spring/boot/demospringboot/thrid/party/api/maoyan/MaoyanCinemasFactory.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="164">
+          <caret line="198" column="44" lean-forward="true" selection-start-line="198" selection-start-column="44" selection-end-line="198" selection-end-column="44" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/demo/spring/boot/demospringboot/data/jpa/service/CinemasDetailJpa.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="390">
+          <caret line="32" column="79" lean-forward="false" selection-start-line="32" selection-start-column="79" selection-end-line="32" selection-end-column="79" />
+          <folding />
         </state>
       </provider>
     </entry>

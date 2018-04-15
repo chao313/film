@@ -1,6 +1,7 @@
 package demo.spring.boot.demospringboot.data.jpa.service;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -27,4 +28,8 @@ public interface CinemasDetailJpa extends JpaRepository<CinemasDetailVo, Integer
      * @return
      */
     CinemasDetailVo findCinemasDetailVoByCinemasIdAndMovieId(Integer cinemasId, Integer movieId);
+
+
+    @Query(value = "select new CinemasDetailVo(cinemas_id) from CinemasDetailVo")
+    List<CinemasDetailVo> findOnlyCinemasId();
 }

@@ -28,9 +28,9 @@ public class Init {
     @Test
     public void test() {
         LOGGER.info("初始化开始");
-//        dataFactoryService.loadInHotMovie();
-//        dataFactoryService.makeUpHotMovie();
- //       dataFactoryService.loadInHotMoviesDetail();
+        dataFactoryService.loadInHotMovie();
+        dataFactoryService.makeUpHotMovie();
+        dataFactoryService.loadInHotMoviesDetail();
         try {
             dataFactoryService.loadInHotMoviesDetailComment();
         } catch (InterruptedException e) {
@@ -38,6 +38,5 @@ public class Init {
         }
         dataFactoryService.loadInCinemasWithMovie();
         LOGGER.info("初始化结束");
-
     }
 }

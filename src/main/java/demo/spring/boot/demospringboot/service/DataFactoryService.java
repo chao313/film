@@ -191,7 +191,7 @@ public class DataFactoryService {
         citys.add("无锡市");
         citys.add("盐城市");
         List<Integer> ids = new ArrayList<>();
-        cinemasDetailJpa.findAll().forEach(vo -> {
+        cinemasDetailJpa.findOnlyCinemasId().forEach(vo -> {
             ids.add(vo.getCinemasId());
         });
         cinemasJpa.findCinemasVoByCityIsInAndIdIsNotIn(citys, ids).forEach(cinemasVo -> {

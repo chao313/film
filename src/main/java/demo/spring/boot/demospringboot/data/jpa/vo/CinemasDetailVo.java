@@ -26,4 +26,11 @@ public class CinemasDetailVo {
     private String content;//电影内容
     private Timestamp createTime;
     private Timestamp updateTime;
+
+    public CinemasDetailVo(Integer cinemasId) {
+        this.cinemasId = cinemasId;
+    }
+
+    public CinemasDetailVo() {
+    }
 }

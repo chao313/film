@@ -1,7 +1,11 @@
 ## dev环境使用是配置
 server:
-  port: 8082
-  context-path: /chao
+    port: 443
+    context-path: /chao
+    ssl:
+      key-store: classpath:mac666.cn.jks
+      key-store-password: 90dtjh0wc9o2
+      key-password: 90dtjh0wc9o2
 
 
 spring:
@@ -59,11 +63,11 @@ path:
    videofile: /usr/local/tomcat/webapps
 
 task:
- movieTask: 0 0 1 * * ?
- makeUpMovieTask: 0 0 1,2,3,4,5 * * ?
- movieDetailTask: 0 0 1,2,3,4,5 * * ?
- movieDetailCommontTask: 0 0 1,2,3,4,5 * * ?
- loadInCinemasWithMovieTask: 1 * * * * ?
+ movieTask: 0 0 17 * * ?
+ makeUpMovieTask: 0 0 18,19,20,21 * * ?
+ movieDetailTask: 0 0 18,19,20,21 * * ?
+ movieDetailCommontTask: 0 0 18,19,20,21 * * ?
+ loadInCinemasWithMovieTask: 0 0 18,19,20,21 * * ?
 
 
 

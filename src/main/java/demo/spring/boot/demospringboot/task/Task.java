@@ -81,7 +81,7 @@ public class Task {
      * @description 定时加载 loadInCinemasWithFilm
      * @description 只要数据不为空 所以需要执行多次
      */
-    //@Scheduled(cron = "${task.loadInCinemasWithMovieTask}")
+    @Scheduled(cron = "${task.loadInCinemasWithMovieTask}")
     public void loadInCinemasWithMovie() {
         LOGGER.info("Task 载入 loadInCinemasWithMovie 开始执行时间:{}", this.getTime());
         try {

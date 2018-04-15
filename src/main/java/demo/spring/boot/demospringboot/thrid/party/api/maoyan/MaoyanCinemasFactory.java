@@ -12,7 +12,9 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -317,6 +319,8 @@ public class MaoyanCinemasFactory {
         vo.setCinemasId(cinemasId);
         vo.setContent(result.getBody());
         vo.setMovieId(111);
+        vo.setCreateTime(new Timestamp(new Date().getTime()));
+        vo.setUpdateTime(new Timestamp(new Date().getTime()));
         cinemasDetailJpa.save(vo);
         CinemasWithMovie cinemasWithMovie =
                 JSONObject.parseObject(result.getBody(), CinemasWithMovie.class);
