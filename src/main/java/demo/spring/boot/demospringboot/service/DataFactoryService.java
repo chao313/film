@@ -190,10 +190,7 @@ public class DataFactoryService {
         citys.add("苏州市");
         citys.add("无锡市");
         citys.add("盐城市");
-        List<Integer> ids = new ArrayList<>();
-        cinemasDetailJpa.findOnlyCinemasId().forEach(vo -> {
-            ids.add(vo.getCinemasId());
-        });
+        List<Integer> ids = cinemasDetailJpa.findOnlyCinemasId();
         cinemasJpa.findCinemasVoByCityIsInAndIdIsNotIn(citys, ids).forEach(cinemasVo -> {
             try {
                 CinemasWithMovie cinemasWithMovie = maoyanCinemasFactory.

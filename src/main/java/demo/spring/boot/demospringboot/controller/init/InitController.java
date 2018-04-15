@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.ws.rs.PATCH;
 
+import demo.spring.boot.demospringboot.data.jpa.service.CinemasDetailJpa;
 import demo.spring.boot.demospringboot.data.jpa.service.CinemasJpa;
 import demo.spring.boot.demospringboot.data.jpa.service.HotMovieDetailCommentJpa;
 import demo.spring.boot.demospringboot.service.DataFactoryService;
@@ -25,6 +26,9 @@ public class InitController {
     private DataFactoryService dataFactoryService;
 
     @Autowired
+    private CinemasDetailJpa cinemasDetailJpa;
+
+    @Autowired
     private CinemasJpa cinemasJpa;
 
     @PatchMapping(value = "/delete-init")
@@ -38,7 +42,7 @@ public class InitController {
         } catch (InterruptedException e) {
             LOGGER.info("Task 载入hotMovieDetail 执行异常:{}", e.toString());
         }
-        cinemasJpa.deleteAll();
+        cinemasDetailJpa.deleteAll();
         dataFactoryService.loadInCinemasWithMovie();
         LOGGER.info("初始化结束");
     }
@@ -60,7 +64,7 @@ public class InitController {
 
     @PatchMapping(value = "/cinemas-movie-delete-init")
     public void cinemasWithMovieDeleteInit() {
-        cinemasJpa.deleteAll();
+        cinemasDetailJpa.deleteAll();
         dataFactoryService.loadInCinemasWithMovie();
         LOGGER.info("初始化结束");
     }
