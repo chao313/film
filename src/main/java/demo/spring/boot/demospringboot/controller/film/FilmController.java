@@ -402,8 +402,8 @@ public class FilmController {
                         //处理日期
                         Date convert =
                                 DateUtils.convert(cinemasMoviePlistVo.getTm(), "HH:mm");
-                        Date date = DateUtils.addMinutes(convert, -cinemasMoviesVo.getDur());
-                        cinemasMoviePlistVo.setStart(DateUtils.convert(date,"HH:mm"));
+                        Date date = DateUtils.addMinutes(convert, cinemasMoviesVo.getDur());
+                        cinemasMoviePlistVo.setEnd(DateUtils.convert(date,"HH:mm"));
                     });
                 });
             });

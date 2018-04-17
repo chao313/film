@@ -56,7 +56,7 @@ public class CinemasMoviePlistVo {
      * 为了前端展示
      */
     private String price;
-    private String start;
+    private String end;
     private Timestamp createTime;
     private Timestamp updateTime;
 }
