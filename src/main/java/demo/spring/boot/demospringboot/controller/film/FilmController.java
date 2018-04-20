@@ -407,6 +407,23 @@ public class FilmController {
                     });
                 });
             });
+
+            //过滤过期
+            result.getShowData().getMovies().forEach(cinemasMoviesVo -> {
+                cinemasMoviesVo.getShows().forEach(cinemasMoviesShowsVo -> {
+                    if (cinemasMoviesShowsVo.getDateShow().contains("今天")) {
+                        cinemasMoviesShowsVo.getPlist().stream().filter(cinemasMoviePlistVo -> {
+                            String convert = DateUtils.convert(new Date(), "HH:mm");
+                            if (cinemasMoviePlistVo.getTm().compareTo(convert) < 0) {
+                                //如果播放时间小于当前时间
+                                return false;
+                            } else {
+                                return true;
+                            }
+                        });
+                    }
+                });
+            });
             response.setContent(result);
         } catch (Exception e) {
             response.setCode(Code.System.FAIL);
