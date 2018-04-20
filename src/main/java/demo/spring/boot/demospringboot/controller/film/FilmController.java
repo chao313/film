@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -411,16 +412,22 @@ public class FilmController {
             //过滤过期
             result.getShowData().getMovies().forEach(cinemasMoviesVo -> {
                 cinemasMoviesVo.getShows().forEach(cinemasMoviesShowsVo -> {
+                    //过滤过期
+                    LOGGER.info("data:{}", cinemasMoviesShowsVo.getDateShow());
                     if (cinemasMoviesShowsVo.getDateShow().contains("今天")) {
-                        cinemasMoviesShowsVo.getPlist().stream().filter(cinemasMoviePlistVo -> {
+                        List<CinemasMoviePlistVo> collect =
+                                cinemasMoviesShowsVo.getPlist().stream().filter(cinemasMoviePlistVo -> {
                             String convert = DateUtils.convert(new Date(), "HH:mm");
                             if (cinemasMoviePlistVo.getTm().compareTo(convert) < 0) {
+                                LOGGER.info("本场次过期");
                                 //如果播放时间小于当前时间
                                 return false;
                             } else {
+                                LOGGER.info("本场次没有过期");
                                 return true;
                             }
-                        });
+                                }).collect(Collectors.toList());
+                        cinemasMoviesShowsVo.setPlist(collect);
                     }
                 });
             });
