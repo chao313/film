@@ -2,8 +2,11 @@ package demo.spring.boot.demospringboot.data.jpa.vo;
 
 
 
+import org.hibernate.annotations.ColumnDefault;
+
 import java.sql.Timestamp;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -63,6 +66,9 @@ public class HotMovieVo {
     private boolean threed;
 
     private String time;
+
+    @ColumnDefault("100")
+    private Integer sort;
 
     @Id
     private int id;

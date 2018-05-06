@@ -115,7 +115,8 @@ public class FilmController {
         Response<List<HotMovieVo>> response
                 = new Response<>();
         try {
-            Pageable pageable = new PageRequest(page, size);
+            Sort sort = new Sort("sort");
+            Pageable pageable = new PageRequest(page, size, sort);
             Page<HotMovieVo> result = hotMoviesJpa.findAll(pageable);
             response.setCode(Code.System.OK);
             response.setMsg(Code.System.SERVER_SUCCESS_MSG);
@@ -543,7 +544,8 @@ public class FilmController {
         Response<List<VMovieVo>> response
                 = new Response<>();
         try {
-            Pageable pageable = new PageRequest(page, size);
+            Sort sort = new Sort(new Sort.Order("sort"));
+            Pageable pageable = new PageRequest(page, size, sort);
             List<VMovieVo> vMovieVos = vMovieJpa.findVMovieVosByVideoUrlIsNot("-2", pageable);
             response.setCode(Code.System.OK);
             response.setMsg(Code.System.SERVER_SUCCESS_MSG);

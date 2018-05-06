@@ -1,5 +1,7 @@
 package demo.spring.boot.demospringboot.data.jpa.vo;
 
+import org.hibernate.annotations.ColumnDefault;
+
 import java.sql.Timestamp;
 
 import javax.persistence.Column;
@@ -27,6 +29,8 @@ public class VMovieVo {
     @Column(unique = true)
     private String href;
     private String imgUrl;
+    @ColumnDefault("100")
+    private Integer sort;
     private String tab;
     @Column(columnDefinition = "varchar(32) default '-2'")
     private String videoUrl;
