@@ -19,7 +19,7 @@ import lombok.ToString;
 @Data
 @ToString
 @Entity
-@Table(name = "t_banner")
+@Table(name = "t_film_banner")
 public class BannerVo {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
