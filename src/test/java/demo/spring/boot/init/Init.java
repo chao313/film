@@ -12,7 +12,7 @@ import demo.spring.boot.demospringboot.Application;
 import demo.spring.boot.demospringboot.service.DataFactoryService;
 
 /**
- * 2018/4/12    Created by   chao
+ * 2018/4/12    Created by   juan
  */
 
 @RunWith(SpringJUnit4ClassRunner.class)

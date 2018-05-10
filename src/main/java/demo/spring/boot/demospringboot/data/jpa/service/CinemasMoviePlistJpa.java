@@ -8,7 +8,7 @@ import java.util.List;
 import demo.spring.boot.demospringboot.data.jpa.vo.CinemasMoviePlistVo;
 
 /**
- * 2018/4/12    Created by   chao
+ * 2018/4/12    Created by   juan
  */
 @Service
 public interface CinemasMoviePlistJpa extends JpaRepository<CinemasMoviePlistVo,Integer>{

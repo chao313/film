@@ -25,7 +25,7 @@ import demo.spring.boot.demospringboot.thrid.party.util.Http;
 import demo.spring.boot.demospringboot.util.IP;
 
 /**
- * 2018/4/6    Created by   chao
+ * 2018/4/6    Created by   juan
  */
 @Component
 public class VmovieFactory {

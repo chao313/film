@@ -9,7 +9,7 @@ import java.util.List;
 import demo.spring.boot.demospringboot.data.jpa.vo.VMovieVo;
 
 /**
- * 2018/4/7    Created by   chao
+ * 2018/4/7    Created by   juan
  */
 @Component
 public interface VMovieJpa extends JpaRepository<VMovieVo, Integer> {

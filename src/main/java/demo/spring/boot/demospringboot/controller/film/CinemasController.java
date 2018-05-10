@@ -14,7 +14,7 @@ import demo.spring.boot.demospringboot.framework.Code;
 import demo.spring.boot.demospringboot.framework.Response;
 
 /**
- * 2018/4/12    Created by   chao
+ * 2018/4/12    Created by   juan
  */
 @RestController
 @RequestMapping(value = "/cinemas")

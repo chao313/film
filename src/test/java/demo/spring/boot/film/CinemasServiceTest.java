@@ -15,7 +15,7 @@ import demo.spring.boot.demospringboot.data.mybatis.service.CinemasService;
 import demo.spring.boot.demospringboot.data.mybatis.vo.CinemasJsonBo;
 
 /**
- * 2018/4/6    Created by   chao
+ * 2018/4/6    Created by   juan
  */
 
 @RunWith(SpringJUnit4ClassRunner.class)

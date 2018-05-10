@@ -18,13 +18,13 @@ public class RedisCacheService {
     //设置缓存
     //体现在redis上面的就是加入一个key-value
     //但是！ 默认的过期时间是-1
-    @Cacheable(value = "chao:redis:key")
+    @Cacheable(value = "juan:redis:key")
     public String redisSetupCache() {
         return "这是缓存？" + new Date().toString();
     }
 
     //清除缓存缓存
-    @Cacheable(value = "chao:redis:key")
+    @Cacheable(value = "juan:redis:key")
     public String redisCleanupCache() {
         return "这是缓存？" + new Date().toString();
     }

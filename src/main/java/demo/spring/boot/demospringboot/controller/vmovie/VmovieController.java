@@ -13,7 +13,7 @@ import demo.spring.boot.demospringboot.thrid.party.api.vmovie.Config;
 import demo.spring.boot.demospringboot.thrid.party.api.vmovie.VmovieFactory;
 
 /**
- * 2018/4/6    Created by   chao
+ * 2018/4/6    Created by   juan
  */
 
 @RestController

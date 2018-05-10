@@ -15,7 +15,7 @@ import demo.spring.boot.demospringboot.data.jpa.service.HotMovieDetailCommentJpa
 import demo.spring.boot.demospringboot.service.DataFactoryService;
 
 /**
- * 2018/4/14    Created by   chao
+ * 2018/4/14    Created by   juan
  */
 @RestController
 @RequestMapping(value = "/init")

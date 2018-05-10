@@ -14,7 +14,7 @@ import demo.spring.boot.demospringboot.data.jpa.service.CityJpa;
 import demo.spring.boot.demospringboot.data.jpa.vo.CityVo;
 
 /**
- * 2018/4/10    Created by   chao
+ * 2018/4/10    Created by   juan
  */
 @RestController
 @RequestMapping("/city")

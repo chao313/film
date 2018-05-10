@@ -15,7 +15,7 @@ import demo.spring.boot.demospringboot.data.jpa.vo.other.NewSeats;
 import demo.spring.boot.demospringboot.thrid.party.api.maoyan.MaoyanCinemasFactory;
 
 /**
- * 2018/4/5    Created by   chao
+ * 2018/4/5    Created by   juan
  */
 
 @RunWith(SpringJUnit4ClassRunner.class)

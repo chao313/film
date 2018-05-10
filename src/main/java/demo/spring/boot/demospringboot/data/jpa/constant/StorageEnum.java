@@ -1,7 +1,7 @@
 package demo.spring.boot.demospringboot.data.jpa.constant;
 
 /**
- * 2018/4/8    Created by   chao
+ * 2018/4/8    Created by   juan
  */
 public enum StorageEnum {
     SEARCH_HISTORY("search_history"), FIND_RECORD("find_record");

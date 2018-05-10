@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import demo.spring.boot.demospringboot.data.jpa.vo.BannerVo;
 
 /**
- * 2018/5/5    Created by   chao
+ * 2018/5/5    Created by   juan
  */
 @Service
 public interface BannerJpa extends JpaRepository<BannerVo,Integer> {

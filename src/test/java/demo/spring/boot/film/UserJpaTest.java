@@ -13,7 +13,7 @@ import demo.spring.boot.demospringboot.data.jpa.service.UserJpa;
 import demo.spring.boot.demospringboot.data.jpa.vo.UserVo;
 
 /**
- * 2018/4/8    Created by   chao
+ * 2018/4/8    Created by   juan
  */
 
 @RunWith(SpringJUnit4ClassRunner.class)

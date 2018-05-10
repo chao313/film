@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import demo.spring.boot.demospringboot.data.jpa.vo.CinemasDealVo;
 
 /**
- * 2018/4/12    Created by   chao
+ * 2018/4/12    Created by   juan
  *
  * 处理优惠
  */

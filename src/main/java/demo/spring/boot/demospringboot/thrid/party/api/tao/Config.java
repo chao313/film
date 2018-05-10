@@ -1,7 +1,7 @@
 package demo.spring.boot.demospringboot.thrid.party.api.tao;
 
 /**
- * 2018/4/15    Created by   chao
+ * 2018/4/15    Created by   juan
  */
 public interface Config {
 

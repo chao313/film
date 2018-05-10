@@ -14,7 +14,7 @@ import demo.spring.boot.demospringboot.framework.Code;
 import demo.spring.boot.demospringboot.framework.Response;
 
 /**
- * 2018/5/5    Created by   chao
+ * 2018/5/5    Created by   juan
  */
 @RestController
 @RequestMapping(value = "/banner")

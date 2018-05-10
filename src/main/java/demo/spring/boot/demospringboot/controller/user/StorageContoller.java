@@ -16,7 +16,7 @@ import demo.spring.boot.demospringboot.data.jpa.service.StorageVoJpa;
 import demo.spring.boot.demospringboot.data.jpa.vo.StorageVo;
 
 /**
- * 2018/4/8    Created by   chao
+ * 2018/4/8    Created by   juan
  */
 @RestController
 @RequestMapping("/storage")

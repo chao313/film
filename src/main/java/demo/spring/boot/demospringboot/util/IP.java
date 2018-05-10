@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Random;
 
 /**
- * 2018/4/6    Created by   chao
+ * 2018/4/6    Created by   juan
  */
 public class IP {
     private static List<String> list = new ArrayList<>();

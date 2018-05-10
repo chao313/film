@@ -15,7 +15,7 @@ import lombok.Data;
 import lombok.ToString;
 
 /**
- * 2018/4/7    Created by   chao
+ * 2018/4/7    Created by   juan
  */
 @Entity
 @Table(name = "t_vmovie")

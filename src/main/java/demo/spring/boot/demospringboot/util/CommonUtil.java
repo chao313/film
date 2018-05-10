@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 2018/4/13    Created by   chao
+ * 2018/4/13    Created by   juan
  */
 public class CommonUtil {
 

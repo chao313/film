@@ -14,7 +14,7 @@ import demo.spring.boot.demospringboot.service.DataFactoryService;
 import demo.spring.boot.demospringboot.util.DateUtils;
 
 /**
- * 2018/4/8    Created by   chao
+ * 2018/4/8    Created by   juan
  */
 
 @Configuration //1.主要用于标记配置类，兼备Component的效果。
