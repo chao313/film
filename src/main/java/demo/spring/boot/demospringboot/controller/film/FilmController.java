@@ -245,6 +245,31 @@ public class FilmController {
     /**
      * 获取 电影院
      */
+    @GetMapping(value = "/getCinemas2/{lat}/{lng}/{page}/{size}/{movieId}")
+    public Response<List<CinemasJsonBo>> getCinemas(
+            @PathVariable(value = "lat") String lat,
+            @PathVariable(value = "lng") String lng,
+            @PathVariable(value = "page") Integer page,
+            @PathVariable(value = "size") Integer size,
+            @PathVariable(value = "movieId") String movieId) {
+        Response<List<CinemasJsonBo>> response
+                = new Response<>();
+        try {
+            List<CinemasJsonBo> cinemasJsonBos = cinemasService.queryCinemasByMovieIDByDist(lat, lng, page, size,movieId);
+            response.setCode(Code.System.OK);
+            response.setMsg(Code.System.SERVER_SUCCESS_MSG);
+            response.setContent(cinemasJsonBos);
+        } catch (Exception e) {
+            response.setCode(Code.System.FAIL);
+            response.setMsg(Code.SystemError.SERVER_INTERNAL_ERROR_MSG);
+            response.addException(e);
+        }
+        return response;
+    }
+
+    /**
+     * 获取 电影院
+     */
     @GetMapping(value = "/getCinemas/{lat}/{lng}/{page}/{size}/{movieId}")
     public Response<List<CinemasJsonBo>> getCinemasByMovieId(
             @PathVariable(value = "lat") String lat,

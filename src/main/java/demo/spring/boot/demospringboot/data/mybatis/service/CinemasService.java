@@ -20,4 +20,11 @@ public class CinemasService {
         return cinemasJsonBos;
     }
 
+
+    public List<CinemasJsonBo> queryCinemasByMovieIDByDist(String theLat, String thelng, Integer page, Integer size,String movieid) {
+        page = page <= 0 ? 0 : page;
+        List<CinemasJsonBo> cinemasJsonBos = mapper.queryCinemasByMovieIDByDist(theLat, thelng, page * size, size,movieid);
+        return cinemasJsonBos;
+    }
+
 }

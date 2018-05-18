@@ -36,6 +36,8 @@ public interface CinemasJpa extends JpaRepository<CinemasVo, Integer> {
 
     List<CinemasVo> findCinemasVoByCityIsInAndIdIsNotIn(List<String> citys, List<Integer> ids);
 
+    CinemasVo findFirstByAddr(String addr);
+
 
 
 
